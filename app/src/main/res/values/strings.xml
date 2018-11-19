@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Health Tracker</string>
+    <string name="Image_Background" />
 </resources>
