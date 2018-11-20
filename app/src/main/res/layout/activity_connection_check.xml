@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".connection_check">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <Button
+        android:id="@+id/next_button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/Image_Background"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="446dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="17dp"
+        android:contentDescription="@string/next_button2"
+        android:text="@string/next_button2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/health_heart" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
