@@ -12,4 +12,5 @@
     <string name="date_data">Date:</string>
     <string name="time_data">Time:</string>
     <string name="next_button2">Next</string>
+    <string name="save_button">Save</string>
 </resources>
