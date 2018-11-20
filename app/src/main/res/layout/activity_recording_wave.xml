@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".recording_wave">
 
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="446dp"
+        android:layout_marginBottom="18dp"
+        android:contentDescription="@string/start_button"
+        android:text="@string/start_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/stop_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/stop_button"
+        android:layout_width="191dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="446dp"
+        android:layout_marginBottom="17dp"
+        android:contentDescription="@string/stop_button"
+        android:text="@string/stop_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/start_button"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
