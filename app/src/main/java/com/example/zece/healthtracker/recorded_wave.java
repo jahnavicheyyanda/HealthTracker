@@ -13,8 +13,8 @@ public class recorded_wave extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorded_wave);
 
-        Button next_button = (Button) findViewById(R.id.next_button);
-        Button cancel_button = (Button) findViewById(R.id.cancel_button);
+        Button next_button = findViewById(R.id.next_button);
+        Button cancel_button = findViewById(R.id.cancel_button);
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
