@@ -1,7 +1,7 @@
 package com.example.zece.healthtracker;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class files_page extends AppCompatActivity {
 
@@ -9,5 +9,6 @@ public class files_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_files_page);
+
     }
 }
