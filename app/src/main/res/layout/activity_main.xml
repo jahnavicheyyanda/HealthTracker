@@ -6,18 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/next_button_home"
+    <TextView
+        android:id="@+id/textConnection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/text_connection"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintBottom_toTopOf="@+id/next_button_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/next_button_home"
+        android:layout_width="84dp"
+        android:layout_height="61dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="446dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="17dp"
-        android:contentDescription="@string/next_button2"
+        android:contentDescription="@string/next_button"
         android:text="@string/next_button2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+
 </android.support.constraint.ConstraintLayout>

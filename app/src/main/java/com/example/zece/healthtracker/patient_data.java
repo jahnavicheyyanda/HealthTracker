@@ -18,12 +18,13 @@ public class patient_data extends AppCompatActivity {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save_button();
+                files_page();
             }
         });
     }
 
-    public void save_button(){
+    public void files_page(){
         Intent intent_save = new Intent(this, files_page.class);
+        startActivity(intent_save);
     }
 }

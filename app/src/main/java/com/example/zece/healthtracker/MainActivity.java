@@ -12,9 +12,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button next_button2 = findViewById(R.id.next_button_home);
 
-        next_button2.setOnClickListener(new View.OnClickListener() {
+        Button next_button = findViewById(R.id.next_button_home);
+
+        next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recording_wave();
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, recording_wave.class);
         startActivity(intent);
     }
-
 
 
 }
