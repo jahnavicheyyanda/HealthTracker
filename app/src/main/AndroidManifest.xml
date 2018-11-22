@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".connection_check" />
         <activity android:name=".recording_wave" />
         <activity android:name=".recorded_wave" />
         <activity android:name=".patient_data" />
