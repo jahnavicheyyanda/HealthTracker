@@ -50,10 +50,10 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/InputLastName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toEndOf="@+id/name_data"
         app:layout_constraintTop_toBottomOf="@+id/patient_data"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/last_name"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
-        android:text="@string/lastName_data"
+        android:text="@string/last_data"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_data" />
@@ -72,13 +72,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="316dp"
+        android:layout_marginBottom="312dp"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toEndOf="@+id/last_name" />
 
     <TextView
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
@@ -132,6 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="200dp"
         android:ems="10"
@@ -139,7 +140,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.771"
-        app:layout_constraintStart_toEndOf="@+id/time" />
+        app:layout_constraintStart_toEndOf="@+id/time"
+        app:layout_constraintTop_toBottomOf="@+id/date_data" />
 
     <Button
         android:id="@+id/save_button"
