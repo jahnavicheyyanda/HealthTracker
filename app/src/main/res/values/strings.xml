@@ -16,4 +16,5 @@
     <string name="text_connection">Connection Established</string>
     <string name="first_name">Enter your first name</string>
     <string name="last_name">Enter your last name</string>
+    <string name="text_opening">Please connect to a bluetooth device</string>
 </resources>
