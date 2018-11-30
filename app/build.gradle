@@ -9,8 +9,17 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
         packagingOptions {
             exclude 'META-INF/proguard/androidx-annotations.pro'
+        }
+        packagingOptions {
+            exclude 'META-INF/services/javax.annotation.processing.Processor'
         }
     }
     buildTypes {
@@ -32,6 +41,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    // Room
     def room_version = "2.1.0-alpha02"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
