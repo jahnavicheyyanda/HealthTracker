@@ -9,7 +9,7 @@
     <string name="patient_data">Patient Data</string>
     <string name="name_data">First Name:</string>
     <string name="last_data" translatable="false">Last Name:</string>
-    <string name="date_data">Date:</string>
+    <string name="date_data">Date - Time:</string>
     <string name="time_data">Time:</string>
     <string name="next_button2">Next</string>
     <string name="save_button">Save</string>
@@ -17,4 +17,6 @@
     <string name="first_name">Enter your first name</string>
     <string name="last_name">Enter your last name</string>
     <string name="text_opening">Please connect to a bluetooth device</string>
+    <string name="date_data_input">Date</string>
+    <string name="time_data_input">Time</string>
 </resources>
