@@ -1,72 +1,31 @@
 package com.example.zece.healthtracker;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-
-import androidx.room.Dao;
+import androidx.room.Room;
 
 public class patient_data extends AppCompatActivity {
 
-    private EditText FirstName, LastName;
-    private Button OnSave;
+    public static FragmentManager fragmentManager;
+    public static MyAppDatabase myAppDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_data);
 
-        Integer PatientId ;
-        FirstName = findViewById(R.id.InputName);
-        LastName = findViewById(R.id.InputLastName);
-        final Button Onsave = findViewById(R.id.save_button);
+        fragmentManager = getSupportFragmentManager();
+        myAppDatabase = Room.databaseBuilder(getApplicationContext(),MyAppDatabase.class,"carotiddb").allowMainThreadQueries().build();
 
-
-        Onsave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer patient_id;
-                String first_name = FirstName.getText().toString();
-                String last_name = LastName.getText().toString();
-
-                Calendar calendar = Calendar.getInstance();
-                String currentDate = DateFormat.getDateTimeInstance().format(calendar.getTime());
-
-                TextView date_data_input = findViewById(R.id.date_data_input);
-                date_data_input.setText(currentDate);
-
-
-                Patient patient = new Patient();
-                patient.setFirst_name(first_name);
-                patient.setLast_name(last_name);
-
-                }
-
-
-
-        });
-
-       /* save_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                files_page();
+        if(findViewById(R.id.fragment_patient_data_save) != null){
+            if (savedInstanceState!=null){
+                return;
             }
-        }); */
 
+            fragmentManager.beginTransaction().add(R.id.fragment_patient_data_save, new patient_data_save()).commit();
+        }
 
-
-
-
-    }
-    public void files_page(){
-        Intent intent_save = new Intent(this, files_page.class);
-        startActivity(intent_save);
     }
 }
