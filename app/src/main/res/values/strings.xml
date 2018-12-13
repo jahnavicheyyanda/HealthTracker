@@ -19,4 +19,5 @@
     <string name="text_opening">Please connect to a bluetooth device</string>
     <string name="date_data_input">Date</string>
     <string name="time_data_input">Time</string>
+    <string name="choose_data">Choose your name</string>
 </resources>

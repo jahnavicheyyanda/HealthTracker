@@ -8,10 +8,11 @@
 
     <Button
         android:id="@+id/start_button"
-        android:layout_width="191dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="446dp"
         android:layout_marginBottom="17dp"
+        android:background="@color/colorAccent"
         android:contentDescription="@string/start_button"
         android:text="@string/start_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,10 +23,11 @@
 
     <Button
         android:id="@+id/stop_button"
-        android:layout_width="191dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="446dp"
         android:layout_marginBottom="17dp"
+        android:background="@color/colorAccent"
         android:contentDescription="@string/stop_button"
         android:text="@string/stop_button"
         app:layout_constraintBottom_toBottomOf="parent"
