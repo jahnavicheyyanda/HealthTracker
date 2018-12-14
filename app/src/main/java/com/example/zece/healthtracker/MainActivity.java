@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public class BluetoothIntentReceiver extends BroadcastReceiver
+    /*public class BluetoothIntentReceiver extends BroadcastReceiver
     {
 
         private final String TAG = BluetoothIntentReceiver.class.getSimpleName();
@@ -75,6 +75,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+*/
 
 }
