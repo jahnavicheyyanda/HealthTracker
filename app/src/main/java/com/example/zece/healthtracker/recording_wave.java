@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.media.audiofx.Visualizer;
+import com.john.waveview.WaveView;
 
 public class recording_wave extends AppCompatActivity {
 
@@ -14,6 +15,9 @@ public class recording_wave extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording_wave);
 
+        final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
+        final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
+        Button start_button = findViewById(R.id.start_button);
         Button stop_button = findViewById(R.id.stop_button);
 
         stop_button.setOnClickListener(new View.OnClickListener()
