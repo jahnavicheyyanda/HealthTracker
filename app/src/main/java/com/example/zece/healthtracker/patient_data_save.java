@@ -20,6 +20,9 @@ public class patient_data_save extends Fragment {
     private EditText FirstName, LastName, Date;
     private Button OnSave;
 
+    public patient_data_save() {
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class patient_data_save extends Fragment {
                 patient.setFirst_name(firstname);
                 patient.setLast_name(lastname);
 
-                patient_data.myAppDatabase.DAO().addpatient(patient);
+             //   patient_data.myAppDatabase.DAO().addpatient(patient);
                 Toast.makeText(getActivity(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
                 FirstName.setText("");

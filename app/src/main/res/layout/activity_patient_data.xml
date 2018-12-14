@@ -7,8 +7,9 @@
     tools:context=".patient_data">
 
     <fragment
+        android:id="@+id/fragment_patient_data_save"
+        android:name="com.example.zece.healthtracker.patient_data_save"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_patient_data_save"/>
+        android:layout_height="match_parent" />
 
 </android.support.constraint.ConstraintLayout>
