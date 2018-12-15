@@ -1,3 +1,4 @@
+/*
 package com.example.zece.healthtracker;
 
 
@@ -14,6 +15,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import com.example.zece.healthtracker.Sound.SoundFile;
 
+*/
 /**
  * WaveformView is an Android view that displays a visual representation
  * of an audio waveform.  It retrieves the frame gains from a CheapSoundFile
@@ -26,7 +28,8 @@ import com.example.zece.healthtracker.Sound.SoundFile;
  *
  * WaveformView doesn't actually handle selection, but it will just display
  * the selected part of the waveform in a different color.
- */
+ *//*
+
 public class WaveformView extends View {
     public interface WaveformListener {
         public void waveformTouchStart(float x);
@@ -76,7 +79,8 @@ public class WaveformView extends View {
         Resources res = getResources();
         mGridPaint = new Paint();
         mGridPaint.setAntiAlias(false);
-     /*   mGridPaint.setColor(res.getColor(R.color.grid_line));
+     */
+/*   mGridPaint.setColor(res.getColor(R.color.grid_line));
         mSelectedLinePaint = new Paint();
         mSelectedLinePaint.setAntiAlias(false);
         mSelectedLinePaint.setColor(res.getColor(R.color.waveform1));
@@ -98,7 +102,8 @@ public class WaveformView extends View {
         mTimecodePaint.setTextSize(12);
         mTimecodePaint.setAntiAlias(true);
         mTimecodePaint.setColor(res.getColor(R.color.timecode));
-        mTimecodePaint.setShadowLayer(2, 1, 1, res.getColor(R.color.timecode_shadow));*/
+        mTimecodePaint.setShadowLayer(2, 1, 1, res.getColor(R.color.timecode_shadow));*//*
+
 
         mGestureDetector = new GestureDetector(
                 context,
@@ -132,7 +137,7 @@ public class WaveformView extends View {
                         return true;
                     }
                     public void onScaleEnd(ScaleGestureDetector d) {
-                        Log.v("Ringdroid", "ScaleEnd " + d.getCurrentSpanX());
+                        Log.v("healthtracker", "ScaleEnd " + d.getCurrentSpanX());
                     }
                 }
         );
@@ -426,9 +431,11 @@ public class WaveformView extends View {
         }
     }
 
-    /**
+    */
+/**
      * Called once when a new sound file is added
-     */
+     *//*
+
     private void computeDoublesForAllZoomLevels() {
         int numFrames = mSoundFile.getNumFrames();
         int[] frameGains = mSoundFile.getFrameGains();
@@ -559,10 +566,12 @@ public class WaveformView extends View {
         mInitialized = true;
     }
 
-    /**
+    */
+/**
      * Called the first time we need to draw when the zoom level has changed
      * or the screen is resized
-     */
+     *//*
+
     private void computeIntsForThisZoomLevel() {
         int halfHeight = (getMeasuredHeight() / 2) - 1;
         mHeightsAtThisZoomLevel = new int[mLenByZoomLevel[mZoomLevel]];
@@ -572,3 +581,4 @@ public class WaveformView extends View {
         }
     }
 }
+*/
