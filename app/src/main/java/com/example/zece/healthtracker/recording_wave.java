@@ -13,13 +13,12 @@ import android.media.MediaPlayer;
 
 
 
-public class recording_wave extends Activity {
+public class recording_wave extends AppCompatActivity {
 
     VisualizerView mVisualizerView;
 
     private MediaPlayer mMediaPlayer;
     private Visualizer mVisualizer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,30 +26,28 @@ public class recording_wave extends Activity {
         setContentView(R.layout.activity_recording_wave);
 
  /*     final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
-        final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2); */
+        final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
         Button start_button = findViewById(R.id.start_button);
-        Button stop_button = findViewById(R.id.stop_button);
+        Button stop_button = findViewById(R.id.stop_button);*/
 
         mVisualizerView = (VisualizerView) findViewById(R.id.myvisualizerview);
        initAudio();
 
-        stop_button.setOnClickListener(new View.OnClickListener(){
-
-        @Override
-        public void onClick(View v) {
-            recorded_wave();
-
-        }
-
-        });
     }
 
+        /*stop_button.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                recorded_wave();
+            }
+        });
+    }
         public void recorded_wave(){
             Intent intent = new Intent(this, recorded_wave.class);
             startActivity(intent);
-        }
-
-
+        } */
 
     @Override
     protected void onPause() {
@@ -93,7 +90,6 @@ public class recording_wave extends Activity {
         mVisualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
         mVisualizer.setDataCaptureListener(
                 new Visualizer.OnDataCaptureListener() {
-
                     public void onWaveFormDataCapture(Visualizer visualizer,
                                                       byte[] bytes, int samplingRate) {
                         mVisualizerView.updateVisualizer(bytes);
@@ -102,8 +98,10 @@ public class recording_wave extends Activity {
                     public void onFftDataCapture(Visualizer visualizer,
                                                  byte[] bytes, int samplingRate) {
                     }
-                }, Visualizer.getMaxCaptureRate() / 2, false, true);
+                }, Visualizer.getMaxCaptureRate() / 2, true, false);
     }
+
+
 }
 
 
