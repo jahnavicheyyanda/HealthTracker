@@ -20,4 +20,5 @@
     <string name="date_data_input">Date</string>
     <string name="time_data_input">Time</string>
     <string name="choose_data">Choose your name</string>
+    <string name="patient_id" />
 </resources>

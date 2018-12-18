@@ -1,17 +1,20 @@
 package com.example.zece.healthtracker;
 
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Patient
 {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey/*(autoGenerate = true)*/
     private int patient_id;
 
+    @ColumnInfo(name = "first_name")
     private String first_name;
 
+    @ColumnInfo(name = "last_name")
     private String last_name;
 
     public int getPatient_id() {
