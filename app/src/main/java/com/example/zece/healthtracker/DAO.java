@@ -7,7 +7,6 @@ import androidx.room.Insert;
 public interface DAO
 {
     @Insert
-    public void  addpatient(Patient patient);
-
+    public void addPatient(Patient patient);
 
 }

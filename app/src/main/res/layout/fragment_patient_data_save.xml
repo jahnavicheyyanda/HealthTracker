@@ -139,5 +139,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patient_data" />
 
+    <EditText
+        android:id="@+id/InputPatientId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
+        android:ems="10"
+        android:hint="Enter Patient ID"
+        android:inputType="number"
+        android:text="@string/patient_id"
+        app:layout_constraintBottom_toTopOf="@+id/date_data_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputLastName" />
+
 
 </android.support.constraint.ConstraintLayout>

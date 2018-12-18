@@ -17,7 +17,7 @@ import java.util.Calendar;
 
 public class patient_data_save extends Fragment {
 
-    private EditText FirstName, LastName, Date;
+    private EditText PatientId, FirstName, LastName, Date;
     private Button OnSave;
 
     public patient_data_save() {
@@ -30,6 +30,7 @@ public class patient_data_save extends Fragment {
         View view = inflater.inflate(R.layout.fragment_patient_data_save, container, false);
         FirstName = view.findViewById(R.id.InputName);
         LastName = view.findViewById(R.id.InputLastName);
+        PatientId = view.findViewById(R.id.InputPatientId);
         OnSave = view.findViewById(R.id.save_button);
 
         Calendar calendar = Calendar.getInstance();
@@ -42,18 +43,21 @@ public class patient_data_save extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String firstname = FirstName.getText().toString();
-                String lastname = LastName.getText().toString();
+                String firstName = FirstName.getText().toString();
+                String lastName = LastName.getText().toString();
+                int patientId = Integer.parseInt(PatientId.getText().toString());
 
                 Patient patient = new Patient();
-                patient.setFirst_name(firstname);
-                patient.setLast_name(lastname);
+                patient.setFirst_name(firstName);
+                patient.setLast_name(lastName);
+                patient.setPatient_id(patientId);
 
-             //   patient_data.myAppDatabase.DAO().addpatient(patient);
+//                patient_data.myAppDatabase.DAO().addPatient(patient);
                 Toast.makeText(getActivity(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
                 FirstName.setText("");
                 LastName.setText("");
+                PatientId.setText("");
 
             }
         });
