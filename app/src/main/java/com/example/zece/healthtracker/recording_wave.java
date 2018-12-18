@@ -6,19 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.media.audiofx.Visualizer;
+import android.media.MediaPlayer;
+
 import com.john.waveview.WaveView;
 import android.app.Activity;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 
 
 
 public class recording_wave extends AppCompatActivity {
 
     VisualizerView mVisualizerView;
+    VisualizerView nVisualizerView;
 
     private MediaPlayer mMediaPlayer;
     private Visualizer mVisualizer;
+    private MediaPlayer nMediaPlayer;
+    private Visualizer nVisualizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,27 +31,26 @@ public class recording_wave extends AppCompatActivity {
 
  /*     final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
         final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
-        Button start_button = findViewById(R.id.start_button);
-        Button stop_button = findViewById(R.id.stop_button);*/
+        Button start_button = findViewById(R.id.start_button);*/
+        Button stop_button = findViewById(R.id.stop_button);
 
-        mVisualizerView = (VisualizerView) findViewById(R.id.myvisualizerview);
-       initAudio();
-
-    }
-
-        /*stop_button.setOnClickListener(new View.OnClickListener()
-
-        {
+        stop_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 recorded_wave();
             }
         });
+
+        mVisualizerView = (VisualizerView) findViewById(R.id.myvisualizerview);
+        nVisualizerView = (VisualizerView) findViewById(R.id.myvisualizerview2);
+        initAudio();
+
     }
-        public void recorded_wave(){
-            Intent intent = new Intent(this, recorded_wave.class);
-            startActivity(intent);
-        } */
+
+    public void recorded_wave(){
+        Intent intent = new Intent(this, recorded_wave.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onPause() {
@@ -57,11 +60,18 @@ public class recording_wave extends AppCompatActivity {
             mMediaPlayer.release();
             mMediaPlayer = null;
         }
+
+        if (isFinishing() && nMediaPlayer != null) {
+            nVisualizer.release();
+            nMediaPlayer.release();
+            nMediaPlayer = null;
+        }
     }
 
     private void initAudio() {
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        //setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mMediaPlayer = MediaPlayer.create(this, R.raw.test);
+
 
         setupVisualizerFxAndUI();
         // Make sure the visualizer is enabled only when you actually want to
@@ -93,12 +103,13 @@ public class recording_wave extends AppCompatActivity {
                     public void onWaveFormDataCapture(Visualizer visualizer,
                                                       byte[] bytes, int samplingRate) {
                         mVisualizerView.updateVisualizer(bytes);
+                        nVisualizerView.updateVisualizer(bytes);
                     }
 
-                    public void onFftDataCapture(Visualizer visualizer,
+                  public void onFftDataCapture(Visualizer visualizer,
                                                  byte[] bytes, int samplingRate) {
                     }
-                }, Visualizer.getMaxCaptureRate() / 2, true, false);
+                }, Visualizer.getMaxCaptureRate() / 2, true, true);
     }
 
 

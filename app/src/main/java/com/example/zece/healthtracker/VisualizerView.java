@@ -63,5 +63,4 @@ public class VisualizerView extends View {
         }
         canvas.drawLines(mPoints, mForePaint);
     }
-
 }
