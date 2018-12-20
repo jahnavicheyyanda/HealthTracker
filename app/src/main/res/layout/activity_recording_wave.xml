@@ -9,7 +9,7 @@
     <com.example.zece.healthtracker.VisualizerView
         android:id="@+id/myvisualizerview"
         android:layout_width="0dp"
-        android:layout_height="172dp"
+        android:layout_height="202dp"
         android:layout_marginTop="24dp"
         android:background="@color/colorGrey"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,8 +20,8 @@
     <com.example.zece.healthtracker.VisualizerView
         android:id="@+id/myvisualizerview2"
         android:layout_width="0dp"
-        android:layout_height="172dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="202dp"
+        android:layout_marginTop="28dp"
         android:background="@color/colorGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

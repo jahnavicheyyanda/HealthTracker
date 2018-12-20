@@ -14,10 +14,14 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
+    //MyAppDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //db = MyAppDatabase.getAppDatabase(getApplicationContext());
 
         Button next_button = findViewById(R.id.next_button_home);
 

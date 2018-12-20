@@ -19,6 +19,7 @@ public class patient_data_save extends Fragment {
 
     private EditText PatientId, FirstName, LastName, Date;
     private Button OnSave;
+    MyAppDatabase appDatabase;
 
     public patient_data_save() {
     }
@@ -32,6 +33,8 @@ public class patient_data_save extends Fragment {
         LastName = view.findViewById(R.id.InputLastName);
         PatientId = view.findViewById(R.id.InputPatientId);
         OnSave = view.findViewById(R.id.save_button);
+
+        //appDatabase = MyAppDatabase.getAppDatabase(getContext());
 
         Calendar calendar = Calendar.getInstance();
         final String currentDate = DateFormat.getDateTimeInstance().format(calendar.getTime());
@@ -52,7 +55,7 @@ public class patient_data_save extends Fragment {
                 patient.setLast_name(lastName);
                 patient.setPatient_id(patientId);
 
-//                patient_data.myAppDatabase.DAO().addPatient(patient);
+                //appDatabase.DAO().addPatient(patient);
                 Toast.makeText(getActivity(),"Data saved successfully",Toast.LENGTH_SHORT).show();
 
                 FirstName.setText("");

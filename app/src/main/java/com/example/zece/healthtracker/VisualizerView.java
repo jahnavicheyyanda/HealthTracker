@@ -12,7 +12,9 @@ public class VisualizerView extends View {
 
     private byte[] mBytes;
     private float[] mPoints;
+    //a drawing primitive
     private Rect mRect = new Rect();
+    //The Paint class holds the style and color information about how to draw geometries
     private Paint mForePaint = new Paint();
 
     public VisualizerView(Context context) {
@@ -32,7 +34,7 @@ public class VisualizerView extends View {
 
     private void init() {
         mBytes = null;
-        mForePaint.setStrokeWidth(1f);
+        mForePaint.setStrokeWidth(6F);
         mForePaint.setAntiAlias(true);
         mForePaint.setColor(Color.rgb(0, 128, 255));
     }
@@ -43,6 +45,7 @@ public class VisualizerView extends View {
     }
 
     @Override
+    //Canvas to host the draw calls
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mBytes == null) {
