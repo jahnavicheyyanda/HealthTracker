@@ -6,31 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".recorded_wave">
 
+    <com.example.zece.healthtracker.VisualizerView
+        android:id="@+id/waveform1"
+        android:layout_width="0dp"
+        android:layout_height="202dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintBottom_toTopOf="@+id/waveform2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <com.example.zece.healthtracker.VisualizerView
+        android:id="@+id/waveform2"
+        android:layout_width="0dp"
+        android:layout_height="202dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="56dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintBottom_toTopOf="@+id/next_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waveform1" />
+
     <Button
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="446dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="32dp"
         android:background="@color/colorAccent"
         android:contentDescription="@string/next_button"
         android:text="@string/next_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cancel_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/waveform2" />
 
     <Button
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="446dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="17dp"
         android:background="@color/colorAccent"
         android:contentDescription="@string/cancel_button"
         android:text="@string/cancel_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next_button"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/waveform2"
+        app:layout_constraintVertical_bias="0.733" />
+
+
 </android.support.constraint.ConstraintLayout>

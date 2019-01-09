@@ -1,18 +1,23 @@
 package com.example.zece.healthtracker;
 
 import android.content.Intent;
+import android.media.audiofx.Visualizer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class recorded_wave extends AppCompatActivity {
+    VisualizerView mWaveformView;
+    VisualizerView nWaveformView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorded_wave);
 
+        mWaveformView = findViewById(R.id.waveform1);
+        nWaveformView = findViewById(R.id.waveform2);
         Button next_button = findViewById(R.id.next_button);
         Button cancel_button = findViewById(R.id.cancel_button);
 

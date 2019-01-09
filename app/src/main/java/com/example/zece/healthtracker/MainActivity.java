@@ -38,14 +38,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*public class BluetoothIntentReceiver extends BroadcastReceiver
-    {
+    /*public class BluetoothIntentReceiver extends BroadcastReceiver {
 
         private final String TAG = BluetoothIntentReceiver.class.getSimpleName();
 
         @Override
-        public void onReceive(Context context, Intent intent)
-        {
+        public void onReceive(Context context, Intent intent) {
             int state = intent.getIntExtra("android.bluetooth.a2dp.extra.SINK_STATE", -1);
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             String action = intent.getAction();
@@ -56,29 +54,25 @@ public class MainActivity extends AppCompatActivity {
             boolean actionConnected = false;
             boolean actionDisconnected = false;
 
-            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action))
-            {
+            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
                 actionConnected = true;
-            }
-            else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action) || BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals(action))
-            {
+            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action) || BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals(action)) {
                 actionDisconnected = true;
             }
 
             boolean connected = state == android.bluetooth.BluetoothA2dp.STATE_CONNECTED || actionConnected;
             boolean disconnected = state == android.bluetooth.BluetoothA2dp.STATE_DISCONNECTED || actionDisconnected;
 
-            if (connected)
-            {
+            if (connected) {
                 Log.i(TAG, "Connected to Bluetooth device");
             }
 
-            if (disconnected)
-            {
+            if (disconnected) {
                 Log.i(TAG, "Disconnected from Bluetooth device");
             }
         }
     }
+
 */
 
 }
