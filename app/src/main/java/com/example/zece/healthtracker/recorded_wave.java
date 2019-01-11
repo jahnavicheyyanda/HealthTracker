@@ -37,7 +37,7 @@ public class recorded_wave extends AppCompatActivity {
     }
 
     public void next_button() {
-        Intent intent_next = new Intent(this, patient_data.class);
+        Intent intent_next = new Intent(this, files_page.class);
                 startActivity(intent_next);
     }
 

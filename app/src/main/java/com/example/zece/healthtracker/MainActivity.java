@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                files_page();
+                recording_wave();
             }
         });
     }
 
-    public void files_page() {
-        Intent intent = new Intent(this, files_page.class);
+    public void recording_wave() {
+        Intent intent = new Intent(this, recording_wave.class);
         startActivity(intent);
     }
 

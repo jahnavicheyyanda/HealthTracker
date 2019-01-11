@@ -20,6 +20,9 @@ public class Patient {
     @NonNull
     private String last_name;
 
+    @ColumnInfo(name = "note")
+    private  String note;
+
     @NonNull
     public String getPatient_id() {
         return patient_id;
@@ -45,9 +48,12 @@ public class Patient {
         this.last_name = last_name;
     }
 
+    public String getNote() { return this.note; }
+
+    public void setNote(String note) { this.note = note; }
+
     public Patient(String patient_id, String last_name) {
         this.patient_id=patient_id;
         this.last_name=last_name;
     }
-
 }

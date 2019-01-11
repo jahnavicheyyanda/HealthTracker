@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class patient_data extends AppCompatActivity {
 
     public static final String PATIENT_ADDED = "new_patient";
-    private EditText InputName, InputLastName;
+    private EditText InputName, InputLastName, InputPatientNote;
 
 
          @Override
@@ -21,6 +21,7 @@ public class patient_data extends AppCompatActivity {
              setContentView(R.layout.activity_patient_data);
              InputName = findViewById(R.id.InputName);
              InputLastName = findViewById(R.id.InputLastName);
+             InputPatientNote = findViewById(R.id.InputPatientNote);
 
              Button saveButton = findViewById(R.id.save_button);
              saveButton.setOnClickListener(new View.OnClickListener() {
