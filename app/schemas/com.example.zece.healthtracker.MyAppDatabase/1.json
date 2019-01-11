@@ -2,16 +2,16 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "388cc8df10a30a7b12e35c0763e3b39c",
+    "identityHash": "1fdee3877f9fe273389bb926ea1dc0ee",
     "entities": [
       {
-        "tableName": "Patient",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`patient_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT, `last_name` TEXT)",
+        "tableName": "patients",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`patient_id` TEXT NOT NULL, `first_name` TEXT, `last_name` TEXT NOT NULL, PRIMARY KEY(`patient_id`))",
         "fields": [
           {
             "fieldPath": "patient_id",
             "columnName": "patient_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -24,23 +24,22 @@
             "fieldPath": "last_name",
             "columnName": "last_name",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
             "patient_id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       }
     ],
-    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"388cc8df10a30a7b12e35c0763e3b39c\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1fdee3877f9fe273389bb926ea1dc0ee\")"
     ]
   }
 }

@@ -21,4 +21,10 @@
     <string name="time_data_input">Time</string>
     <string name="choose_data">Choose your name</string>
     <string name="patient_id" />
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_files_page">files_page</string>
+    <string name="saved">Patient Saved</string>
+    <string name="not_saved">Couldn\'t Save</string>
+    <string name="no_patient">No patient</string>
+    <string name="note">Note</string>
 </resources>

@@ -14,27 +14,24 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
-    //MyAppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //db = MyAppDatabase.getAppDatabase(getApplicationContext());
-
         Button next_button = findViewById(R.id.next_button_home);
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recording_wave();
+                files_page();
             }
         });
     }
 
-    public void recording_wave() {
-        Intent intent = new Intent(this, recording_wave.class);
+    public void files_page() {
+        Intent intent = new Intent(this, files_page.class);
         startActivity(intent);
     }
 

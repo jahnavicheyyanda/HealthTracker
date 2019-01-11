@@ -1,43 +1,53 @@
 package com.example.zece.healthtracker;
 
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-@Entity
-public class Patient
-{
+@Entity(tableName = "patients")
+public class Patient {
     @PrimaryKey/*(autoGenerate = true)*/
-    private int patient_id;
+    @NonNull
+    private String patient_id;
 
     @ColumnInfo(name = "first_name")
+    //@NonNull
     private String first_name;
 
     @ColumnInfo(name = "last_name")
+    @NonNull
     private String last_name;
 
-    public int getPatient_id() {
+    @NonNull
+    public String getPatient_id() {
         return patient_id;
     }
-
-    public void setPatient_id(int patient_id) {
+    @NonNull
+    public void setPatient_id(String patient_id) {
         this.patient_id = patient_id;
     }
 
     public String getFirst_name() {
-        return first_name;
+        return this.first_name;
     }
 
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
-
+    @NonNull
     public String getLast_name() {
-        return last_name;
+        return this.last_name;
     }
-
+    @NonNull
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
+
+    public Patient(String patient_id, String last_name) {
+        this.patient_id=patient_id;
+        this.last_name=last_name;
+    }
+
 }
