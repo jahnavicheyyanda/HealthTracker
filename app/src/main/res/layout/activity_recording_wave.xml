@@ -4,29 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".recording_wave">
+    tools:context=".UI.recording_wave">
 
-    <com.example.zece.healthtracker.VisualizerView
+    <com.example.zece.healthtracker.Waveform.VisualizerView
         android:id="@+id/myvisualizerview"
-        android:layout_width="0dp"
-        android:layout_height="202dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/colorGrey"
+        android:layout_width="match_parent"
+        android:layout_height="293dp"
+        android:layout_marginTop="232dp"
+        android:layout_marginBottom="47dp"
+        android:background="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <com.example.zece.healthtracker.VisualizerView
-        android:id="@+id/myvisualizerview2"
-        android:layout_width="0dp"
-        android:layout_height="202dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/colorGrey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myvisualizerview" />
 
 
     <Button
@@ -34,22 +25,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="36dp"
         android:background="@color/colorAccent"
         android:contentDescription="@string/start_button"
         android:text="@string/start_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/stop_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myvisualizerview2" />
+        app:layout_constraintTop_toBottomOf="@+id/myvisualizerview" />
+
 
     <Button
         android:id="@+id/stop_button"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="36dp"
         android:background="@color/colorAccent"
         android:contentDescription="@string/stop_button"
         android:text="@string/stop_button"
@@ -57,6 +52,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.73"
         app:layout_constraintStart_toEndOf="@+id/start_button"
-        app:layout_constraintTop_toBottomOf="@+id/myvisualizerview2" />
+        app:layout_constraintTop_toBottomOf="@+id/myvisualizerview"
+        app:layout_constraintVertical_bias="0.85" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="173dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="238dp"
+        android:layout_marginBottom="185dp"
+        android:height="@dimen/activity_vertical_margin"
+        android:fontFamily="monospace"
+        android:text="@string/recording_text_view"
+        android:textColor="@color/colorDarkred"
+        android:textFontWeight="10sp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/myvisualizerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.332"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.232" />
 
 </android.support.constraint.ConstraintLayout>

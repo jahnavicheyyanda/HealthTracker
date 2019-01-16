@@ -1,4 +1,4 @@
-package com.example.zece.healthtracker;
+package com.example.zece.healthtracker.Waveform;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -1,4 +1,4 @@
-package com.example.zece.healthtracker;
+package com.example.zece.healthtracker.UI;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -12,6 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.zece.healthtracker.Patient;
+import com.example.zece.healthtracker.PatientListAdaptor;
+import com.example.zece.healthtracker.PatientViewModel;
+import com.example.zece.healthtracker.R;
 
 import java.util.List;
 import java.util.UUID;

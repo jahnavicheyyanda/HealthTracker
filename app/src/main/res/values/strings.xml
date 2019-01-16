@@ -27,4 +27,6 @@
     <string name="not_saved">Couldn\'t Save</string>
     <string name="no_patient">No patient</string>
     <string name="note">Note</string>
+    <string name="recording_text_view">CLICK ON START BUTTON TO START THE RECORDING.</string>
+    <string name="recorded_text">CLICK CANCEL TO DISCARD THE RECORDED AUDIO.CLICK NEXT TO SAVE THE FILE.</string>
 </resources>

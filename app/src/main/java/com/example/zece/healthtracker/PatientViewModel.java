@@ -6,13 +6,19 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.zece.healthtracker.DAO;
+import com.example.zece.healthtracker.MyAppDatabase;
+import com.example.zece.healthtracker.Patient;
+
 import java.util.List;
+
+
 
 public class PatientViewModel extends AndroidViewModel {
 
     private String TAG = this.getClass().getSimpleName();
     private DAO patientDao;
-    private MyAppDatabase patientDB;
+    public MyAppDatabase patientDB;
     private LiveData<List<Patient>> mAllPatients;
 
     public PatientViewModel(Application application) {
@@ -28,7 +34,7 @@ public class PatientViewModel extends AndroidViewModel {
         new InsertAsyncTask(patientDao).execute(patient);
     }
 
-    LiveData<List<Patient>> getAllPatients(){
+    public LiveData<List<Patient>> getAllPatients(){
         return mAllPatients;
     }
 
