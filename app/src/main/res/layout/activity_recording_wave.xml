@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.recording_wave">
+    tools:context=".UI.RecordingWave">
 
     <com.example.zece.healthtracker.Waveform.VisualizerView
         android:id="@+id/myvisualizerview"

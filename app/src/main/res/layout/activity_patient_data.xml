@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.patient_data">
+    tools:context=".UI.PatientData">
 
     <TextView
         android:id="@+id/patient_data"
@@ -131,7 +131,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:text="@string/choose_data"
-        android:textSize="@dimen/std"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/spinner_patient"
         app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"

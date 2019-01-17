@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void recording_wave() {
-        Intent intent = new Intent(this, recording_wave.class);
+        Intent intent = new Intent(this, RecordingWave.class);
         startActivity(intent);
     }
 

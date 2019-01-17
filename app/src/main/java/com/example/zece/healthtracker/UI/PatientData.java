@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.example.zece.healthtracker.R;
 
-public class patient_data extends AppCompatActivity {
+public class PatientData extends AppCompatActivity {
 
     public static final String PATIENT_ADDED = "new_patient";
     private EditText InputName, InputLastName, InputPatientNote;

@@ -15,7 +15,7 @@ import com.example.zece.healthtracker.Waveform.RecorderVisualizerView;
 import java.io.File;
 import java.io.IOException;
 
-public class recorded_wave extends AppCompatActivity {
+public class RecordedWave extends AppCompatActivity {
     private MediaRecorder myAudioRecorder;
     private boolean isRecording;
     private RecorderVisualizerView visualizerView;
@@ -107,7 +107,7 @@ public class recorded_wave extends AppCompatActivity {
     }
 
     public void cancel_button(){
-        Intent intent_cancel = new Intent(this, recording_wave.class);
+        Intent intent_cancel = new Intent(this, RecordingWave.class);
         startActivity(intent_cancel);
 
     }

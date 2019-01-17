@@ -1,4 +1,4 @@
-package com.example.zece.healthtracker;
+package com.example.zece.healthtracker.Database;
 
 
 import android.arch.persistence.room.ColumnInfo;

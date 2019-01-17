@@ -13,7 +13,7 @@ import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.Waveform.VisualizerView;
 
 
-public class recording_wave extends AppCompatActivity {
+public class RecordingWave extends AppCompatActivity {
 
     VisualizerView mVisualizerView;
     private MediaPlayer mMediaPlayer;
@@ -102,7 +102,7 @@ public class recording_wave extends AppCompatActivity {
             }
 
             public void recorded_wave () {
-        Intent intent = new Intent(this, recorded_wave.class);
+        Intent intent = new Intent(this, RecordedWave.class);
         startActivity(intent);
         mMediaPlayer.stop();
     }

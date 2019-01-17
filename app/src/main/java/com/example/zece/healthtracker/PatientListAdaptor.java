@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.zece.healthtracker.Database.Patient;
+
 import java.util.List;
 
 public class PatientListAdaptor extends RecyclerView.Adapter<PatientListAdaptor.PatientViewHolder> {

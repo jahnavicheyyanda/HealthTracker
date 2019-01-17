@@ -27,9 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.recording_wave" />
-        <activity android:name=".UI.recorded_wave" />
-        <activity android:name=".UI.patient_data" />
+        <activity android:name=".UI.RecordingWave" />
+        <activity android:name=".UI.RecordedWave" />
+        <activity android:name=".UI.PatientData" />
         <activity
             android:name=".UI.FilesPage"
             android:label="@string/title_activity_files_page"

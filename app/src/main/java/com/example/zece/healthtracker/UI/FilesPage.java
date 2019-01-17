@@ -13,9 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.zece.healthtracker.Patient;
+import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.PatientListAdaptor;
-import com.example.zece.healthtracker.PatientViewModel;
+import com.example.zece.healthtracker.View.PatientViewModel;
 import com.example.zece.healthtracker.R;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class FilesPage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FilesPage.this, patient_data.class);
+                Intent intent = new Intent(FilesPage.this, PatientData.class);
                 startActivityForResult(intent, PATIENT_DATA_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -67,7 +67,7 @@ public class FilesPage extends AppCompatActivity {
 
             //to insert patient
             final String patient_id = UUID.randomUUID().toString();
-            Patient patient = new Patient (patient_id, data.getStringExtra(patient_data.PATIENT_ADDED));
+            Patient patient = new Patient (patient_id, data.getStringExtra(PatientData.PATIENT_ADDED));
             patientViewModel.insert(patient);
 
             Toast.makeText(

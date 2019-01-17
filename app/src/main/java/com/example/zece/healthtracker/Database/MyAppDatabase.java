@@ -1,10 +1,12 @@
-package com.example.zece.healthtracker;
+package com.example.zece.healthtracker.Database;
 
 import android.content.Context;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+
+import com.example.zece.healthtracker.Database.Patient;
 
 
 @Database(entities = {Patient.class},version = 1)
@@ -13,7 +15,7 @@ public abstract DAO mDao();
 
 private static volatile MyAppDatabase patientRoomInstance;
 
-static MyAppDatabase getDatabase(final Context context) {
+public static MyAppDatabase getDatabase(final Context context) {
     if (patientRoomInstance == null){
         synchronized (MyAppDatabase.class){
             if (patientRoomInstance == null) {
