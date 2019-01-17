@@ -56,7 +56,7 @@ public class recording_wave extends AppCompatActivity {
 
     private void initAudio() {
         //setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        mMediaPlayer = MediaPlayer.create(this, R.raw.test);
+        mMediaPlayer = MediaPlayer.create(this, R.raw.test2);
 
 
         setupVisualizerFxAndUI();

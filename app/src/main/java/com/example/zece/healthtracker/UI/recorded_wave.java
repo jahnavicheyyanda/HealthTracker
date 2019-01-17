@@ -47,11 +47,11 @@ public class recorded_wave extends AppCompatActivity {
         });
 
         if (!isRecording) {
-            File f = new File(getExternalFilesDir(null), "new.wav");
+            File f = new File(getExternalFilesDir(null), "new");
 
             myAudioRecorder = new MediaRecorder();
             myAudioRecorder
-                    .setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+                    .setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
             myAudioRecorder
                     .setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             myAudioRecorder
@@ -102,7 +102,7 @@ public class recorded_wave extends AppCompatActivity {
     };
 
     public void next_button() {
-        Intent intent_next = new Intent(this, files_page.class);
+        Intent intent_next = new Intent(this, FilesPage.class);
         startActivity(intent_next);
     }
 

@@ -7,7 +7,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -30,7 +31,7 @@
         <activity android:name=".UI.recorded_wave" />
         <activity android:name=".UI.patient_data" />
         <activity
-            android:name=".UI.files_page"
+            android:name=".UI.FilesPage"
             android:label="@string/title_activity_files_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".saved_wave" />

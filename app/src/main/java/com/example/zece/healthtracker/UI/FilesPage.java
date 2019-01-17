@@ -21,7 +21,7 @@ import com.example.zece.healthtracker.R;
 import java.util.List;
 import java.util.UUID;
 
-public class files_page extends AppCompatActivity {
+public class FilesPage extends AppCompatActivity {
 
     private static final int PATIENT_DATA_ACTIVITY_REQUEST_CODE = 1;
     private String TAG = this.getClass().getSimpleName();
@@ -44,7 +44,7 @@ public class files_page extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(files_page.this, patient_data.class);
+                Intent intent = new Intent(FilesPage.this, patient_data.class);
                 startActivityForResult(intent, PATIENT_DATA_ACTIVITY_REQUEST_CODE);
             }
         });

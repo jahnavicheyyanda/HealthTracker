@@ -28,11 +28,6 @@ public class Helper {
             .getExternalStorageDirectory() + "/Recordings";
     public static final String LOAD_RECORDINGS = "Load Records";
 
-    public void makeHepticFeedback(Context context) {
-
-        ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE))
-                .vibrate(100);
-    }
 
     public ArrayList<String> getAllFileInDirectory(File directory) {
 
