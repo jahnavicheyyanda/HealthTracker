@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.zece.healthtracker.R;
+import com.example.zece.healthtracker.UI.RecordingWave;
 
 import java.util.ArrayList;
 import java.util.Set;
