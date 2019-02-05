@@ -14,15 +14,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.zece.healthtracker.Database.Patient;
-import com.example.zece.healthtracker.PatientListAdaptor;
+import com.example.zece.healthtracker.View.PatientListAdaptor;
 import com.example.zece.healthtracker.View.PatientViewModel;
 import com.example.zece.healthtracker.R;
 
 import java.util.List;
 import java.util.UUID;
 
-public class FilesPage extends AppCompatActivity {
+public class FilesPage extends AppCompatActivity implements PatientListAdaptor.OnDeleteClickListener {
 
+    public static final int UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE = 2;
     private static final int PATIENT_DATA_ACTIVITY_REQUEST_CODE = 1;
     private String TAG = this.getClass().getSimpleName();
     private PatientViewModel patientViewModel;
@@ -36,7 +37,7 @@ public class FilesPage extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        patientListAdaptor =new PatientListAdaptor(this);
+        patientListAdaptor =new PatientListAdaptor(this, this);
         recyclerView.setAdapter(patientListAdaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -67,18 +68,37 @@ public class FilesPage extends AppCompatActivity {
 
             //to insert patient
             final String patient_id = UUID.randomUUID().toString();
-            Patient patient = new Patient (patient_id, data.getStringExtra(PatientData.PATIENT_ADDED));
+            Patient patient = new Patient (patient_id, data.getStringExtra(PatientData.NEW_LASTNAME), data.getStringExtra(PatientData.NEW_FIRSTNAME), data.getStringExtra(PatientData.NEW_PATIENTNOTE));
             patientViewModel.insert(patient);
 
             Toast.makeText(
                     getApplicationContext(),
                     R.string.saved,
                     Toast.LENGTH_LONG).show();
-        }else{
+        } else if (requestCode == UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+
+            //code update the patient data
+            Patient patient = new Patient(
+                    data.getStringExtra(PatientDataEdit.PATIENT_ID),
+                    data.getStringExtra(PatientDataEdit.UPDATED_LASTNAME), data.getStringExtra(PatientDataEdit.UPDATED_FIRSTNAME),data.getStringExtra(PatientDataEdit.UPDATED_NOTE));
+            PatientViewModel.update(patient);
+
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.updated,
+                    Toast.LENGTH_LONG).show();
+
+        } else{
             Toast.makeText(
                     getApplicationContext(),
                     R.string.not_saved,
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void OnDeleteClickListener(Patient mPatient) {
+        //Code for delete operation
+        patientViewModel.delete(mPatient);
     }
 }

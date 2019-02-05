@@ -17,7 +17,7 @@ import java.util.List;
 public class PatientViewModel extends AndroidViewModel {
 
     private String TAG = this.getClass().getSimpleName();
-    private DAO patientDao;
+    private static DAO patientDao;
     public MyAppDatabase patientDB;
     private LiveData<List<Patient>> mAllPatients;
 
@@ -38,6 +38,14 @@ public class PatientViewModel extends AndroidViewModel {
         return mAllPatients;
     }
 
+    public static void update(Patient patient){
+        new UpdateAsyncTask(patientDao).execute(patient);
+    }
+
+    public void delete(Patient patient){
+        new DeleteAsyncTask(patientDao).execute(patient);
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
@@ -46,17 +54,52 @@ public class PatientViewModel extends AndroidViewModel {
 
     //With AsyncTask, operations will be done in background thread
 
-    private class InsertAsyncTask extends AsyncTask<Patient, Void, Void> {
+    private class OperationsAsyncTask extends AsyncTask<Patient, Void, Void> {
 
-        DAO mPatientDao;
+        DAO mAsyncTaskDao;
 
-        public InsertAsyncTask(DAO mPatientDao) {
-            this.mPatientDao = mPatientDao;
+        OperationsAsyncTask(DAO dao) {
+            this.mAsyncTaskDao = dao;
         }
 
         @Override
         protected Void doInBackground(Patient... patients) {
-            mPatientDao.insert(patients[0]);
+            return null;
+        }
+    }
+
+    private class InsertAsyncTask extends OperationsAsyncTask {
+
+        public InsertAsyncTask(DAO mPatientDao) { super(mPatientDao);   }
+
+        @Override
+        protected Void doInBackground(Patient... patients) {
+            mAsyncTaskDao.insert(patients[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateAsyncTask extends AsyncTask<Patient, Void, Void> {
+
+        DAO mPatientDao;
+
+        UpdateAsyncTask(DAO patientDao) { this.mPatientDao = patientDao ;
+        }
+
+        @Override
+        protected Void doInBackground(Patient... patients) {
+            mPatientDao.update(patients[0]);
+            return null;
+        }
+    }
+
+    private class DeleteAsyncTask extends OperationsAsyncTask {
+
+        public DeleteAsyncTask(DAO patientDao) { super(patientDao);        }
+
+        @Override
+        protected Void doInBackground(Patient... patients) {
+            mAsyncTaskDao.delete(patients[0]);
             return null;
         }
     }

@@ -68,11 +68,15 @@
         android:id="@+id/InputLastName"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
+        android:layout_marginStart="73dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/InputPatientNote"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/last_name"
         app:layout_constraintTop_toBottomOf="@+id/InputName"
         tools:ignore="Autofill" />
 

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.PatientDataEdit">
+
+
+    <TextView
+        android:id="@+id/patient_data"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="52dp"
+        android:contentDescription="@string/patient_data"
+        android:text="@string/patient_data"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name_data"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="163dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:contentDescription="@string/name_data"
+        android:text="@string/name_data"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/last_name"
+        app:layout_constraintEnd_toStartOf="@+id/InputNameEdit"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/InputNameEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="98dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="@string/first_name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/InputLastNameEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/name_data"
+        app:layout_constraintTop_toBottomOf="@+id/patient_data"
+        tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/last_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="88dp"
+        android:text="@string/last_data"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/InputPatientNoteEdit"
+        app:layout_constraintEnd_toStartOf="@+id/InputLastNameEdit"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_data" />
+
+    <EditText
+        android:id="@+id/InputLastNameEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:hint="@string/last_name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/InputPatientNoteEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/last_name"
+        app:layout_constraintTop_toBottomOf="@+id/InputNameEdit"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/InputPatientNoteEdit"
+        android:layout_width="359dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/note"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputLastNameEdit" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputPatientNoteEdit">
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:onClick="updateData"
+            android:text="@string/update" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:onClick="cancelUpdate"
+            android:text="@string/cancel" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

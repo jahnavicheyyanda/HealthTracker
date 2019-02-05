@@ -8,12 +8,20 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.zece.healthtracker.R;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
+import static com.example.zece.healthtracker.UI.PatientDataEdit.PATIENT_ID;
+
 public class PatientData extends AppCompatActivity {
 
-    public static final String PATIENT_ADDED = "new_patient";
+    public static final String NEW_PATIENTNOTE = "new_patient_note" ;
+    public static final String NEW_FIRSTNAME = "new_patient_firstName";
+    public static final String NEW_LASTNAME = "new_patient_lastName";
     private EditText InputName, InputLastName, InputPatientNote;
 
 
@@ -25,6 +33,12 @@ public class PatientData extends AppCompatActivity {
              InputLastName = findViewById(R.id.InputLastName);
              InputPatientNote = findViewById(R.id.InputPatientNote);
 
+             Calendar calendar = Calendar.getInstance();
+             String currentDate = DateFormat.getDateTimeInstance().format(calendar.getTime());
+
+             TextView date_data_input = findViewById(R.id.date_data_input);
+             date_data_input.setText(currentDate);
+
              Button saveButton = findViewById(R.id.save_button);
              saveButton.setOnClickListener(new View.OnClickListener() {
                  @Override
@@ -33,10 +47,22 @@ public class PatientData extends AppCompatActivity {
 
                      if (TextUtils.isEmpty(InputLastName.getText())) {
                          setResult(RESULT_CANCELED, resultIntent);
-                     } else {
-                         String patient = InputLastName.getText().toString();
-                         resultIntent.putExtra(PATIENT_ADDED, patient);
+
+                     }  else if (TextUtils.isEmpty(InputName.getText())) {
+                         setResult(RESULT_CANCELED, resultIntent);
+
+                     }  else if (TextUtils.isEmpty(InputPatientNote.getText())){
+                         setResult(RESULT_CANCELED, resultIntent);
+
+                     }  else {
+                         String patientLastName = InputLastName.getText().toString();
+                         String patientFirstName = InputName.getText().toString();
+                         String patientNote = InputPatientNote.getText().toString();
+                         resultIntent.putExtra(NEW_LASTNAME, patientLastName);
+                         resultIntent.putExtra(NEW_FIRSTNAME, patientFirstName);
+                         resultIntent.putExtra(NEW_PATIENTNOTE, patientNote);
                          setResult(RESULT_OK, resultIntent);
+
                      }
 
                      finish();
