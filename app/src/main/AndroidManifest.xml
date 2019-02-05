@@ -38,4 +38,5 @@
         <activity android:name=".UI.PatientDataEdit"></activity>
     </application>
 
+
 </manifest>
