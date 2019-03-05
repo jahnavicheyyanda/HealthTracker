@@ -25,8 +25,8 @@ public class RecordingWave extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording_wave);
 
- /*     final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
-        final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2); */
+ //    final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
+ //       final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
         Button start_button = findViewById(R.id.start_button);
         Button stop_button = findViewById(R.id.stop_button);
         TextView recording_text = findViewById(R.id.textView);
@@ -109,6 +109,4 @@ public class RecordingWave extends AppCompatActivity {
 
 
 }
-
-
 

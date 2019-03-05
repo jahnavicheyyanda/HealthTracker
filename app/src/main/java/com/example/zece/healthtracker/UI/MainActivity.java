@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BA = BluetoothAdapter.getDefaultAdapter();
-        lv = (ListView)findViewById(R.id.bluetoothlist);
+       /* BA = BluetoothAdapter.getDefaultAdapter();
+        lv = (ListView)findViewById(R.id.bluetoothlist);*/
 
         Button next_button = findViewById(R.id.next_button_home);
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void on(View v){
+   /* public void on(View v){
         if (!BA.isEnabled()) {
             Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(turnOn, 0);
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayAdapter adapter = new  ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
 
         lv.setAdapter(adapter);
-    }
+    }*/
 
     public void recording_wave() {
         Intent intent = new Intent(this, RecordingWave.class);

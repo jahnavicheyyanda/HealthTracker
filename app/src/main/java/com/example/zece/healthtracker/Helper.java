@@ -9,7 +9,7 @@ import android.os.Vibrator;
 
 public class Helper {
 
-    private static Helper helperInstance;
+    /*private static Helper helperInstance;
 
     private Helper() {
 
@@ -63,6 +63,6 @@ public class Helper {
             return true;
         }
 
-    }
+    }*/
 
 }

@@ -14,20 +14,21 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.zece.healthtracker.Database.Patient;
-import com.example.zece.healthtracker.View.PatientListAdaptor;
+import com.example.zece.healthtracker.Database.Record;
+import com.example.zece.healthtracker.View.PatientListAdapter;
 import com.example.zece.healthtracker.View.PatientViewModel;
 import com.example.zece.healthtracker.R;
 
 import java.util.List;
 import java.util.UUID;
 
-public class FilesPage extends AppCompatActivity implements PatientListAdaptor.OnDeleteClickListener {
+public class FilesPage extends AppCompatActivity implements PatientListAdapter.OnDeleteClickListener {
 
     public static final int UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE = 2;
     private static final int PATIENT_DATA_ACTIVITY_REQUEST_CODE = 1;
     private String TAG = this.getClass().getSimpleName();
     private PatientViewModel patientViewModel;
-    private PatientListAdaptor patientListAdaptor;
+    private PatientListAdapter patientListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,10 @@ public class FilesPage extends AppCompatActivity implements PatientListAdaptor.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //connecting recyclerView to a layout manager, and attach an adapter for the data to be displayed
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        patientListAdaptor =new PatientListAdaptor(this, this);
-        recyclerView.setAdapter(patientListAdaptor);
+        patientListAdapter = new PatientListAdapter(this, this, this);
+        recyclerView.setAdapter(patientListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -55,9 +57,17 @@ public class FilesPage extends AppCompatActivity implements PatientListAdaptor.O
         patientViewModel.getAllPatients().observe(this, new Observer<List<Patient>>(){
             @Override
             public void onChanged(@Nullable List<Patient> patients) {
-                patientListAdaptor.setPatients(patients);
+                patientListAdapter.setPatients(patients);
             }
         });
+
+        patientViewModel.getAllRecords().observe(this, new Observer<List<Record>>(){
+            @Override
+            public void onChanged(@Nullable List<Record> records) {
+                patientListAdapter.setRecords(records);
+            }
+        });
+
     }
 
     @Override
@@ -67,9 +77,17 @@ public class FilesPage extends AppCompatActivity implements PatientListAdaptor.O
         if (requestCode == PATIENT_DATA_ACTIVITY_REQUEST_CODE && resultCode== RESULT_OK) {
 
             //to insert patient
+
             final String patient_id = UUID.randomUUID().toString();
-            Patient patient = new Patient (patient_id, data.getStringExtra(PatientData.NEW_LASTNAME), data.getStringExtra(PatientData.NEW_FIRSTNAME), data.getStringExtra(PatientData.NEW_PATIENTNOTE));
+            Patient patient = new Patient ( patient_id,
+                                            data.getStringExtra(PatientData.NEW_LASTNAME),
+                                            data.getStringExtra(PatientData.NEW_FIRSTNAME),
+                                            data.getStringExtra(PatientData.NEW_PATIENTNOTE));
             patientViewModel.insert(patient);
+
+            final String rid = UUID.randomUUID().toString();
+            Record record = new Record (rid, patient_id, data.getStringExtra(PatientData.NEW_RECORDDATE));
+            patientViewModel.insert(record);
 
             Toast.makeText(
                     getApplicationContext(),
@@ -80,7 +98,9 @@ public class FilesPage extends AppCompatActivity implements PatientListAdaptor.O
             //code update the patient data
             Patient patient = new Patient(
                     data.getStringExtra(PatientDataEdit.PATIENT_ID),
-                    data.getStringExtra(PatientDataEdit.UPDATED_LASTNAME), data.getStringExtra(PatientDataEdit.UPDATED_FIRSTNAME),data.getStringExtra(PatientDataEdit.UPDATED_NOTE));
+                    data.getStringExtra(PatientDataEdit.UPDATED_LASTNAME),
+                    data.getStringExtra(PatientDataEdit.UPDATED_FIRSTNAME),
+                    data.getStringExtra(PatientDataEdit.UPDATED_NOTE));
             PatientViewModel.update(patient);
 
             Toast.makeText(
@@ -96,9 +116,18 @@ public class FilesPage extends AppCompatActivity implements PatientListAdaptor.O
         }
     }
 
+    //For delete operation
+
     @Override
     public void OnDeleteClickListener(Patient mPatient) {
-        //Code for delete operation
+
         patientViewModel.delete(mPatient);
     }
+
+    @Override
+    public void OnDeleteClickListener2(Record mRecord) {
+
+        patientViewModel.delete(mRecord);
+    }
+
 }

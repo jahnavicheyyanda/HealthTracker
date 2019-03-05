@@ -6,8 +6,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import java.util.Date;
-
 @Entity(tableName = "patients")
 public class Patient {
     @PrimaryKey/*(autoGenerate = true)*/
@@ -15,7 +13,6 @@ public class Patient {
     private String patient_id;
 
     @ColumnInfo(name = "first_name")
-    //@NonNull
     private String first_name;
 
     @ColumnInfo(name = "last_name")
@@ -24,17 +21,6 @@ public class Patient {
 
     @ColumnInfo(name = "note")
     private  String note;
-
-    @ColumnInfo
-    private Date date;
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     @NonNull
     public String getPatient_id() {
@@ -65,11 +51,14 @@ public class Patient {
 
     public void setNote(String note) { this.note = note; }
 
-    public Patient(String patient_id, String last_name, String first_name, String note/*, Date date*/) {
+
+
+    public Patient(String patient_id, String last_name, String first_name, String note) {
         this.patient_id=patient_id;
         this.last_name=last_name;
         this.first_name=first_name;
         this.note=note;
-       // this.date = date;
     }
+
+
 }

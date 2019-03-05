@@ -7,14 +7,18 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.zece.healthtracker.Database.Patient;
-
 import java.util.List;
 
 @Dao
 public interface DAO {
     @Insert
     void insert (Patient patient);
+
+    @Update
+    void update(Patient patient);
+
+    @Delete
+    int delete(Patient patient);
 
     @Query("SELECT * FROM patients")
     LiveData<List<Patient>> getAllPatients();
@@ -28,11 +32,19 @@ public interface DAO {
     @Query("SELECT * FROM patients WHERE patient_id=:patientId")
     LiveData<Patient> getPatient_note(String patientId);
 
+    @Insert
+    void insert(Record... record);
+
     @Update
-    void update(Patient patient);
+    void update(Record... record);
 
     @Delete
-    int delete(Patient patient);
+    void delete(Record... record);
 
+    @Query("SELECT * FROM records")
+    LiveData<List<Record>> getAllRecords();
+
+    @Query("SELECT * FROM records WHERE rid=:rid")
+    LiveData<Record> getDate(String rid);
 
 }

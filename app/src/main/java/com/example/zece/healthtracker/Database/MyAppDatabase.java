@@ -1,22 +1,18 @@
 package com.example.zece.healthtracker.Database;
 
-import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 
-import com.example.zece.healthtracker.Database.Patient;
-import com.example.zece.healthtracker.DateRoomConverter;
 
-
-@Database(entities = {Patient.class},version = 1)
-@TypeConverters({DateRoomConverter.class})
+@Database(entities = {Patient.class, Record.class},version = 6)
 public abstract class MyAppDatabase extends RoomDatabase {
 
 public abstract DAO mDao();
 
+//DB is made singleton to prevent having multiple instances of the database opened at the same time.
 private static volatile MyAppDatabase patientRoomInstance;
 
 public static MyAppDatabase getDatabase(final Context context) {
@@ -24,8 +20,6 @@ public static MyAppDatabase getDatabase(final Context context) {
         synchronized (MyAppDatabase.class){
             if (patientRoomInstance == null) {
                 patientRoomInstance = Room.databaseBuilder(context.getApplicationContext(), MyAppDatabase.class, "carotiddb")
-                        // allow queries on the main thread.
-                        // Don't do this on a real app! See PersistenceBasicSample for an example.
                         .build();
             }
         }

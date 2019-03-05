@@ -12,29 +12,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.zece.healthtracker.Database.Patient;
+import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
 import com.example.zece.healthtracker.UI.PatientDataEdit;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-public class PatientListAdaptor extends RecyclerView.Adapter<PatientListAdaptor.PatientViewHolder> {
+public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.PatientViewHolder> {
 
     public interface OnDeleteClickListener{
         void OnDeleteClickListener(Patient mPatient);
+        void OnDeleteClickListener2(Record mRecord);
     }
 
     private final LayoutInflater layoutInflater;
     private Context mContext;
     private List<Patient> list;
+    private List<Record> recordList;
     private OnDeleteClickListener onDeleteClickListener;
 
-    public PatientListAdaptor(Context context, OnDeleteClickListener listener) {
+    public PatientListAdapter(Context context, OnDeleteClickListener listener , OnDeleteClickListener listener2) {
         layoutInflater = LayoutInflater.from(context);
         this.list = list;
+        this.recordList = recordList;
         mContext = context;
         this.onDeleteClickListener = listener;
     }
+
+    //Create new views
 
     @NonNull
     @Override
@@ -44,15 +52,25 @@ public class PatientListAdaptor extends RecyclerView.Adapter<PatientListAdaptor.
         return viewHolder;
     }
 
+    //binding the view holders to their data with assigning them to position
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
 
         if (list != null) {
+
+            Record record = recordList.get(position);
+            holder.setDataRec(record.getRid(), position);
+            holder.setDataRec(record.getPid(), position);
+            holder.setDataRec(String.valueOf(record.getDate()), position);
+
             Patient patient = list.get(position);
             holder.setData(patient.getLast_name(), position);
             holder.setData(patient.getFirst_name(), position);
             holder.setData(patient.getNote(), position);
+
+
             holder.setListeners();
+
         } else {
             holder.patientItemView.setText(R.string.no_patient);
         }
@@ -66,8 +84,14 @@ public class PatientListAdaptor extends RecyclerView.Adapter<PatientListAdaptor.
         else return 0;
     }
 
+    //notification methods are for updates, to rebind the affected view holders to their data updated.
     public void setPatients(List<Patient> patients) {
         list = patients;
+        notifyDataSetChanged();
+    }
+
+    public void setRecords(List<Record> records) {
+        recordList = records;
         notifyDataSetChanged();
     }
 
@@ -89,6 +113,11 @@ public class PatientListAdaptor extends RecyclerView.Adapter<PatientListAdaptor.
             mPosition=position;
         }
 
+        public void setDataRec(String record, int position) {
+            patientItemView.setText(record);
+            mPosition=position;
+        }
+
         public void setListeners() {
             imgEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,7 +125,10 @@ public class PatientListAdaptor extends RecyclerView.Adapter<PatientListAdaptor.
 
                     Intent intent = new Intent(mContext, PatientDataEdit.class);
                     intent.putExtra("patient_id", list.get(mPosition).getPatient_id());
-                    ((Activity)mContext).startActivityForResult(intent, FilesPage.UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE);
+
+                    ((Activity)mContext).startActivityForResult(intent,
+                            FilesPage.UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE);
+
 
 
                 }
