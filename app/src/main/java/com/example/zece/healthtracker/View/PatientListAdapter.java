@@ -17,8 +17,6 @@ import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
 import com.example.zece.healthtracker.UI.PatientDataEdit;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.PatientViewHolder> {
@@ -47,7 +45,7 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
     @NonNull
     @Override
     public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.list_item, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.patient_list_item, parent, false);
         PatientViewHolder viewHolder = new PatientViewHolder(itemView);
         return viewHolder;
     }
