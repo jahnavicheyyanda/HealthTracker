@@ -1,7 +1,9 @@
 package com.example.zece.healthtracker.View;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
+import com.example.zece.healthtracker.UI.MainActivity;
 import com.example.zece.healthtracker.UI.PatientDataEdit;
 
 import java.util.List;
@@ -117,6 +120,7 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
         }
 
         public void setListeners() {
+
             imgEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -135,9 +139,30 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
             imgDelete.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    if (onDeleteClickListener != null){
-                        onDeleteClickListener.OnDeleteClickListener(list.get(mPosition));
-                    }
+                    AlertDialog.Builder altDial = new AlertDialog.Builder(mContext);
+                    altDial.setMessage("Do you want to delete the data?").setCancelable(false)
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    if (onDeleteClickListener != null){
+                                        onDeleteClickListener.OnDeleteClickListener(list.get(mPosition));
+                                    }
+
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert = altDial.create();
+                    alert.setTitle("Delete");
+                    alert.show();
+
+
 
                 }
             });
