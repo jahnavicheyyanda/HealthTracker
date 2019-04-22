@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "388cc8df10a30a7b12e35c0763e3b39c",
+    "identityHash": "a37913b1f016712d8f979196daba9483",
     "entities": [
       {
         "tableName": "Patient",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`patient_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT, `last_name` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`patient_id` INTEGER NOT NULL, `first_name` TEXT, `last_name` TEXT, PRIMARY KEY(`patient_id`))",
         "fields": [
           {
             "fieldPath": "patient_id",
@@ -31,7 +31,7 @@
           "columnNames": [
             "patient_id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -40,7 +40,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"388cc8df10a30a7b12e35c0763e3b39c\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a37913b1f016712d8f979196daba9483\")"
     ]
   }
 }

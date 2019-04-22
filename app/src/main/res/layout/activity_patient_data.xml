@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".patient_data">
+    tools:context=".UI.PatientData">
 
     <TextView
         android:id="@+id/patient_data"
@@ -13,9 +13,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="52dp"
         android:contentDescription="@string/patient_data"
         android:text="@string/patient_data"
         android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/choose_patient_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,11 +28,13 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/name_data"
         android:text="@string/name_data"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/last_name"
         app:layout_constraintEnd_toStartOf="@+id/InputName"
         app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,11 +44,15 @@
         android:id="@+id/InputName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/InputLastName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/name_data"
         app:layout_constraintTop_toBottomOf="@+id/spinner_patient"
         tools:ignore="Autofill" />
 
@@ -53,81 +61,90 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/last_data"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/InputPatientNote"
         app:layout_constraintEnd_toStartOf="@+id/InputLastName"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_data" />
 
     <EditText
         android:id="@+id/InputLastName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginStart="73dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/InputPatientNote"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/last_name"
         app:layout_constraintTop_toBottomOf="@+id/InputName"
         tools:ignore="Autofill" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/date_data"
         android:text="@string/date_data"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toStartOf="@+id/date_data_input"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/last_name" />
+        app:layout_constraintTop_toBottomOf="@+id/InputPatientNote" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="72dp"
         android:background="@color/colorAccent"
         android:text="@string/save_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/date_data_input"
         android:layout_width="204dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="56dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/date_data_input"
         android:text="@string/date_data_input"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputLastName" />
+        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintTop_toBottomOf="@+id/InputPatientNote" />
 
     <TextView
         android:id="@+id/choose_patient_data"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:text="@string/choose_data"
-        android:textSize="@dimen/std"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/spinner_patient"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patient_data" />
 
@@ -139,5 +156,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patient_data" />
 
+    <EditText
+        android:id="@+id/InputPatientNote"
+        android:layout_width="359dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="3dp"
+        android:ems="10"
+        android:hint="Note"
+        android:inputType="text"
+        android:text="@string/note"
+        app:layout_constraintBottom_toTopOf="@+id/date_data_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputLastName"
+        app:layout_constraintVertical_bias="0.145" />
 
 </android.support.constraint.ConstraintLayout>
