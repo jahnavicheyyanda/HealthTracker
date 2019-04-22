@@ -22,13 +22,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "Main Activity";
+    public static final String TAG = "Main Activity";
 
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
-    public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
-    public DeviceListAdapter mDeviceListAdapter;
+    ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
+    DeviceListAdapter mDeviceListAdapter;
     ListView lvNewDevices;
+    public BluetoothDevice device;
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onReceive: ACTION_FOUND");
 
             if(action.equals(BluetoothDevice.ACTION_FOUND)){
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 mBTDevices.add(device);
 
                 Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
