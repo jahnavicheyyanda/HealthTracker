@@ -37,4 +37,5 @@
     <string name="tvDeviceAddress" />
     <string name="tvDeviceName" />
     <string name="btnFindUnpairedDevices">Discover</string>
+    <string name="next_button_record">Next</string>
 </resources>
