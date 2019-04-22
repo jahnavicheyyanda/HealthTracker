@@ -1,6 +1,9 @@
 package com.example.zece.healthtracker.UI;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,16 +11,22 @@ import android.widget.Button;
 import android.media.audiofx.Visualizer;
 import android.media.MediaPlayer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.Waveform.VisualizerView;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class RecordingWave extends AppCompatActivity {
 
     VisualizerView mVisualizerView;
-    private MediaPlayer mMediaPlayer;
-    private Visualizer mVisualizer;
+    public MediaPlayer mMediaPlayer;
+    public Visualizer mVisualizer;
+
+
 
 
     @Override
@@ -34,11 +43,11 @@ public class RecordingWave extends AppCompatActivity {
         stop_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                recorded_wave();
+                mMediaPlayer.stop();
             }
         });
 
-        mVisualizerView = (VisualizerView) findViewById(R.id.myvisualizerview);
+        mVisualizerView = findViewById(R.id.myvisualizerview);
         initAudio();
 
     }
@@ -56,7 +65,43 @@ public class RecordingWave extends AppCompatActivity {
 
     private void initAudio() {
         //setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        mMediaPlayer = MediaPlayer.create(this, R.raw.test2);
+        //mMediaPlayer = MediaPlayer.create(this, R.raw.test2);
+
+        /*Uri myUri1 = Uri.parse("file:/sdcard/Download/Test2.wav");
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            mMediaPlayer.setDataSource(getApplicationContext(), myUri1);
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        } catch (SecurityException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        } catch (IllegalStateException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            mMediaPlayer.prepare();
+        } catch (IllegalStateException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
+        }*/
+
+        /*String pathToFile = "files:///Music/Test2.wav";
+        try {
+            mMediaPlayer.setDataSource(pathToFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            mMediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        mMediaPlayer = MediaPlayer.create(RecordingWave.this,  Uri.parse(Environment.getExternalStorageDirectory()+ "/Music/Test.mp3"));
 
 
         setupVisualizerFxAndUI();
@@ -75,13 +120,41 @@ public class RecordingWave extends AppCompatActivity {
                         mVisualizer.setEnabled(false);
                     }
                 });
+
+        Button start_button = findViewById(R.id.start_button);
+
+        start_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
             mMediaPlayer.start();
 
+            }
+        });
+
+
+        Button next_button_record = findViewById(R.id.next_button_record);
+
+        next_button_record.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                recorded_wave();
+
+            }
+        });
+
+    }
+
+    public void recorded_wave () {
+        Intent intent = new Intent(this, RecordedWave.class);
+
+        startActivity(intent);
 
     }
 
 
-        private void setupVisualizerFxAndUI () {
+    private void setupVisualizerFxAndUI () {
         // Create the Visualizer object and attach it to our media player.
                 mVisualizer = new Visualizer(mMediaPlayer.getAudioSessionId());
                 mVisualizer.setCaptureSize(100);
@@ -101,11 +174,6 @@ public class RecordingWave extends AppCompatActivity {
 
             }
 
-            public void recorded_wave () {
-        Intent intent = new Intent(this, RecordedWave.class);
-        startActivity(intent);
-        mMediaPlayer.stop();
-    }
 
 
 }
