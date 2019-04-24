@@ -1,7 +1,6 @@
 package com.example.zece.healthtracker.UI;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +10,10 @@ import android.widget.Button;
 import android.media.audiofx.Visualizer;
 import android.media.MediaPlayer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.Waveform.VisualizerView;
 
-import java.io.File;
-import java.io.IOException;
 
 
 public class RecordingWave extends AppCompatActivity {
@@ -27,8 +23,6 @@ public class RecordingWave extends AppCompatActivity {
     public Visualizer mVisualizer;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,20 +30,18 @@ public class RecordingWave extends AppCompatActivity {
 
  //    final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
  //       final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
-        Button start_button = findViewById(R.id.start_button);
         Button stop_button = findViewById(R.id.stop_button);
         TextView recording_text = findViewById(R.id.textView);
 
         stop_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                mMediaPlayer.stop();
+                mMediaPlayer.pause();
             }
         });
 
         mVisualizerView = findViewById(R.id.myvisualizerview);
         initAudio();
-
     }
 
     @Override
@@ -60,49 +52,12 @@ public class RecordingWave extends AppCompatActivity {
             mMediaPlayer.release();
             mMediaPlayer = null;
         }
-
     }
 
     private void initAudio() {
-        //setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        //mMediaPlayer = MediaPlayer.create(this, R.raw.test2);
 
-        /*Uri myUri1 = Uri.parse("file:/sdcard/Download/Test2.wav");
-        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try {
-            mMediaPlayer.setDataSource(getApplicationContext(), myUri1);
-        } catch (IllegalArgumentException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (SecurityException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (IllegalStateException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            mMediaPlayer.prepare();
-        } catch (IllegalStateException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        }*/
-
-        /*String pathToFile = "files:///Music/Test2.wav";
-        try {
-            mMediaPlayer.setDataSource(pathToFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            mMediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        mMediaPlayer = MediaPlayer.create(RecordingWave.this,  Uri.parse(Environment.getExternalStorageDirectory()+ "/Music/Test.mp3"));
-
+          mMediaPlayer = MediaPlayer.create(RecordingWave.this, Uri.parse(Environment.getExternalStorageDirectory()
+                                              + "/Music/Test.mp3"));
 
         setupVisualizerFxAndUI();
         // Make sure the visualizer is enabled only when you actually want to
@@ -139,7 +94,14 @@ public class RecordingWave extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                mMediaPlayer.stop();
                 recorded_wave();
+
+                // Stopping the file will completely stop the file and you won’t be able to run it again.
+                // when we hit the Play button again to be able to play it again (because the MediaPlayer object will be cleared after stop().
+                // There will be no file present in the object anymore.)
+                mMediaPlayer = MediaPlayer.create(RecordingWave.this,  Uri.parse(Environment.getExternalStorageDirectory()
+                                                    + "/Music/Test.mp3"));
 
             }
         });
