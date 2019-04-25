@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.BreakIterator;
@@ -146,6 +148,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     };
 
+    private void OperateFolderActions() {
+
+        String state = Environment.getExternalStorageState();
+        Log.d("Media State", state);
+
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            File appDirectoryTransfer = new File(
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker_transfer/");
+
+            File appDirectory = new File(
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker/");
+
+            Log.d("appDirectroyTransExist", appDirectoryTransfer.exists() + "");
+            Log.d("appDirectroyExist", appDirectory.exists() + "");
+            if (!appDirectoryTransfer.exists())
+                Log.d("appDirTr created: ", appDirectoryTransfer.mkdir() + "");
+
+            if (!appDirectory.exists())
+                Log.d("appDir created: ", appDirectory.mkdir() + "");
+        }
+
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -161,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        OperateFolderActions();
 
         Button btnONOFF = findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = findViewById(R.id.btnDiscoverable_on_off);

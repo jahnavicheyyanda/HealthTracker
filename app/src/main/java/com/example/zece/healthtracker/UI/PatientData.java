@@ -2,6 +2,7 @@ package com.example.zece.healthtracker.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.zece.healthtracker.R;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -63,6 +65,11 @@ public class PatientData extends AppCompatActivity {
                          resultIntent.putExtra(NEW_PATIENTNOTE, patientNote);
                          resultIntent.putExtra(NEW_RECORDDATE, recordDate);
                          setResult(RESULT_OK, resultIntent);
+
+                         File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Health_tracker_transfer/Test.mp3");
+                         File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Health_tracker/Test.mp3");
+                         from.renameTo(to);
+
 
                      }
 
