@@ -66,10 +66,12 @@ public class PatientData extends AppCompatActivity {
                          resultIntent.putExtra(NEW_RECORDDATE, recordDate);
                          setResult(RESULT_OK, resultIntent);
 
-                         File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Health_tracker_transfer/Test.mp3");
-                         File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Health_tracker/Test.mp3");
+                         File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                                                +"/Health_tracker_transfer/Test.mp3");
+                         File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                                                +"/Health_tracker/"+InputName.getText().toString()+" "+InputLastName.getText().toString()
+                                                + " "+date_data_input.getText().toString()+".mp3");
                          from.renameTo(to);
-
 
                      }
 
