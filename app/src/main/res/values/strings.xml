@@ -38,4 +38,6 @@
     <string name="tvDeviceName" />
     <string name="btnFindUnpairedDevices">Discover</string>
     <string name="next_button_record">Next</string>
+    <string name="ivRowPlay" />
+    <string name="test">test</string>
 </resources>

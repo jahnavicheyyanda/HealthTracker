@@ -12,6 +12,7 @@ import android.media.MediaPlayer;
 import android.widget.TextView;
 
 import com.example.zece.healthtracker.R;
+import com.example.zece.healthtracker.Waveform.RecorderVisualizerView;
 import com.example.zece.healthtracker.Waveform.VisualizerView;
 
 
@@ -119,7 +120,7 @@ public class RecordingWave extends AppCompatActivity {
     private void setupVisualizerFxAndUI () {
         // Create the Visualizer object and attach it to our media player.
                 mVisualizer = new Visualizer(mMediaPlayer.getAudioSessionId());
-                mVisualizer.setCaptureSize(100);
+                mVisualizer.setCaptureSize(1);
                 //Visualizer.getCaptureSizeRange()[1]
                 mVisualizer.setDataCaptureListener(
                         new Visualizer.OnDataCaptureListener() {

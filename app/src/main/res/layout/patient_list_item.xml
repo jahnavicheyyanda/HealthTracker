@@ -55,6 +55,13 @@
                 android:layout_margin="7dp"
                 android:src="@android:drawable/ic_menu_edit"
                 android:tint="#9E9E9E" />
+
+            <ImageButton
+                android:id="@+id/ivRowPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/ivRowPlay"
+                card_view:srcCompat="@android:drawable/ic_media_play" />
         </LinearLayout>
 
     </LinearLayout>

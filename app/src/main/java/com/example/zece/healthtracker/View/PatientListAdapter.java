@@ -127,6 +127,9 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
                     Intent intent = new Intent(mContext, PatientDataEdit.class);
                     intent.putExtra("patient_id", list.get(mPosition).getPatient_id());
+                    intent.putExtra("patient_firstName", list.get(mPosition).getFirst_name());
+                    intent.putExtra("patient_lastName", list.get(mPosition).getLast_name());
+                    //intent.putExtra("record_date", list.get(mPosition).getRecord_date());
 
                     ((Activity)mContext).startActivityForResult(intent,
                             FilesPage.UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE);

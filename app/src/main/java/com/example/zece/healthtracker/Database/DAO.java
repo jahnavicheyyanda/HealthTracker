@@ -32,6 +32,9 @@ public interface DAO {
     @Query("SELECT * FROM patients WHERE patient_id=:patientId")
     LiveData<Patient> getPatient_note(String patientId);
 
+    @Query("SELECT * FROM patients WHERE patient_id=:patientId")
+    LiveData<Patient> getRecord_date(String patientId);
+
     @Insert
     void insert(Record... record);
 
