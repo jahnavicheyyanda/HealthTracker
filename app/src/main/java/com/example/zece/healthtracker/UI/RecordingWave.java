@@ -1,5 +1,6 @@
 package com.example.zece.healthtracker.UI;
 
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -21,6 +22,8 @@ public class RecordingWave extends AppCompatActivity {
     VisualizerView mVisualizerView;
     public MediaPlayer mMediaPlayer;
     public Visualizer mVisualizer;
+    public ConnectedThread mConnectedThread;
+    public BluetoothSocket socket;
 
 
     @Override
@@ -32,6 +35,7 @@ public class RecordingWave extends AppCompatActivity {
  //       final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
         Button stop_button = findViewById(R.id.stop_button);
         TextView recording_text = findViewById(R.id.textView);
+       
 
         stop_button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -43,6 +47,7 @@ public class RecordingWave extends AppCompatActivity {
         mVisualizerView = findViewById(R.id.myvisualizerview);
         initAudio();
     }
+    
 
     @Override
     protected void onPause() {
@@ -87,6 +92,17 @@ public class RecordingWave extends AppCompatActivity {
             }
         });
 
+        Button recording_start_pi = findViewById(R.id.recording_start_button);
+        recording_start_pi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConnectedThread = new ConnectedThread(socket);
+                mConnectedThread.start();
+            }
+        });
+
+
+
 
         Button next_button_record = findViewById(R.id.next_button_record);
 
@@ -107,6 +123,9 @@ public class RecordingWave extends AppCompatActivity {
         });
 
     }
+
+
+
 
     public void recorded_wave () {
         Intent intent = new Intent(this, RecordedWave.class);

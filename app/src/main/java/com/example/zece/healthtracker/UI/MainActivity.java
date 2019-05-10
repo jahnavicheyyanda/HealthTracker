@@ -3,6 +3,7 @@ package com.example.zece.healthtracker.UI;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +25,8 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.text.BreakIterator;
 import java.util.ArrayList;
@@ -31,7 +35,10 @@ import java.util.UUID;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.View.DeviceListAdapter;
 
+import static android.bluetooth.BluetoothAdapter.STATE_CONNECTED;
 import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
+import static android.provider.CalendarContract.Calendars.NAME;
+import static com.example.zece.healthtracker.UI.MainActivity.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -44,11 +51,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     DeviceListAdapter mDeviceListAdapter;
     ListView lvNewDevices;
     public BluetoothDevice device;
-
     private Handler mHandler;
     private ConnectThread mConnectThread;
+    private AcceptThread mAcceptThread;
+    //private ConnectedThread mConnectedThread;
     private BluetoothSocket mmSocket;
-    UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    //private final InputStream mmInStream;
+    UUID uuid = UUID.fromString("00001103-0000-1000-8000-00805f9b34fb");
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -94,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     case BluetoothAdapter.STATE_CONNECTING:
                         Log.d(TAG, "mBroadcastReceiver2: connecting");
                         break;
-                    case BluetoothAdapter.STATE_CONNECTED:
+                    case STATE_CONNECTED:
                         Log.d(TAG, "mBroadcastReceiver2: connected");
                         break;
                 }
@@ -154,19 +163,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Log.d("Media State", state);
 
         if (Environment.MEDIA_MOUNTED.equals(state)) {
-            File appDirectoryTransfer = new File(
-                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker_transfer/");
+            File appDirectoryTransfer = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker_transfer/");
 
-            File appDirectory = new File(
-                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker/");
+            File appDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker/");
 
             Log.d("appDirectroyTransExist", appDirectoryTransfer.exists() + "");
             Log.d("appDirectroyExist", appDirectory.exists() + "");
             if (!appDirectoryTransfer.exists())
                 Log.d("appDirTr created: ", appDirectoryTransfer.mkdir() + "");
 
-            if (!appDirectory.exists())
-                Log.d("appDir created: ", appDirectory.mkdir() + "");
+            if (!appDirectory.exists()) Log.d("appDir created: ", appDirectory.mkdir() + "");
         }
 
     }
@@ -335,7 +341,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 if (fail == false) {
                     mConnectThread = new ConnectThread(mmSocket);
+                    mAcceptThread = new AcceptThread();
                     mConnectThread.start();
+                    mAcceptThread.start();
                 }
             }
         }.start();
@@ -347,10 +355,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
             return (BluetoothSocket) m.invoke(device, uuid);
         } catch (Exception e) {
-            Log.e(TAG, "Could not create Insecure RFComm Connection",e);
+            Log.e(TAG, "Could not create Insecure RFComm Connection", e);
         }
-        return  device.createRfcommSocketToServiceRecord(uuid);
+        return device.createRfcommSocketToServiceRecord(uuid);
     }
+
+
 
    /* private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         return device.createRfcommSocketToServiceRecord(uuid);
@@ -363,9 +373,65 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    private class AcceptThread extends Thread {
+        private final BluetoothServerSocket mmServerSocket;
+
+        public AcceptThread() {
+            // Use a temporary object that is later assigned to mmServerSocket
+            // because mmServerSocket is final.
+            BluetoothServerSocket tmp = null;
+            try {
+                // MY_UUID is the app's UUID string, also used by the client code.
+                tmp = mBluetoothAdapter.listenUsingRfcommWithServiceRecord(NAME, uuid);
+            } catch (IOException e) {
+                Log.e(TAG, "Socket's listen() method failed", e);
+            }
+            mmServerSocket = tmp;
+        }
+
+        public void run() {
+            BluetoothSocket socket = null;
+            // Keep listening until exception occurs or a socket is returned.
+            while (true) {
+                try {
+                    socket = mmServerSocket.accept();
+                } catch (IOException e) {
+                    Log.e(TAG, "Socket's accept() method failed", e);
+                    break;
+                }
+
+                if (socket != null) {
+                    // A connection was accepted. Perform work associated with
+                    // the connection in a separate thread.
+                    manageMyConnectedSocket(socket);
+                    try {
+                        mmServerSocket.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+            }
+        }
+
+        // Closes the connect socket and causes the thread to finish.
+        public void cancel() {
+            try {
+                mmServerSocket.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Could not close the connect socket", e);
+            }
+        }
+    }
+
+    private void manageMyConnectedSocket(BluetoothSocket socket) {
+    }
+
+
     private class ConnectThread extends Thread {
 
-        public ConnectThread(BluetoothSocket socket) {
+
+        private ConnectThread(BluetoothSocket socket) {
         }
 
         public void run(BluetoothAdapter bluetoothAdapter) {
@@ -388,7 +454,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             // The connection attempt succeeded. Perform work associated with
             // the connection in a separate thread.
-            //manageMyConnectedSocket(mmSocket);
+
+            //mConnectedThread = new ConnectedThread(mmSocket);
+            //mConnectedThread.start();
+
         }
 
         // Closes the client socket and causes the thread to finish.
@@ -402,37 +471,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-        private void manageMyConnectedSocket(BluetoothSocket mmSocket) {
+    // Call this method from the main activity to shut down the connection.
+    public void cancel() {
+        try {
+            mmSocket.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Could not close the connect socket", e);
         }
-
-
+    }
 
 }
-
-/*     //cancel discovery because it is memory intensive
-        mBluetoothAdapter.cancelDiscovery();
-
-        Log.d(TAG, "onItemClick: you clicked on a device.");
-        String deviceName = mBTDevices.get(i).getName();
-        String deviceAddress = mBTDevices.get(i).getAddress();
-
-        Log.d(TAG, "onItemClick: deviceName = " + deviceName);
-        Log.d(TAG, "onItemClick: deviceAddress = " + deviceAddress);
-
-        //create the bond
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
-            Log.d(TAG, "Trying to pair with " + deviceName);
-            try {
-                mBTDevices.get(i).createRfcommSocketToServiceRecord(UUID.fromString("0000110100001000800000805F9B34FB"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }*/
-
-
 
 
 

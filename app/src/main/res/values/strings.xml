@@ -38,4 +38,7 @@
     <string name="tvDeviceName" />
     <string name="btnFindUnpairedDevices">Discover</string>
     <string name="next_button_record">Next</string>
+    <string name="bt_connection_lost">bt_connection_lost</string>
+    <string name="bt_unable">bt_unable</string>
+    <string name="recording_start">Record</string>
 </resources>
