@@ -41,4 +41,6 @@
     <string name="bt_connection_lost">bt_connection_lost</string>
     <string name="bt_unable">bt_unable</string>
     <string name="recording_start">Record</string>
+    <string name="ivRowPlay" />
+    <string name="test">test</string>
 </resources>

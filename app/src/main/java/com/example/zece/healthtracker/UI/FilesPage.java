@@ -103,9 +103,12 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
                     data.getStringExtra(PatientDataEdit.UPDATED_NOTE));
             PatientViewModel.update(patient);
 
+     //       PatientData patientData = new PatientData();
+     //       String inputName = patientData.onCreate();.patientFirstName;
+
             Toast.makeText(
                     getApplicationContext(),
-                    R.string.updated,
+                    R.string.updated  ,
                     Toast.LENGTH_LONG).show();
 
         } else{
