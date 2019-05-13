@@ -5,15 +5,20 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.View.PatientDataEditViewModel;
+
+import java.io.File;
 
 public class PatientDataEdit extends AppCompatActivity {
 
@@ -24,8 +29,8 @@ public class PatientDataEdit extends AppCompatActivity {
     private EditText inputNameEdit, inputLastNameEdit, inputPatientNoteEdit;
     private Bundle bundle;
     private String patientId;
+    private String patientFirstName, patientLastName;
     private LiveData<Patient> patient;
-
     PatientDataEditViewModel patientDataEditViewModel;
 
     @Override
@@ -33,20 +38,34 @@ public class PatientDataEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_data_edit);
 
+
+
         inputNameEdit = findViewById(R.id.InputNameEdit);
         inputLastNameEdit = findViewById(R.id.InputLastNameEdit);
         inputPatientNoteEdit = findViewById(R.id.InputPatientNoteEdit);
 
+
         bundle = getIntent().getExtras();
+
+
 
         if(bundle != null) {
             patientId = bundle.getString("patient_id");
+            patientFirstName = bundle.getString("patient_firstName");
+            patientLastName = bundle.getString("patient_lastName");
+
+
         }
+
 
         patientDataEditViewModel = ViewModelProviders.of(this).get(PatientDataEditViewModel.class);
         patient = patientDataEditViewModel.getFirst_name(patientId);
         patient = patientDataEditViewModel.getLast_name(patientId);
         patient = patientDataEditViewModel.getPatient_note(patientId);
+
+
+
+
         patient.observe(this, new Observer<Patient>() {
             @Override
             public void onChanged(@Nullable Patient patient) {
@@ -67,6 +86,25 @@ public class PatientDataEdit extends AppCompatActivity {
         resultIntent.putExtra(UPDATED_LASTNAME, updatedLastName);
         resultIntent.putExtra(UPDATED_NOTE, updatedPatientNote);
         setResult(RESULT_OK, resultIntent);
+
+        PatientData patientData = new PatientData();
+
+        //String takenDate ;
+        //takenDate = patientData.currentDate;
+
+
+        //patientData.currentDate
+
+        File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                +"/Health_tracker/"
+                +" "+patientLastName
+                +" "+patientFirstName+".mp3" );
+        File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                +"/Health_tracker/"
+                +" "+updatedLastName
+                +" "+updatedFirstName+".mp3");
+        from.renameTo(to);
+
         finish();
     }
 

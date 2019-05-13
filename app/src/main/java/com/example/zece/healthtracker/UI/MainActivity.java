@@ -3,33 +3,52 @@ package com.example.zece.healthtracker.UI;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.BreakIterator;
+import java.util.ArrayList;
+import java.util.UUID;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.View.DeviceListAdapter;
 
-import java.util.ArrayList;
+import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = "Main Activity";
+    public static final String TAG = "Main Activity";
 
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
-    public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
-    public DeviceListAdapter mDeviceListAdapter;
+    ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
+    DeviceListAdapter mDeviceListAdapter;
     ListView lvNewDevices;
+    public BluetoothDevice device;
+
+    private Handler mHandler;
+    private ConnectThread mConnectThread;
+    private BluetoothSocket mmSocket;
+    UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -38,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, mBluetoothAdapter.ERROR);
 
-                switch(state){
+                switch (state) {
                     case BluetoothAdapter.STATE_OFF:
                         Log.d(TAG, "onReceive: STATE OFF");
                         break;
@@ -62,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             if (action.equals(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)) {
                 final int mode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, mBluetoothAdapter.ERROR);
 
-                switch(mode){
+                switch (mode) {
                     case BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE:
                         Log.d(TAG, "mBroadcastReceiver2: Discoverability Enabled");
                         break;
@@ -88,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             final String action = intent.getAction();
             Log.d(TAG, "onReceive: ACTION_FOUND");
 
-            if(action.equals(BluetoothDevice.ACTION_FOUND)){
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            if (action.equals(BluetoothDevice.ACTION_FOUND)) {
+                device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 mBTDevices.add(device);
 
                 Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
@@ -107,27 +126,51 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
 
-            if(action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)){
+            if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
                 BluetoothDevice mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
                 //3 cases:
                 //case1: bonded already
-                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED){
+                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
                 }
 
                 //case2: creating bond
-                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDING){
+                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDING) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDING.");
                 }
 
                 //case3: breaking a bond
-                if(mDevice.getBondState() == BluetoothDevice.BOND_NONE){
+                if (mDevice.getBondState() == BluetoothDevice.BOND_NONE) {
                     Log.d(TAG, "BroadcastReceiver: BOND_NONE.");
                 }
             }
         }
     };
+
+    private void OperateFolderActions() {
+
+        String state = Environment.getExternalStorageState();
+        Log.d("Media State", state);
+
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            File appDirectoryTransfer = new File(
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker_transfer/");
+
+            File appDirectory = new File(
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker/");
+
+            Log.d("appDirectroyTransExist", appDirectoryTransfer.exists() + "");
+            Log.d("appDirectroyExist", appDirectory.exists() + "");
+            if (!appDirectoryTransfer.exists())
+                Log.d("appDirTr created: ", appDirectoryTransfer.mkdir() + "");
+
+            if (!appDirectory.exists())
+                Log.d("appDir created: ", appDirectory.mkdir() + "");
+        }
+
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -144,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        OperateFolderActions();
 
         Button btnONOFF = findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = findViewById(R.id.btnDiscoverable_on_off);
@@ -178,14 +223,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    public void enableDisableBT() {
 
-    public void enableDisableBT(){
-
-        if(mBluetoothAdapter == null){
+        if (mBluetoothAdapter == null) {
             Log.d(TAG, "enableDisableBT: Does not have Bluetooth capabilities.");
         }
 
-        if(!mBluetoothAdapter.isEnabled()){
+        if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enableBTIntent);
 
@@ -194,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             registerReceiver(mBroadcastReceiver1, BTIntent);
         }
 
-        if(mBluetoothAdapter.isEnabled()){
+        if (mBluetoothAdapter.isEnabled()) {
             mBluetoothAdapter.disable();
 
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
@@ -215,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void btnDiscover(View view) {
         Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
-        if(mBluetoothAdapter.isDiscovering()){
+        if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
             Log.d(TAG, "cancel discovery.");
 
@@ -227,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
         }
 
-        if(!mBluetoothAdapter.isDiscovering()){
+        if (!mBluetoothAdapter.isDiscovering()) {
 
             //Check BT permissions in manifest
             checkBTPermissions();
@@ -242,21 +286,130 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //if it is greater that LOLLIPOP version, it will check the manifest for bluetooth permissions
         //do not care about errors below. the reason is they can be used only after API 23. with if clauses we give it so no problem.
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             int permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
             permissionCheck += this.checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION");
             if (permissionCheck != 0) {
 
                 this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001); //Any number
             }
-        }else{
+        } else {
             Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //cancel discovery because it is memory intensive
+
+        Log.d(TAG, "onItemClick: you clicked on a device.");
+        String deviceName = mBTDevices.get(i).getName();
+        final String deviceAddress = mBTDevices.get(i).getAddress();
+
+        Log.d(TAG, "onItemClick: deviceName = " + deviceName);
+        Log.d(TAG, "onItemClick: deviceAddress = " + deviceAddress);
+
+        new Thread() {
+            public void run() {
+                boolean fail = false;
+
+                BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(deviceAddress);
+
+                try {
+                    mmSocket = createBluetoothSocket(device);
+                } catch (IOException e) {
+                    fail = true;
+                    Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
+                }
+                // Establish the Bluetooth socket connection.
+                try {
+                    mmSocket.connect();
+                } catch (IOException e) {
+                    // Unable to connect; close the socket and return.
+                    try {
+                        fail = true;
+                        mmSocket.close();
+                    } catch (IOException e2) {
+                        //insert code to deal with this
+                        Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                if (fail == false) {
+                    mConnectThread = new ConnectThread(mmSocket);
+                    mConnectThread.start();
+                }
+            }
+        }.start();
+    }
+
+
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+        try {
+            final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
+            return (BluetoothSocket) m.invoke(device, uuid);
+        } catch (Exception e) {
+            Log.e(TAG, "Could not create Insecure RFComm Connection",e);
+        }
+        return  device.createRfcommSocketToServiceRecord(uuid);
+    }
+
+   /* private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+        return device.createRfcommSocketToServiceRecord(uuid);
+        //creates secure outgoing connection with BT device using UUID
+    }*/
+
+    public void recording_wave() {
+        Intent intent = new Intent(this, RecordingWave.class);
+        startActivity(intent);
+    }
+
+
+    private class ConnectThread extends Thread {
+
+        public ConnectThread(BluetoothSocket socket) {
+        }
+
+        public void run(BluetoothAdapter bluetoothAdapter) {
+            // Cancel discovery because it otherwise slows down the connection.
+            bluetoothAdapter.cancelDiscovery();
+
+            try {
+                // Connect to the remote device through the socket. This call blocks
+                // until it succeeds or throws an exception.
+                mmSocket.connect();
+            } catch (IOException connectException) {
+                // Unable to connect; close the socket and return.
+                try {
+                    mmSocket.close();
+                } catch (IOException closeException) {
+                    Log.e(TAG, "Could not close the client socket", closeException);
+                }
+                return;
+            }
+
+            // The connection attempt succeeded. Perform work associated with
+            // the connection in a separate thread.
+            //manageMyConnectedSocket(mmSocket);
+        }
+
+        // Closes the client socket and causes the thread to finish.
+        public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Could not close the client socket", e);
+            }
+        }
+
+    }
+
+        private void manageMyConnectedSocket(BluetoothSocket mmSocket) {
+        }
+
+
+
+}
+
+/*     //cancel discovery because it is memory intensive
         mBluetoothAdapter.cancelDiscovery();
 
         Log.d(TAG, "onItemClick: you clicked on a device.");
@@ -269,13 +422,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //create the bond
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
             Log.d(TAG, "Trying to pair with " + deviceName);
-            mBTDevices.get(i).createBond();
+            try {
+                mBTDevices.get(i).createRfcommSocketToServiceRecord(UUID.fromString("0000110100001000800000805F9B34FB"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
 
-    public void recording_wave() {
-        Intent intent = new Intent(this, RecordingWave.class);
-        startActivity(intent);
-    }
 
-}
+    }*/
+
+
+
+
+
