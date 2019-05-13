@@ -3,6 +3,7 @@ package com.example.zece.healthtracker.UI;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
@@ -38,7 +39,6 @@ import com.example.zece.healthtracker.View.DeviceListAdapter;
 import static android.bluetooth.BluetoothAdapter.STATE_CONNECTED;
 import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
 import static android.provider.CalendarContract.Calendars.NAME;
-import static com.example.zece.healthtracker.UI.MainActivity.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -51,13 +51,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     DeviceListAdapter mDeviceListAdapter;
     ListView lvNewDevices;
     public BluetoothDevice device;
-    private Handler mHandler;
-    private ConnectThread mConnectThread;
-    private AcceptThread mAcceptThread;
-    //private ConnectedThread mConnectedThread;
+    private Handler handler;
+    //private ConnectThread mConnectThread;
+    //private AcceptThread mAcceptThread;
+    private ConnectedThread mConnectedThread;
     private BluetoothSocket mmSocket;
-    //private final InputStream mmInStream;
-    UUID uuid = UUID.fromString("00001103-0000-1000-8000-00805f9b34fb");
+    UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -200,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnEnableDisable_Discoverable = findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();
+        Button recordStart = findViewById(R.id.record_start);
 
         //Broadcasts when bond state changes (ie: pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -224,6 +224,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 recording_wave();
+            }
+        });
+
+       Button record_start = findViewById(R.id.record_start);
+        record_start.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                byte[] num = "1".getBytes();
+                mConnectedThread.write(num);      //method to turn on
             }
         });
     }
@@ -304,8 +315,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        //cancel discovery because it is memory intensive
+        mBluetoothAdapter.cancelDiscovery();
 
         Log.d(TAG, "onItemClick: you clicked on a device.");
         String deviceName = mBTDevices.get(i).getName();
@@ -314,7 +329,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Log.d(TAG, "onItemClick: deviceName = " + deviceName);
         Log.d(TAG, "onItemClick: deviceAddress = " + deviceAddress);
 
+        //create the bond
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            Log.d(TAG, "Trying to pair with " + deviceName);
+
+            mBTDevices.get(i).createBond();
+            device = mBTDevices.get(i);
+            /*try {
+                mBTDevices.get(i).createRfcommSocketToServiceRecord(UUID.fromString("0000110100001000800000805F9B34FB"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+        }
+
+
         new Thread() {
+
             public void run() {
                 boolean fail = false;
 
@@ -340,17 +370,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
                 }
                 if (fail == false) {
-                    mConnectThread = new ConnectThread(mmSocket);
-                    mAcceptThread = new AcceptThread();
-                    mConnectThread.start();
-                    mAcceptThread.start();
+
+                    mConnectedThread = new ConnectedThread(mmSocket);
+                    mConnectedThread.start();
+
                 }
             }
         }.start();
+
     }
 
 
-    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+
+
+
+    // Closes the client socket and causes the thread to finish.
+    public void cancel() {
+        try {
+            mmSocket.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Could not close the client socket", e);
+        }
+    }
+
+
+//creates insecure outgoing connection with BT device using UUID
+  /*  private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         try {
             final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
             return (BluetoothSocket) m.invoke(device, uuid);
@@ -358,22 +403,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Log.e(TAG, "Could not create Insecure RFComm Connection", e);
         }
         return device.createRfcommSocketToServiceRecord(uuid);
-    }
-
-
-
-   /* private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
-        return device.createRfcommSocketToServiceRecord(uuid);
-        //creates secure outgoing connection with BT device using UUID
     }*/
 
-    public void recording_wave() {
-        Intent intent = new Intent(this, RecordingWave.class);
-        startActivity(intent);
+
+    //creates secure outgoing connection with BT device using UUID
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+        mmSocket = device.createRfcommSocketToServiceRecord(uuid);
+        return mmSocket;
+
     }
 
 
-    private class AcceptThread extends Thread {
+    /*private class AcceptThread extends Thread {
         private final BluetoothServerSocket mmServerSocket;
 
         public AcceptThread() {
@@ -403,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (socket != null) {
                     // A connection was accepted. Perform work associated with
                     // the connection in a separate thread.
-                    manageMyConnectedSocket(socket);
+                    //manageMyConnectedSocket(socket);
                     try {
                         mmServerSocket.close();
                     } catch (IOException e) {
@@ -424,14 +465,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    private void manageMyConnectedSocket(BluetoothSocket socket) {
-    }
-
 
     private class ConnectThread extends Thread {
 
-
-        private ConnectThread(BluetoothSocket socket) {
+        public ConnectThread(BluetoothSocket socket) {
         }
 
         public void run(BluetoothAdapter bluetoothAdapter) {
@@ -455,32 +492,127 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // The connection attempt succeeded. Perform work associated with
             // the connection in a separate thread.
 
-            //mConnectedThread = new ConnectedThread(mmSocket);
-            //mConnectedThread.start();
+            mConnectedThread = new ConnectedThread(mmSocket);
+            mConnectedThread.start();
+            byte[] bytes = new byte[1];
+            mConnectedThread.write(bytes);
 
+        } */
+
+
+    private interface MessageConstants {
+        public static final int MESSAGE_READ = 0;
+        public static final int MESSAGE_WRITE = 1;
+        public static final int MESSAGE_TOAST = 2;
+
+        // ... (Add other message types here as needed.)
+    }
+
+    private class ConnectedThread extends Thread {
+        private final BluetoothSocket mmSocket;
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
+        private byte[] mmBuffer; // mmBuffer store for the stream
+
+        public ConnectedThread(BluetoothSocket socket) {
+            mmSocket = socket;
+            InputStream tmpIn = null;
+            OutputStream tmpOut = null;
+
+            // Get the input and output streams; using temp objects because
+            // member streams are final.
+            /*try {
+                tmpIn = socket.getInputStream();
+            } catch (IOException e) {
+                Log.e(TAG, "Error occurred when creating input stream", e);
+            }*/
+            try {
+                tmpOut = socket.getOutputStream();
+            } catch (IOException e) {
+                Log.e(TAG, "Error occurred when creating output stream", e);
+            }
+
+            mmInStream = tmpIn;
+            mmOutStream = tmpOut;
         }
 
-        // Closes the client socket and causes the thread to finish.
-        public void cancel() {
+      /*  public void run() {
+            mmBuffer = new byte[1024];
+            int numBytes; // bytes returned from read()
+
+            // Keep listening to the InputStream until an exception occurs.
+            while (true) {
+                try {
+                    // Read from the InputStream.
+                    numBytes = mmInStream.read(mmBuffer);
+                    // Send the obtained bytes to the UI activity.
+                    Message readMsg = handler.obtainMessage(MessageConstants.MESSAGE_READ, numBytes, -1, mmBuffer);
+                    readMsg.sendToTarget();
+                    Log.d(TAG, "Input stream was received");
+                } catch (IOException e) {
+                    Log.d(TAG, "Input stream was disconnected", e);
+                    break;
+                }
+            }
+        }*/
+
+
+        //Call this from the main activity to send data to the remote device.
+        public void write(byte[] bytes) {
             try {
-                mmSocket.close();
+                mmOutStream.write(bytes);
+
+               /* // Share the sent message with the UI activity.
+                Message writtenMsg = handler.obtainMessage(
+                        MessageConstants.MESSAGE_WRITE, -1, -1, mmBuffer);
+                writtenMsg.sendToTarget();*/
             } catch (IOException e) {
-                Log.e(TAG, "Could not close the client socket", e);
+                Log.e(TAG, "Error occurred when sending data", e);
+
+                // Send a failure message back to the activity.
+                Message writeErrorMsg =
+                        handler.obtainMessage(MessageConstants.MESSAGE_TOAST);
+                Bundle bundle = new Bundle();
+                bundle.putString("toast",
+                        "Couldn't send data to the other device");
+                writeErrorMsg.setData(bundle);
+                handler.sendMessage(writeErrorMsg);
             }
         }
 
+
+
+
+
+        // Call this method from the main activity to shut down the connection.
+       public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Could not close the connect socket", e);
+            }
+        }
+
+
     }
 
-    // Call this method from the main activity to shut down the connection.
-    public void cancel() {
-        try {
-            mmSocket.close();
-        } catch (IOException e) {
-            Log.e(TAG, "Could not close the connect socket", e);
-        }
+
+
+
+
+    public void recording_wave() {
+        Intent intent = new Intent(this, RecordingWave.class);
+        startActivity(intent);
     }
+
 
 }
+
+
+
+
+
+
 
 
 

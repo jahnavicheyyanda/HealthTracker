@@ -1,3 +1,4 @@
+
 package com.example.zece.healthtracker.UI;
 
 import android.bluetooth.BluetoothSocket;
@@ -23,7 +24,7 @@ public class RecordingWave extends AppCompatActivity {
     VisualizerView mVisualizerView;
     public MediaPlayer mMediaPlayer;
     public Visualizer mVisualizer;
-    public ConnectedThread mConnectedThread;
+    //public ConnectedThread mConnectedThread;
     public BluetoothSocket socket;
 
 
@@ -35,7 +36,7 @@ public class RecordingWave extends AppCompatActivity {
  //    final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
  //       final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
         Button stop_button = findViewById(R.id.stop_button);
-        TextView recording_text = findViewById(R.id.textView);
+        //TextView recording_text = findViewById(R.id.textView);
        
 
         stop_button.setOnClickListener(new View.OnClickListener(){
@@ -63,7 +64,7 @@ public class RecordingWave extends AppCompatActivity {
     private void initAudio() {
 
           mMediaPlayer = MediaPlayer.create(RecordingWave.this, Uri.parse(Environment.getExternalStorageDirectory()
-                                              + "/Music/Test.mp3"));
+                                              + "/Health_tracker_transfer/Test.mp3"));
 
         setupVisualizerFxAndUI();
         // Make sure the visualizer is enabled only when you actually want to
@@ -93,14 +94,14 @@ public class RecordingWave extends AppCompatActivity {
             }
         });
 
-        Button recording_start_pi = findViewById(R.id.recording_start_button);
+      /*  Button recording_start_pi = findViewById(R.id.recording_start_button);
         recording_start_pi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mConnectedThread = new ConnectedThread(socket);
                 mConnectedThread.start();
             }
-        });
+        });*/
 
 
 
@@ -118,7 +119,7 @@ public class RecordingWave extends AppCompatActivity {
                 // when we hit the Play button again to be able to play it again (because the MediaPlayer object will be cleared after stop().
                 // There will be no file present in the object anymore.)
                 mMediaPlayer = MediaPlayer.create(RecordingWave.this,  Uri.parse(Environment.getExternalStorageDirectory()
-                                                    + "/Music/Test.mp3"));
+                                                    + "/Health_tracker_transfer/Test.mp3"));
 
             }
         });
@@ -130,7 +131,6 @@ public class RecordingWave extends AppCompatActivity {
 
     public void recorded_wave () {
         Intent intent = new Intent(this, RecordedWave.class);
-
         startActivity(intent);
 
     }
@@ -159,4 +159,5 @@ public class RecordingWave extends AppCompatActivity {
 
 
 }
+
 

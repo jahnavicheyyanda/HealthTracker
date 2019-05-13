@@ -43,4 +43,6 @@
     <string name="recording_start">Record</string>
     <string name="ivRowPlay" />
     <string name="test">test</string>
+    <string name="Record">record</string>
+    <string name="record_button">selected button</string>
 </resources>

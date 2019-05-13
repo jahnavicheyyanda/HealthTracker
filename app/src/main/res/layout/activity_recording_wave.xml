@@ -11,13 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="293dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintBottom_toTopOf="@id/recording_start_button"/>
 
 
     <Button
@@ -53,27 +52,6 @@
         app:layout_constraintStart_toEndOf="@+id/start_button"
         app:layout_constraintTop_toBottomOf="@+id/myvisualizerview" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        android:height="@dimen/activity_vertical_margin"
-        android:fontFamily="monospace"
-        android:text="@string/recording_text_view"
-        android:textColor="@color/colorDarkred"
-        android:textFontWeight="10sp"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/myvisualizerview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/next_button_record"
@@ -94,14 +72,13 @@
         android:id="@+id/recording_start_button"
         android:layout_width="wrap_content"
         android:layout_height="@android:dimen/app_icon_size"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="163dp"
         android:background="@color/colorAccent"
         android:text="@string/recording_start"
-        app:layout_constraintBottom_toTopOf="@+id/stop_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myvisualizerview" />
 
