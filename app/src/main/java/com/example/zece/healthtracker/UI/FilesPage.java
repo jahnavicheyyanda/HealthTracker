@@ -3,7 +3,9 @@ package com.example.zece.healthtracker.UI;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +17,11 @@ import android.widget.Toast;
 
 import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.Database.Record;
+import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.View.PatientListAdapter;
 import com.example.zece.healthtracker.View.PatientViewModel;
-import com.example.zece.healthtracker.R;
 
+import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,13 +46,41 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
         recyclerView.setAdapter(patientListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+        File file = new File(uri.toString());
+        if (!file.exists()){
+            //fab.setVisibility(View.VISIBLE);
+            fab.hide();
+            //fab.setEnabled(false);
+
+
+        } else {
+            fab.show();
+            //fab.setEnabled(true);
+        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+                File file = new File(uri.toString());
+                if (!file.exists()){
+                    //fab.setVisibility(View.VISIBLE);
+                    fab.hide();
+                    //fab.setEnabled(false);
+
+
+                } else {
+                    fab.show();
+                    //fab.setEnabled(true);
+                }
+
+
                 Intent intent = new Intent(FilesPage.this, PatientData.class);
                 startActivityForResult(intent, PATIENT_DATA_ACTIVITY_REQUEST_CODE);
             }
+
         });
 
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);

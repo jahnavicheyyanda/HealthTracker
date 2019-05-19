@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,20 +19,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.text.BreakIterator;
-import java.util.ArrayList;
-import java.util.UUID;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.View.DeviceListAdapter;
 
-import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -217,7 +214,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recording_wave();
+
+
+                Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+                File file = new File(uri.toString());
+                if (file.exists()) {
+                    recording_wave();
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "There is no file to stream", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

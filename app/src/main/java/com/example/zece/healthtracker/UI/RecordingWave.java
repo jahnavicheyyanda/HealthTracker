@@ -1,18 +1,16 @@
 package com.example.zece.healthtracker.UI;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.media.audiofx.Visualizer;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.media.audiofx.Visualizer;
-import android.media.MediaPlayer;
-import android.widget.TextView;
 
 import com.example.zece.healthtracker.R;
-import com.example.zece.healthtracker.Waveform.RecorderVisualizerView;
 import com.example.zece.healthtracker.Waveform.VisualizerView;
 
 
@@ -32,7 +30,6 @@ public class RecordingWave extends AppCompatActivity {
  //    final WaveView firstwaveview =(WaveView)findViewById(R.id.waveView1);
  //       final WaveView secondwaveview =(WaveView)findViewById(R.id.waveView2);
         Button stop_button = findViewById(R.id.stop_button);
-        TextView recording_text = findViewById(R.id.textView);
 
         stop_button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -58,20 +55,19 @@ public class RecordingWave extends AppCompatActivity {
     private void initAudio() {
 
           mMediaPlayer = MediaPlayer.create(RecordingWave.this, Uri.parse(Environment.getExternalStorageDirectory()
-                                              + "/Music/Test.mp3"));
+                                              + "/Health_tracker_transfer/Test.wav"));
 
         setupVisualizerFxAndUI();
         // Make sure the visualizer is enabled only when you actually want to
         // receive data, and
         // when it makes sense to receive data.
-            mVisualizer.setEnabled(true);
+        mVisualizer.setEnabled(true);
         // When the stream ends, we don't need to collect any more data. We
         // don't do this in
         // setupVisualizerFxAndUI because we likely want to have more,
         // non-Visualizer related code
         // in this callback.
-        mMediaPlayer
-                .setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         mVisualizer.setEnabled(false);
                     }
@@ -102,25 +98,20 @@ public class RecordingWave extends AppCompatActivity {
                 // when we hit the Play button again to be able to play it again (because the MediaPlayer object will be cleared after stop().
                 // There will be no file present in the object anymore.)
                 mMediaPlayer = MediaPlayer.create(RecordingWave.this,  Uri.parse(Environment.getExternalStorageDirectory()
-                                                    + "/Music/Test.mp3"));
+                                                    + "/Health_tracker_transfer/Test.wav"));
 
             }
         });
 
     }
 
-    public void recorded_wave () {
-        Intent intent = new Intent(this, RecordedWave.class);
 
-        startActivity(intent);
-
-    }
 
 
     private void setupVisualizerFxAndUI () {
         // Create the Visualizer object and attach it to our media player.
                 mVisualizer = new Visualizer(mMediaPlayer.getAudioSessionId());
-                mVisualizer.setCaptureSize(1);
+                mVisualizer.setCaptureSize(10);
                 //Visualizer.getCaptureSizeRange()[1]
                 mVisualizer.setDataCaptureListener(
                         new Visualizer.OnDataCaptureListener() {
@@ -132,10 +123,17 @@ public class RecordingWave extends AppCompatActivity {
                             public void onFftDataCapture(Visualizer visualizer,
                                                          byte[] bytes, int samplingRate) {
                             }
-                        }, Visualizer.getMaxCaptureRate() / 24, true, true);
+                        }, Visualizer.getMaxCaptureRate() / 6, true, true);
 
 
             }
+
+    public void recorded_wave () {
+        Intent intent = new Intent(this, RecordedWave.class);
+
+        startActivity(intent);
+
+    }
 
 
 

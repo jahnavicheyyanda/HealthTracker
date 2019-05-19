@@ -2,17 +2,14 @@ package com.example.zece.healthtracker.UI;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.R;
@@ -97,12 +94,12 @@ public class PatientDataEdit extends AppCompatActivity {
 
         File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/Health_tracker/"
-                +" "+patientLastName
-                +" "+patientFirstName+".mp3" );
+                +" "+patientLastName + ", "
+                +" "+patientFirstName+".wav" );
         File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/Health_tracker/"
-                +" "+updatedLastName
-                +" "+updatedFirstName+".mp3");
+                +" "+updatedLastName +", "
+                +" "+updatedFirstName+".wav");
         from.renameTo(to);
 
         finish();

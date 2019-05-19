@@ -2,12 +2,11 @@ package com.example.zece.healthtracker.UI;
 
 import android.content.Intent;
 import android.media.MediaRecorder;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.Waveform.RecorderVisualizerView;
@@ -30,7 +29,6 @@ public class RecordedWave extends AppCompatActivity {
         visualizerView = findViewById(R.id.visualizer);
         Button next_button = findViewById(R.id.next_button);
         Button cancel_button = findViewById(R.id.cancel_button);
-        TextView recorded_text = findViewById(R.id.textView2);
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +45,7 @@ public class RecordedWave extends AppCompatActivity {
         });
 
         if (!isRecording) {
-            File f = new File(getExternalFilesDir(null), "new");
+            File file = new File(getExternalFilesDir(null), "new");
 
             myAudioRecorder = new MediaRecorder();
             myAudioRecorder
@@ -56,7 +54,7 @@ public class RecordedWave extends AppCompatActivity {
                     .setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             myAudioRecorder
                     .setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-            myAudioRecorder.setOutputFile(f.getAbsolutePath());
+            myAudioRecorder.setOutputFile(file.getAbsolutePath());
             myAudioRecorder.setAudioSamplingRate(44100);
             //myAudioRecorder.setAudioEncodingBitRate(96000);
 
@@ -102,7 +100,7 @@ public class RecordedWave extends AppCompatActivity {
     };
 
     public void next_button() {
-        Intent intent_next = new Intent(this, FilesPage.class);
+        Intent intent_next = new Intent(this, RecordWave.class);
         startActivity(intent_next);
     }
 

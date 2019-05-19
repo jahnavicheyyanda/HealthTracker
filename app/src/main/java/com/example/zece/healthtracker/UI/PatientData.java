@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zece.healthtracker.R;
 
@@ -74,13 +73,12 @@ public class PatientData extends AppCompatActivity {
 
 
                     File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                            + "/Health_tracker_transfer/Test.mp3");
+                            + "/Health_tracker_transfer/Test.wav");
                     File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                             + "/Health_tracker/" /*+recordDate*/
-                            + " " + patientLastName
-                            + " " + patientFirstName + ".mp3");
+                            + " " + patientLastName + ", "
+                            + " " + patientFirstName + ".wav");
                     from.renameTo(to);
-
 
                 }
 
@@ -91,6 +89,7 @@ public class PatientData extends AppCompatActivity {
 
 
         });
+
 
     }
 
