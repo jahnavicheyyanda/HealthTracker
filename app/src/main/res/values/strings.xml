@@ -38,6 +38,9 @@
     <string name="tvDeviceName" />
     <string name="btnFindUnpairedDevices">Discover</string>
     <string name="next_button_record">Next</string>
+    <string name="bt_connection_lost">bt_connection_lost</string>
+    <string name="bt_unable">bt_unable</string>
+    <string name="recording_start">Record</string>
     <string name="ivRowPlay" />
     <string name="test">test</string>
 
@@ -45,4 +48,6 @@
     <string name="action_settings">action_settings</string>
     <string name="start_record_button">START</string>
     <string name="stop_record_button">STOP</string>
+    <string name="Record">record</string>
+    <string name="record_button">selected button</string>
 </resources>
