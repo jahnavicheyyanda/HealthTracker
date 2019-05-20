@@ -46,10 +46,55 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
         recyclerView.setAdapter(patientListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        final FloatingActionButton fab = findViewById(R.id.fab);
-        Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        fabVisibility();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent intent = new Intent(FilesPage.this, PatientData.class);
+                startActivityForResult(intent, PATIENT_DATA_ACTIVITY_REQUEST_CODE);
+
+
+            }
+
+
+
+        });
+
+
+
+        patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
+
+        patientViewModel.getAllPatients().observe(this, new Observer<List<Patient>>(){
+            @Override
+            public void onChanged(@Nullable List<Patient> patients) {
+
+                patientListAdapter.setPatients(patients);
+
+            }
+        });
+
+        patientViewModel.getAllRecords().observe(this, new Observer<List<Record>>(){
+            @Override
+            public void onChanged(@Nullable List<Record> records) {
+
+                patientListAdapter.setRecords(records);
+
+            }
+        });
+
+    }
+
+    public void fabVisibility() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
         File file = new File(uri.toString());
-        if (!file.exists()){
+        if (!file.exists()) {
+            //fab.show();
             //fab.setVisibility(View.VISIBLE);
             fab.hide();
             //fab.setEnabled(false);
@@ -57,48 +102,9 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
         } else {
             fab.show();
+            //fab.hide();
             //fab.setEnabled(true);
         }
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
-                File file = new File(uri.toString());
-                if (!file.exists()){
-                    //fab.setVisibility(View.VISIBLE);
-                    fab.hide();
-                    //fab.setEnabled(false);
-
-
-                } else {
-                    fab.show();
-                    //fab.setEnabled(true);
-                }
-
-
-                Intent intent = new Intent(FilesPage.this, PatientData.class);
-                startActivityForResult(intent, PATIENT_DATA_ACTIVITY_REQUEST_CODE);
-            }
-
-        });
-
-        patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
-
-        patientViewModel.getAllPatients().observe(this, new Observer<List<Patient>>(){
-            @Override
-            public void onChanged(@Nullable List<Patient> patients) {
-                patientListAdapter.setPatients(patients);
-            }
-        });
-
-        patientViewModel.getAllRecords().observe(this, new Observer<List<Record>>(){
-            @Override
-            public void onChanged(@Nullable List<Record> records) {
-                patientListAdapter.setRecords(records);
-            }
-        });
-
     }
 
     @Override
@@ -120,6 +126,8 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
             Record record = new Record (rid, patient_id, data.getStringExtra(PatientData.NEW_RECORDDATE));
             patientViewModel.insert(record);
 
+            fabVisibility();
+
             Toast.makeText(
                     getApplicationContext(),
                     R.string.saved,
@@ -137,10 +145,14 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
      //       PatientData patientData = new PatientData();
      //       String inputName = patientData.onCreate();.patientFirstName;
 
+
+
             Toast.makeText(
                     getApplicationContext(),
                     R.string.updated  ,
                     Toast.LENGTH_LONG).show();
+
+
 
         } else{
             Toast.makeText(
