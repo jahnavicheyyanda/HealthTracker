@@ -50,4 +50,7 @@
     <string name="stop_record_button">STOP</string>
     <string name="Record">record</string>
     <string name="record_button">selected button</string>
+    <string name="main_page_logo">Health Tracker</string>
+    <string name="main_page_file_view">View Files</string>
+    <string name="toast_msg">\"You are connected to a bluetooth device\"</string>
 </resources>
