@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.Waveform.WaveformView;
@@ -36,6 +36,8 @@ public class RecordWave extends AppCompatActivity {
         setContentView(R.layout.activity_record_wave);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        ImageButton stop_button = findViewById(R.id.stop_record_button);
+
 
         final WaveformView mPlaybackView = findViewById(R.id.playbackWaveformView);
 
@@ -63,7 +65,7 @@ public class RecordWave extends AppCompatActivity {
             mPlaybackView.setSamples(samples);
 
 
-            final Button start_button = findViewById(R.id.start_record_button);
+            final ImageButton start_button = findViewById(R.id.start_record_button);
 
             start_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,7 +79,7 @@ public class RecordWave extends AppCompatActivity {
                 }
             });
 
-            Button next_button = findViewById(R.id.next_button_record2);
+            ImageButton next_button = findViewById(R.id.next_button_record2);
 
             next_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,6 +144,8 @@ public class RecordWave extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
 

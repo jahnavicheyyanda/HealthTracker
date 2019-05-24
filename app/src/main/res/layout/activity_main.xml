@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<android.support.constraint.ConstraintLayout tools:context=".UI.MainActivity" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".UI.MainActivity">
 
     <ListView
         android:id="@+id/lvNewDevices"
@@ -18,18 +24,18 @@
 
     <Button
         android:id="@+id/next_button_home"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="17dp"
-        android:background="@color/colorAccent"
+        android:layout_width="90dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="68dp"
+        android:background="@color/colorGreen"
         android:contentDescription="@string/next_button2"
         android:text="@string/next_button2"
-        app:layout_constraintBottom_toTopOf="@+id/record_start"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvNewDevices" />
+        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintStart_toEndOf="@+id/record_start" />
 
     <Button
         android:id="@+id/btnONOFF"
@@ -79,15 +85,15 @@
         android:id="@+id/record_start"
         android:layout_width="90dp"
         android:layout_height="58dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="68dp"
+        android:background="@color/colorGreen"
         android:text="@string/Record"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next_button_home" />
+        app:layout_constraintTop_toBottomOf="@+id/lvNewDevices"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </android.support.constraint.ConstraintLayout>

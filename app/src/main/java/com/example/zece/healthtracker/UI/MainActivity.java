@@ -40,7 +40,6 @@ import com.example.zece.healthtracker.View.DeviceListAdapter;
 
 import static android.bluetooth.BluetoothAdapter.STATE_CONNECTED;
 import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
-import static android.provider.CalendarContract.Calendars.NAME;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -201,7 +200,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnEnableDisable_Discoverable = findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();
-        Button recordStart = findViewById(R.id.record_start);
 
         //Broadcasts when bond state changes (ie: pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -225,8 +223,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
                 File file = new File(uri.toString());
                 if (file.exists()) {
@@ -609,11 +605,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-
-
-
     public void recording_wave() {
-        Intent intent = new Intent(this, RecordingWave.class);
+        Intent intent = new Intent(this, RecordWave.class);
         startActivity(intent);
     }
 

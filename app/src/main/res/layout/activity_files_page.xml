@@ -23,7 +23,8 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/content_files_page" />
+        layout="@layout/content_files_page"
+        android:background="@color/white" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

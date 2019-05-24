@@ -37,9 +37,6 @@ public class MainPage extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
     private void recordbutton() {
