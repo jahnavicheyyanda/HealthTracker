@@ -31,14 +31,18 @@ public class PlaybackThread {
         mListener = listener;
     }
 
-    private Thread mThread;
+    public Thread mThread;
     private boolean mShouldContinue;
     private ShortBuffer mSamples;
     private int mNumSamples;
     private PlaybackListener mListener;
 
 
-    public boolean playing() {return mThread != null;}
+    public boolean playing() {
+            return mThread != null;
+    }
+
+
 
     public void startPlayback() {
         if (mThread != null)
@@ -46,8 +50,7 @@ public class PlaybackThread {
 
         // Start streaming in a thread
         mShouldContinue = true;
-
-        Thread mThread = new Thread(new Runnable() {
+        mThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 play();
@@ -62,6 +65,7 @@ public class PlaybackThread {
 
         mShouldContinue = false;
         mThread = null;
+
     }
 
     private void play() {

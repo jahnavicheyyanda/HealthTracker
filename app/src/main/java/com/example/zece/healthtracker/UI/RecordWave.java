@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.Waveform.WaveformView;
@@ -36,7 +38,6 @@ public class RecordWave extends AppCompatActivity {
         setContentView(R.layout.activity_record_wave);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        ImageButton stop_button = findViewById(R.id.stop_record_button);
 
 
         final WaveformView mPlaybackView = findViewById(R.id.playbackWaveformView);
@@ -49,6 +50,8 @@ public class RecordWave extends AppCompatActivity {
         }
 
         if (samples != null) {
+
+
 
             mPlaybackThread = new PlaybackThread(samples, new PlaybackListener() {
                 @Override
@@ -70,12 +73,25 @@ public class RecordWave extends AppCompatActivity {
             start_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //if (!mPlaybackThread.playing()) {
+                    if (!mPlaybackThread.playing()) {
                         mPlaybackThread.startPlayback();
 
-                    //} else {
-                    //    mPlaybackThread.stopPlayback();}
+                    }
 
+                }
+            });
+
+            ImageButton stop_button = findViewById(R.id.stop_record_button);
+
+            stop_button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    if(mPlaybackThread.playing()) {
+
+                        onStop();
+                        mPlaybackThread.stopPlayback();
+
+                    }
                 }
             });
 
@@ -87,7 +103,6 @@ public class RecordWave extends AppCompatActivity {
                     next_button();
                 }
             });
-
         }
      }
 

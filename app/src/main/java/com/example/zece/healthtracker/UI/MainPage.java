@@ -45,6 +45,10 @@ public class MainPage extends AppCompatActivity {
     }
 
     private void filesbutton() {
+
+        //FilesPage filesPage = new FilesPage();
+        //filesPage.fabInvisible();
+
         Intent intent_next = new Intent(this, FilesPage.class);
         startActivity(intent_next);
     }

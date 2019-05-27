@@ -89,6 +89,11 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
     }
 
+    public void fabInvisible(){
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.hide();
+    }
+
     public void fabVisibility() {
         FloatingActionButton fab = findViewById(R.id.fab);
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
