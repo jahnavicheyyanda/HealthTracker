@@ -36,8 +36,8 @@ public class PatientData extends AppCompatActivity {
         setContentView(R.layout.activity_patient_data);
 
         InputName = findViewById(R.id.InputName);
-        InputLastName = findViewById(R.id.InputLastName);
         InputPatientNote = findViewById(R.id.InputPatientNote);
+        InputLastName = findViewById(R.id.InputLastName);
 
         final TextView date_data_input = findViewById(R.id.date_data_input);
         date_data_input.setText(currentDate);
@@ -59,13 +59,14 @@ public class PatientData extends AppCompatActivity {
                     setResult(RESULT_CANCELED, resultIntent);
 
                 } else {
-                    String patientLastName = InputLastName.getText().toString();
+
                     String patientFirstName = InputName.getText().toString();
                     String patientNote = InputPatientNote.getText().toString();
+                    String patientLastName = InputLastName.getText().toString();
                     String recordDate = date_data_input.getText().toString();
-                    resultIntent.putExtra(NEW_LASTNAME, patientLastName);
                     resultIntent.putExtra(NEW_FIRSTNAME, patientFirstName);
                     resultIntent.putExtra(NEW_PATIENTNOTE, patientNote);
+                    resultIntent.putExtra(NEW_LASTNAME, patientLastName);
                     resultIntent.putExtra(NEW_RECORDDATE, recordDate);
                     setResult(RESULT_OK, resultIntent);
 

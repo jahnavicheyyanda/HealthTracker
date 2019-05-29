@@ -122,9 +122,9 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
             final String patient_id = UUID.randomUUID().toString();
             Patient patient = new Patient ( patient_id,
-                                            data.getStringExtra(PatientData.NEW_LASTNAME),
                                             data.getStringExtra(PatientData.NEW_FIRSTNAME),
-                                            data.getStringExtra(PatientData.NEW_PATIENTNOTE));
+                                            data.getStringExtra(PatientData.NEW_PATIENTNOTE),
+                                            data.getStringExtra(PatientData.NEW_LASTNAME));
             patientViewModel.insert(patient);
 
             final String rid = UUID.randomUUID().toString();
@@ -142,9 +142,9 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
             //code update the patient data
             Patient patient = new Patient(
                     data.getStringExtra(PatientDataEdit.PATIENT_ID),
-                    data.getStringExtra(PatientDataEdit.UPDATED_LASTNAME),
                     data.getStringExtra(PatientDataEdit.UPDATED_FIRSTNAME),
-                    data.getStringExtra(PatientDataEdit.UPDATED_NOTE));
+                    data.getStringExtra(PatientDataEdit.UPDATED_NOTE),
+                    data.getStringExtra(PatientDataEdit.UPDATED_LASTNAME));
             PatientViewModel.update(patient);
 
      //       PatientData patientData = new PatientData();

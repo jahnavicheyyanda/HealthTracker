@@ -65,9 +65,9 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
             holder.setDataRec(String.valueOf(record.getDate()), position);
 
             Patient patient = list.get(position);
-            holder.setData(patient.getLast_name(), position);
             holder.setData(patient.getFirst_name(), position);
             holder.setData(patient.getNote(), position);
+            holder.setData(patient.getLast_name(), position);
 
 
             holder.setListeners();
