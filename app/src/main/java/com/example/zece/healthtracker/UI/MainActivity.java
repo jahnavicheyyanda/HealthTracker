@@ -206,7 +206,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnEnableDisable_Discoverable = findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();
-        Button recordStart = findViewById(R.id.record_start);
 
         //Broadcasts when bond state changes (ie: pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);

@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,8 +20,11 @@ import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
 import com.example.zece.healthtracker.UI.MainActivity;
+import com.example.zece.healthtracker.UI.PatientData;
 import com.example.zece.healthtracker.UI.PatientDataEdit;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.PatientViewHolder> {
@@ -38,7 +43,6 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
     public PatientListAdapter(Context context, OnDeleteClickListener listener , OnDeleteClickListener listener2) {
         layoutInflater = LayoutInflater.from(context);
         this.list = list;
-        this.recordList = recordList;
         mContext = context;
         this.onDeleteClickListener = listener;
     }
@@ -59,15 +63,11 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
         if (list != null) {
 
-            Record record = recordList.get(position);
-            holder.setDataRec(record.getRid(), position);
-            holder.setDataRec(record.getPid(), position);
-            holder.setDataRec(String.valueOf(record.getDate()), position);
+            Patient patientLastName = list.get(position);
+            holder.setData(patientLastName.getLast_name(), position);
 
-            Patient patient = list.get(position);
-            holder.setData(patient.getFirst_name(), position);
-            holder.setData(patient.getNote(), position);
-            holder.setData(patient.getLast_name(), position);
+            /*holder.setData(patient.getNote(), position);
+            holder.setData(patient.getLast_name(), position);*/
 
 
             holder.setListeners();
@@ -114,10 +114,10 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
             mPosition=position;
         }
 
-        public void setDataRec(String record, int position) {
+        /*public void setDataRec(String record, int position) {
             patientItemView.setText(record);
             mPosition=position;
-        }
+        }*/
 
         public void setListeners() {
 
@@ -150,6 +150,14 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
                                     if (onDeleteClickListener != null){
                                         onDeleteClickListener.OnDeleteClickListener(list.get(mPosition));
+
+                                        File file = new File(Environment.getExternalStorageDirectory() + "/Health_tracker/"
+                                                + " " + list.get(mPosition).getLast_name() + "_"
+                                                + " " + list.get(mPosition).getFirst_name() + ".wav");
+
+                                            boolean deleted = file.delete();
+
+
                                     }
 
                                 }
