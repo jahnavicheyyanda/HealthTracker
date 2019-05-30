@@ -98,6 +98,8 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
         FloatingActionButton fab = findViewById(R.id.fab);
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
         File file = new File(uri.toString());
+
+
         if (!file.exists()) {
             //fab.show();
             //fab.setVisibility(View.VISIBLE);
