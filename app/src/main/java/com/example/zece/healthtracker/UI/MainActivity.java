@@ -235,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+
        Button record_start = findViewById(R.id.record_start);
         record_start.setOnClickListener(new View.OnClickListener()
         {

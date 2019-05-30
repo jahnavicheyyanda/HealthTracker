@@ -1,5 +1,6 @@
 package com.example.zece.healthtracker.UI;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,11 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.zece.healthtracker.Database.Patient;
+import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class PatientData extends AppCompatActivity {
 
@@ -36,8 +40,8 @@ public class PatientData extends AppCompatActivity {
         setContentView(R.layout.activity_patient_data);
 
         InputName = findViewById(R.id.InputName);
-        InputPatientNote = findViewById(R.id.InputPatientNote);
         InputLastName = findViewById(R.id.InputLastName);
+        InputPatientNote = findViewById(R.id.InputPatientNote);
 
         final TextView date_data_input = findViewById(R.id.date_data_input);
         date_data_input.setText(currentDate);
@@ -59,14 +63,13 @@ public class PatientData extends AppCompatActivity {
                     setResult(RESULT_CANCELED, resultIntent);
 
                 } else {
-
+                    String patientLastName = InputLastName.getText().toString();
                     String patientFirstName = InputName.getText().toString();
                     String patientNote = InputPatientNote.getText().toString();
-                    String patientLastName = InputLastName.getText().toString();
                     String recordDate = date_data_input.getText().toString();
+                    resultIntent.putExtra(NEW_LASTNAME, patientLastName);
                     resultIntent.putExtra(NEW_FIRSTNAME, patientFirstName);
                     resultIntent.putExtra(NEW_PATIENTNOTE, patientNote);
-                    resultIntent.putExtra(NEW_LASTNAME, patientLastName);
                     resultIntent.putExtra(NEW_RECORDDATE, recordDate);
                     setResult(RESULT_OK, resultIntent);
 
@@ -77,7 +80,7 @@ public class PatientData extends AppCompatActivity {
                             + "/Health_tracker_transfer/Test.wav");
                     File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                             + "/Health_tracker/" /*+recordDate*/
-                            + " " + patientLastName + ", "
+                            + " " + patientLastName + "_"
                             + " " + patientFirstName + ".wav");
                     from.renameTo(to);
 

@@ -20,9 +20,9 @@ import java.io.File;
 public class PatientDataEdit extends AppCompatActivity {
 
     public static final String PATIENT_ID = "patient_id";
-    static final String UPDATED_NOTE = "patient_note" ;
     static final String UPDATED_FIRSTNAME = "patient_firstName";
     static final String UPDATED_LASTNAME = "patient_lastName";
+    static final String UPDATED_NOTE = "patient_note" ;
     private EditText inputNameEdit, inputLastNameEdit, inputPatientNoteEdit;
     private Bundle bundle;
     private String patientId;
@@ -38,8 +38,8 @@ public class PatientDataEdit extends AppCompatActivity {
 
 
         inputNameEdit = findViewById(R.id.InputNameEdit);
-        inputPatientNoteEdit = findViewById(R.id.InputPatientNoteEdit);
         inputLastNameEdit = findViewById(R.id.InputLastNameEdit);
+        inputPatientNoteEdit = findViewById(R.id.InputPatientNoteEdit);
 
 
         bundle = getIntent().getExtras();
@@ -57,46 +57,39 @@ public class PatientDataEdit extends AppCompatActivity {
 
         patientDataEditViewModel = ViewModelProviders.of(this).get(PatientDataEditViewModel.class);
         patient = patientDataEditViewModel.getFirst_name(patientId);
-        patient = patientDataEditViewModel.getPatient_note(patientId);
         patient = patientDataEditViewModel.getLast_name(patientId);
+        patient = patientDataEditViewModel.getPatient_note(patientId);
 
 
         patient.observe(this, new Observer<Patient>() {
             @Override
             public void onChanged(@Nullable Patient patient) {
                 inputNameEdit.setText(patient.getFirst_name());
-                inputPatientNoteEdit.setText(patient.getNote());
                 inputLastNameEdit.setText(patient.getLast_name());
+                inputPatientNoteEdit.setText(patient.getNote());
             }
         });
     }
 
     public void updateData(View view){
         String updatedFirstName = inputNameEdit.getText().toString();
-        String updatedPatientNote = inputPatientNoteEdit.getText().toString();
         String updatedLastName = inputLastNameEdit.getText().toString();
+        String updatedPatientNote = inputPatientNoteEdit.getText().toString();
         Intent resultIntent = new Intent();
         resultIntent.putExtra(PATIENT_ID, patientId);
         resultIntent.putExtra(UPDATED_FIRSTNAME, updatedFirstName);
-        resultIntent.putExtra(UPDATED_NOTE, updatedPatientNote);
         resultIntent.putExtra(UPDATED_LASTNAME, updatedLastName);
+        resultIntent.putExtra(UPDATED_NOTE, updatedPatientNote);
         setResult(RESULT_OK, resultIntent);
 
-        PatientData patientData = new PatientData();
-
-        //String takenDate ;
-        //takenDate = patientData.currentDate;
-
-
-        //patientData.currentDate
 
         File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/Health_tracker/"
-                +" "+patientLastName + ", "
+                +" "+patientLastName + "_"
                 +" "+patientFirstName+".wav" );
         File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/Health_tracker/"
-                +" "+updatedLastName +", "
+                +" "+updatedLastName +"_"
                 +" "+updatedFirstName+".wav");
         from.renameTo(to);
 
