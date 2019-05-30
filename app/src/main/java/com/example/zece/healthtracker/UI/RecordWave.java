@@ -121,23 +121,38 @@ public class RecordWave extends AppCompatActivity {
 
     private short[] getAudioSample() throws IOException {
         //InputStream is = getResources().openRawResource(R.raw.test2);
-        Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+
+        Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
+        File fileBluetooth = new File(uriBluetooth.toString());
+
+
+        //THIS SHOULD CHANGE TO DOWNLOADS OR SMTH AFTER TESTING: RIGHT NOW WE RE NOT ABLE TO SEND IT TO HEALTH_TRACKER_TRANSFER
+        Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
         File file = new File(uri.toString());
-        FileInputStream is = new FileInputStream(file);
-        byte[] data;
-        try {
-            data = IOUtils.toByteArray(is);
-        } finally {
-            if (is != null) {
-                is.close();
-            }
+
+        FileInputStream is;
+
+        if (fileBluetooth.exists()) {
+            is = new FileInputStream(fileBluetooth);
+        } else {
+            is = new FileInputStream(file);
         }
 
-        ShortBuffer sb = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer();
-        short[] samples = new short[sb.limit()];
-        sb.get(samples);
-        return samples;
-    }
+            byte[] data;
+            try {
+                data = IOUtils.toByteArray(is);
+            } finally {
+                if (is != null) {
+                    is.close();
+                }
+            }
+
+            ShortBuffer sb = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer();
+            short[] samples = new short[sb.limit()];
+            sb.get(samples);
+            return samples;
+        }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
