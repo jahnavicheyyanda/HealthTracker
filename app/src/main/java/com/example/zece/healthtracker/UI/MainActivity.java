@@ -241,6 +241,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v)
             {
+
+                Uri uri =  Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+                File file = new File(uri.toString());
+                if (file.exists()) {
+                    file.delete();
+                }
                 byte[] num = "1".getBytes();
                 mConnectedThread.write(num);      //method to turn on
             }
