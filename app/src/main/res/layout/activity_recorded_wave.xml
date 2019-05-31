@@ -4,31 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".recorded_wave">
+    tools:context=".UI.RecordedWave">
+
+    <com.example.zece.healthtracker.Waveform.RecorderVisualizerView
+        android:id="@+id/visualizer"
+        android:layout_width="match_parent"
+        android:layout_height="293dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="48dp"
+        android:background="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/cancel_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="192dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="446dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/colorAccent"
         android:contentDescription="@string/next_button"
         android:text="@string/next_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cancel_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/visualizer" />
 
     <Button
         android:id="@+id/cancel_button"
-        android:layout_width="191dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="446dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/colorAccent"
         android:contentDescription="@string/cancel_button"
         android:text="@string/cancel_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next_button"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="monospace"
+        android:text="@string/recorded_text"
+        android:textColor="@color/colorDarkred"
+        android:textFontWeight="10sp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/visualizer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>

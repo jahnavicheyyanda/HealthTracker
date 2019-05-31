@@ -19,4 +19,25 @@
     <string name="text_opening">Please connect to a bluetooth device</string>
     <string name="date_data_input">Date</string>
     <string name="time_data_input">Time</string>
+    <string name="choose_data">Choose your name</string>
+    <string name="patient_id"> </string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_files_page">Files</string>
+    <string name="saved">Patient Saved</string>
+    <string name="not_saved">Couldn\'t Save</string>
+    <string name="no_patient">No patient</string>
+    <string name="note">Note</string>
+    <string name="recording_text_view">CLICK ON START BUTTON TO START THE RECORDING.</string>
+    <string name="recorded_text">CLICK CANCEL TO DISCARD THE RECORDED AUDIO.CLICK NEXT TO SAVE THE FILE.</string>
+    <string name="update">UPDATE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="updated">Patient Updated</string>
+    <string name="btnONOFF">ON / OFF</string>
+    <string name="btnDiscoverable_on_off">Enable Discoverable</string>
+    <string name="tvDeviceAddress" />
+    <string name="tvDeviceName" />
+    <string name="btnFindUnpairedDevices">Discover</string>
+    <string name="next_button_record">Next</string>
+    <string name="ivRowPlay" />
+    <string name="test">test</string>
 </resources>
