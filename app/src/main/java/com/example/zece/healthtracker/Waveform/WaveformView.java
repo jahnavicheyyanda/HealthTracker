@@ -25,6 +25,7 @@ import java.util.LinkedList;
  * TODO: document your custom view class.
  */
 public class WaveformView extends View {
+
     public static final int MODE_RECORDING = 1;
     public static final int MODE_PLAYBACK = 2;
 
@@ -55,6 +56,7 @@ public class WaveformView extends View {
     public WaveformView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs, 0);
+
     }
 
     public WaveformView(Context context, AttributeSet attrs, int defStyle) {
@@ -130,6 +132,7 @@ public class WaveformView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
 
         LinkedList<float[]> temp = mHistoricalData;
         if (mMode == MODE_RECORDING && temp != null) {

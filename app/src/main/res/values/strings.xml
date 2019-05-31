@@ -26,7 +26,6 @@
     <string name="saved">Patient Saved</string>
     <string name="not_saved">Couldn\'t Save</string>
     <string name="no_patient">No patient</string>
-    <string name="note">Name</string>
     <string name="recording_text_view">CLICK ON START BUTTON TO START THE RECORDING.</string>
     <string name="recorded_text">CLICK CANCEL TO DISCARD THE RECORDED AUDIO.CLICK NEXT TO SAVE THE FILE.</string>
     <string name="update">UPDATE</string>
@@ -53,6 +52,10 @@
     <string name="main_page_logo">Health Tracker</string>
     <string name="main_page_file_view">View Files</string>
     <string name="toast_msg">\"You are connected to a bluetooth device\"</string>
-    <string name="note_last_name" >" "</string>
+    <string name="note_last_name">" "</string>
     <string name="note_date">" "</string>
+    <string name="zoom_img" />
+    <string name="next_button_record2" />
+    <string name="note">" "</string>
+    <string name="notee" />
 </resources>

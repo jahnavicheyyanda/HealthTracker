@@ -1,6 +1,5 @@
 package com.example.zece.healthtracker.UI;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,14 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.zece.healthtracker.Database.Patient;
-import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 public class PatientData extends AppCompatActivity {
 
@@ -80,8 +76,8 @@ public class PatientData extends AppCompatActivity {
                             + "/Health_tracker_transfer/Test.wav");
                     File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                             + "/Health_tracker/" /*+recordDate*/
-                            + " " + patientLastName + "_"
-                            + " " + patientFirstName + ".wav");
+                            + patientLastName + "_"
+                            + patientFirstName +" " + currentDate + ".wav");
                     from.renameTo(to);
 
                 }

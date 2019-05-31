@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UI.MainActivity"></activity>
+        <activity android:name=".UI.ZoomRecordWave"></activity>
+        <activity android:name=".UI.MainActivity" />
         <activity android:name=".UI.MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +44,6 @@
             android:name=".UI.FilesPage"
             android:label="@string/title_activity_files_page"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".saved_wave" />
         <activity android:name=".UI.PatientDataEdit" />
     </application>
 

@@ -232,11 +232,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
                 File fileBluetooth = new File(uriBluetooth.toString());
+
+                Uri uriDownload = Uri.parse(Environment.getExternalStorageDirectory() + "/Download/Test.wav");
+                File fileDownload = new File(uriDownload.toString());
+
                 if(fileBluetooth.exists()){
                     File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                             + "/Health_tracker_transfer/Test.wav");
                     fileBluetooth.renameTo(to);
-
+                } else if (fileDownload.exists()) {
+                    File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                            + "/Health_tracker_transfer/Test.wav");
+                    fileDownload.renameTo(to);
                 }
 
                 Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
@@ -386,7 +393,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             device = mBTDevices.get(i);
         }
 
-
         new Thread() {
 
             public void run() {
@@ -413,6 +419,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
                     }
                 }
+
                 if (fail == false) {
 
                     mConnectedThread = new ConnectedThread(mmSocket);
@@ -421,6 +428,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         }.start();
+
+
+    }
+
+    private void checkConnection() {
+            if (mmSocket.isConnected()){
+                Toast.makeText(getBaseContext(), "Connected", Toast.LENGTH_SHORT).show();
+            }
 
     }
 

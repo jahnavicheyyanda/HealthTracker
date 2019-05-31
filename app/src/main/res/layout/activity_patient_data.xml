@@ -168,7 +168,7 @@
         android:ems="10"
         android:hint="Note"
         android:inputType="text"
-        android:text="@string/note"
+        android:text="@string/notee"
         app:layout_constraintBottom_toTopOf="@+id/date_data_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

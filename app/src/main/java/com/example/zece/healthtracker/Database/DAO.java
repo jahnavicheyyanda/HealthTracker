@@ -47,7 +47,9 @@ public interface DAO {
     @Query("SELECT * FROM records")
     LiveData<List<Record>> getAllRecords();
 
-    @Query("SELECT * FROM records WHERE rid=:rid")
-    LiveData<Record> getDate(String rid);
+    //@Query("SELECT * FROM records WHERE rid=:rid")
+    //LiveData<Record> getDate(String rid);
 
+    @Query("SELECT * FROM records WHERE pid=:pid")
+    LiveData<Record> getDate(String pid);
 }

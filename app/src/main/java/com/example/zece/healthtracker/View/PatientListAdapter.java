@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -19,12 +18,9 @@ import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
-import com.example.zece.healthtracker.UI.MainActivity;
-import com.example.zece.healthtracker.UI.PatientData;
 import com.example.zece.healthtracker.UI.PatientDataEdit;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.List;
 
 public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.PatientViewHolder> {
@@ -114,10 +110,10 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
             mPosition=position;
         }
 
-        /*public void setDataRec(String record, int position) {
+        public void setDataRec(String record, int position) {
             patientItemView.setText(record);
             mPosition=position;
-        }*/
+        }
 
         public void setListeners() {
 
@@ -129,7 +125,7 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
                     intent.putExtra("patient_id", list.get(mPosition).getPatient_id());
                     intent.putExtra("patient_firstName", list.get(mPosition).getFirst_name());
                     intent.putExtra("patient_lastName", list.get(mPosition).getLast_name());
-                    //intent.putExtra("record_date", list.get(mPosition).getRecord_date());
+                    //intent.putExtra("record_date", recordList.get(mPosition).getDate());
 
                     ((Activity)mContext).startActivityForResult(intent,
                             FilesPage.UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE);
@@ -152,8 +148,8 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
                                         onDeleteClickListener.OnDeleteClickListener(list.get(mPosition));
 
                                         File file = new File(Environment.getExternalStorageDirectory() + "/Health_tracker/"
-                                                + " " + list.get(mPosition).getLast_name() + "_"
-                                                + " " + list.get(mPosition).getFirst_name() + ".wav");
+                                                + list.get(mPosition).getLast_name() + "_"
+                                                + list.get(mPosition).getFirst_name() + " " +recordList.get(mPosition).getDate()+ ".wav");
 
                                             boolean deleted = file.delete();
 

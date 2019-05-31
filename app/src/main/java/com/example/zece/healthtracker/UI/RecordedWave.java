@@ -78,10 +78,6 @@ public class RecordedWave extends AppCompatActivity {
 
     }
 
-       /* public void saved_wave() {
-            Intent intent_save = new Intent(this, saved_wave.class);
-            startActivity(intent_save);
-        }*/
 
     Runnable updateVisualizer = new Runnable() {
         @Override
