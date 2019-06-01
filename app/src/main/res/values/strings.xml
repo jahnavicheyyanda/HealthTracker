@@ -59,4 +59,5 @@
     <string name="note">" "</string>
     <string name="notee" />
     <string name="Connect">Connect</string>
+    <string name="check">check</string>
 </resources>

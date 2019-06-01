@@ -62,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //private ConnectThread mConnectThread;
     //private AcceptThread mAcceptThread;
     private ConnectedThread mConnectedThread;
-    private BluetoothSocket mmSocket;
+    private BluetoothSocket mmSocket ;
     UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -188,10 +189,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy: called.");
-        unregisterReceiver(mBroadcastReceiver1);
-        unregisterReceiver(mBroadcastReceiver2);
-        unregisterReceiver(mBroadcastReceiver3);
-        unregisterReceiver(mBroadcastReceiver4);
+        //unregisterReceiver(mBroadcastReceiver1);
+        //unregisterReceiver(mBroadcastReceiver2);
+        //unregisterReceiver(mBroadcastReceiver3);
+        //unregisterReceiver(mBroadcastReceiver4);
         //mBluetoothAdapter.cancelDiscovery();
     }
 
@@ -296,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-                Toast.makeText(getBaseContext(), "Please select a bluetooth device", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Please select a bluetooth device", Toast.LENGTH_SHORT).show();
                 if (mmSocket.isConnected()) {
                     text_status.setText("You are Connected");
                     //Toast.makeText(getBaseContext(), "Remote device is connected", Toast.LENGTH_SHORT).show();
