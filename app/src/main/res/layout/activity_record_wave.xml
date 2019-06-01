@@ -96,6 +96,7 @@
         android:contentDescription="@string/zoom_img"
         android:foregroundTint="#00090101"
         android:tint="@color/default_background"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next_button_record2"
         app:layout_constraintHorizontal_bias="0.936"

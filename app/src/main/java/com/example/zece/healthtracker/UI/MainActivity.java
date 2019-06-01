@@ -432,12 +432,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void checkConnection() {
-            if (mmSocket.isConnected()){
+    /*private void checkConnection() {
+            if (Thread.currentThread().run().mmSocket.isConnected()){
                 Toast.makeText(getBaseContext(), "Connected", Toast.LENGTH_SHORT).show();
             }
 
-    }
+    }*/
 
 
 

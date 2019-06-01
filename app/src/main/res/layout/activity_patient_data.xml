@@ -12,15 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="77dp"
         android:contentDescription="@string/patient_data"
         android:text="@string/patient_data"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/choose_patient_data"
+        app:layout_constraintBottom_toTopOf="@+id/InputName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -144,6 +143,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/choose_data"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/spinner_patient"
         app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,6 +154,7 @@
         android:layout_width="199dp"
         android:layout_height="31dp"
         android:layout_marginTop="52dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patient_data" />
 
