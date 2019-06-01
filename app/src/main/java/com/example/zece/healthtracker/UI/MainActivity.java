@@ -291,6 +291,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        Button test_connection = findViewById(R.id.check_connection);
+        test_connection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
+                Toast.makeText(getBaseContext(), "Please select a bluetooth device", Toast.LENGTH_SHORT).show();
+                if (mmSocket.isConnected()) {
+                    text_status.setText("You are Connected");
+                    //Toast.makeText(getBaseContext(), "Remote device is connected", Toast.LENGTH_SHORT).show();
+                } else {
+                    text_status.setText("Please select a bluetooth device");
+                }
+
+            }
+
+        });
+
 
 
     }
