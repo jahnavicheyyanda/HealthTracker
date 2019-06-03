@@ -277,10 +277,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if(file.exists()){
                     file.delete();
                 }
+                TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
+                if (mmSocket.isConnected()) {
+                    //text_status.setText("You are Connected");
+                    byte[] num = "1".getBytes();
+                    mConnectedThread.write(num);
+                }
+                else {
+                    text_status.setText("Please select a bluetooth device");
+                }
 
-
-                byte[] num = "1".getBytes();
-                mConnectedThread.write(num);
+                //byte[] num = "1".getBytes();
+                //mConnectedThread.write(num);
                 try {
                     mmSocket.close();
                 } catch (IOException e) {
