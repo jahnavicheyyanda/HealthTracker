@@ -196,12 +196,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //mBluetoothAdapter.cancelDiscovery();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         OperateFolderActions();
+
+        Button record_start = findViewById(R.id.record_start);
 
         Button btnONOFF = findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = findViewById(R.id.btnDiscoverable_on_off);
@@ -262,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-        Button record_start = findViewById(R.id.record_start);
+
         record_start.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -285,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     mConnectedThread.write(num);
                 }
                 else {
-                    text_status.setText("Please select a bluetooth device");
+                    text_status.setText("Please select the correct bluetooth device");
                 }
                 try {
                     mmSocket.close();
@@ -436,20 +439,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }.start();
 
+        Button record_start = findViewById(R.id.record_start);
+        record_start.setVisibility(View.VISIBLE);
+
         TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
         text_status.setText("Connected.");
 
+
+
     }
-
-
-    // Closes the client socket and causes the thread to finish.
- /*   public void cancel() {
-        try {
-            mmSocket.close();
-        } catch (IOException e) {
-            Log.e(TAG, "Could not close the client socket", e);
-        }
-    }*/
 
 
     //creates insecure outgoing connection with BT device using UUID
