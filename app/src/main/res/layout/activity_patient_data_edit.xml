@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".UI.PatientDataEdit">
 
 
@@ -63,10 +64,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/last_data"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/InputPatientNoteEdit"
+        app:layout_constraintBottom_toTopOf="@+id/InputDateEdit"
         app:layout_constraintEnd_toStartOf="@+id/InputLastNameEdit"
         app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,23 +78,36 @@
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="73dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/InputPatientNoteEdit"
+        app:layout_constraintBottom_toTopOf="@+id/InputDateEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/last_name"
         app:layout_constraintTop_toBottomOf="@+id/InputNameEdit"
         tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/InputDateEdit"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="52dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/InputPatientNoteEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InputLastNameEdit" />
 
     <EditText
         android:id="@+id/InputPatientNoteEdit"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
@@ -103,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputLastNameEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/InputDateEdit" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -123,6 +137,7 @@
             android:id="@+id/update"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
+            android:background="@color/colorGreen"
             android:onClick="updateData"
             android:text="@string/update" />
 
@@ -130,6 +145,7 @@
             android:id="@+id/cancel"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
+            android:background="@color/colorGreen"
             android:onClick="cancelUpdate"
             android:text="@string/cancel" />
     </LinearLayout>

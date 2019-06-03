@@ -4,9 +4,20 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#d81b60</color>
     <color name="colorPaleGreen">#98FB98</color>
+    <color name="colorGreen">#A4C639</color>
     <color name="colorMediumVioletRed">#C71585</color>
     <color name="MediumTurquoise">#48D1CC</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorDarkred">#f8a8002a</color>
+    <color name="colorDarkred">#F87A112C</color>
     <color name="colorGrey">#D3D3D3</color>
+    <color name="colorDarkGrey">#A9A9A9</color>
+
+    <color name="default_waveform">#178b51</color>
+    <color name="default_waveformFill">#80FFC0</color>
+    <color name="default_waveformBlue">#19AAF9</color>
+    <color name="default_playback_indicator">#ffff66</color>
+    <color name="default_timecode">#ddffffdd</color>
+    <color name="default_background">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_grey">#F3F1F1</color>
 </resources>

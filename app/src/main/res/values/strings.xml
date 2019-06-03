@@ -26,7 +26,6 @@
     <string name="saved">Patient Saved</string>
     <string name="not_saved">Couldn\'t Save</string>
     <string name="no_patient">No patient</string>
-    <string name="note">Note</string>
     <string name="recording_text_view">CLICK ON START BUTTON TO START THE RECORDING.</string>
     <string name="recorded_text">CLICK CANCEL TO DISCARD THE RECORDED AUDIO.CLICK NEXT TO SAVE THE FILE.</string>
     <string name="update">UPDATE</string>
@@ -38,6 +37,28 @@
     <string name="tvDeviceName" />
     <string name="btnFindUnpairedDevices">Discover</string>
     <string name="next_button_record">Next</string>
+    <string name="bt_connection_lost">bt_connection_lost</string>
+    <string name="bt_unable">bt_unable</string>
+    <string name="recording_start">Record</string>
     <string name="ivRowPlay" />
     <string name="test">test</string>
+
+    <string name="library_name">Waveform</string>
+    <string name="action_settings">action_settings</string>
+    <string name="start_record_button">START</string>
+    <string name="stop_record_button">STOP</string>
+    <string name="Record">record</string>
+    <string name="record_button">selected button</string>
+    <string name="main_page_logo">Health Tracker</string>
+    <string name="main_page_file_view">View Files</string>
+    <string name="toast_msg">\"You are connected to a bluetooth device\"</string>
+    <string name="note_last_name">" "</string>
+    <string name="note_date">" "</string>
+    <string name="zoom_img" />
+    <string name="next_button_record2" />
+    <string name="note">" "</string>
+    <string name="notee" />
+    <string name="Connect">Connect</string>
+    <string name="button_okay">Ok</string>
+    <string name="check">check</string>
 </resources>
