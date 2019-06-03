@@ -221,6 +221,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
                 Log.d(TAG, "enabling / disabling bluetooth.");
                 enableDisableBT();
+                TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
+                text_status.setText("Please discover devices to connect.");
             }
 
         });
@@ -296,25 +298,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        Button test_connection = findViewById(R.id.check_connection);
-        test_connection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-                //Toast.makeText(getBaseContext(), "Please select a bluetooth device", Toast.LENGTH_SHORT).show();
-                if (mmSocket.isConnected()) {
-                    text_status.setText("You are Connected");
-                    //Toast.makeText(getBaseContext(), "Remote device is connected", Toast.LENGTH_SHORT).show();
-                } else {
-                    text_status.setText("Please select a bluetooth device");
-                }
-
-            }
-
-        });
-
-
-
     }
 
 
@@ -353,6 +336,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void btnDiscover(View view) {
         Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
+        TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
+        text_status.setText("Please select a device to connect.");
 
         if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
@@ -451,18 +436,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }.start();
 
+        TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
+        text_status.setText("Connected.");
 
     }
-
-    /*private void checkConnection() {
-            if (Thread.currentThread().run().mmSocket.isConnected()){
-                Toast.makeText(getBaseContext(), "Connected", Toast.LENGTH_SHORT).show();
-            }
-
-    }*/
-
-
-
 
 
     // Closes the client socket and causes the thread to finish.
@@ -479,6 +456,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         try {
             final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
+
             return (BluetoothSocket) m.invoke(device, uuid);
         } catch (Exception e) {
             Log.e(TAG, "Could not create Insecure RFComm Connection", e);
