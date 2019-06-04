@@ -419,6 +419,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 // Establish the Bluetooth socket connection.
                 try {
                     mmSocket.connect();
+
                 } catch (IOException e) {
                     // Unable to connect; close the socket and return.
                     try {
@@ -444,8 +445,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
         text_status.setText("Connected.");
-
-
 
     }
 
