@@ -1,7 +1,11 @@
 package com.example.zece.healthtracker.UI;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -12,6 +16,9 @@ import android.widget.PopupWindow;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.RECORD_AUDIO;
 
 public class AppInfo extends AppCompatActivity {
 
@@ -28,6 +35,7 @@ public class AppInfo extends AppCompatActivity {
             }
 
         });*/
+
     }
 /*
     private void mainpage() {
@@ -35,5 +43,6 @@ public class AppInfo extends AppCompatActivity {
         startActivity(intent_next);
 
     }*/
+
 
 }
