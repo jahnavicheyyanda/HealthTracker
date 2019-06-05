@@ -24,11 +24,8 @@ public class PatientData extends AppCompatActivity {
     public static final String NEW_RECORDDATE = "new_record_date";
     public EditText InputName, InputLastName, InputPatientNote;
 
-
     Calendar calendar = Calendar.getInstance();
     String currentDate = DateFormat.getDateTimeInstance().format(calendar.getTime());
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,21 +89,5 @@ public class PatientData extends AppCompatActivity {
 
 
     }
-
-
-    /*String patientFirstName = InputName.getText().toString();
-
-        PatientData patientData = new PatientData();
-        String inputName = patientData.getInputName();
-        Toast.makeText(getApplicationContext(), inputName, Toast.LENGTH_LONG).show();
-
-    public String getInputName(){
-        return patientFirstName;
-        }*/
-
-
-
-
-
 
 }

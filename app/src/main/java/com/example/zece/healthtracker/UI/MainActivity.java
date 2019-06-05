@@ -204,6 +204,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         OperateFolderActions();
 
+        TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
+        text_status.setText("Please turn the bluetooth on.");
+
         Button record_start = findViewById(R.id.record_start);
 
         Button btnONOFF = findViewById(R.id.btnONOFF);
