@@ -30,8 +30,6 @@ public class PatientDataEditViewModel extends AndroidViewModel {
 
     public LiveData<Patient> getPatient_note(String patientId) { return mDao.getPatient_note(patientId);  }
 
-    public LiveData<Patient> getRecord_date(String patientId) { return mDao.getRecord_date(patientId); }
-
     public LiveData<Record> getDate(String patientId) { return mDao.getDate(patientId); }
 
 

@@ -204,6 +204,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         OperateFolderActions();
 
+        TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
+        text_status.setText("Please turn the bluetooth on.");
+
         Button record_start = findViewById(R.id.record_start);
 
         Button btnONOFF = findViewById(R.id.btnONOFF);
@@ -420,6 +423,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 // Establish the Bluetooth socket connection.
                 try {
                     mmSocket.connect();
+
                 } catch (IOException e) {
                     // Unable to connect; close the socket and return.
                     try {
@@ -445,8 +449,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
         text_status.setText("Connected");
-
-
 
     }
 
