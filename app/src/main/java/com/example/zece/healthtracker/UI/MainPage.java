@@ -38,7 +38,7 @@ public class MainPage extends AppCompatActivity {
         FilesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filesbutton();
+                filesButton();
             }
 
         });
@@ -46,7 +46,7 @@ public class MainPage extends AppCompatActivity {
         RecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recordbutton();
+                recordButton();
             }
 
         });
@@ -66,7 +66,7 @@ public class MainPage extends AppCompatActivity {
     private void AppInfoDisplay() {
         LayoutInflater inflater = (LayoutInflater) MainPage.this.getSystemService(MainPage.LAYOUT_INFLATER_SERVICE);
         PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.activity_app_info, null), MATCH_PARENT,MATCH_PARENT, true);
-        pw.showAtLocation(MainPage.this.findViewById(R.id.app_info), Gravity.START, 0, 0);
+        pw.showAtLocation(MainPage.this.findViewById(R.id.app_info), Gravity.CENTER, 0, 0);
         View v= pw.getContentView();
         TextView tv=v.findViewById(R.id.info);
         View view= pw.getContentView();
@@ -88,12 +88,12 @@ public class MainPage extends AppCompatActivity {
     }
 
 
-    private void recordbutton() {
+    private void recordButton() {
         Intent intent_next = new Intent(this, MainActivity.class);
         startActivity(intent_next);
     }
 
-    private void filesbutton() {
+    private void filesButton() {
 
         //FilesPage filesPage = new FilesPage();
         //filesPage.fabInvisible();

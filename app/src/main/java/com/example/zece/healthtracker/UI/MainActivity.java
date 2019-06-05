@@ -341,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void btnDiscover(View view) {
         Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
         TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-        text_status.setText("Please select a device to connect.");
+        text_status.setText("Please select a device to connect");
 
         if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
@@ -444,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         record_start.setVisibility(View.VISIBLE);
 
         TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-        text_status.setText("Connected.");
+        text_status.setText("Connected");
 
 
 
