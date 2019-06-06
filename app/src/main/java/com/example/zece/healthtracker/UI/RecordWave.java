@@ -32,11 +32,11 @@ public class RecordWave extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_wave);
 
-        final ImageButton zoomImg = findViewById(R.id.zoom_img);
+        //final ImageButton zoomImg = findViewById(R.id.zoom_img);
 
         //zoomImg.setOnClickListener(v -> zoom_button());
 
-        final WaveformView mPlaybackView = findViewById(R.id.playbackWaveformView);
+        final WaveformView mPlaybackView = findViewById(R.id.playback_waveform_view);
         //Bitmap bitmap = loadBitmapFromView(findViewById(R.id.playbackWaveformView),350,450);
 
         short[] samples = null;
@@ -63,24 +63,24 @@ public class RecordWave extends AppCompatActivity {
             mPlaybackView.setSamples(samples);
 
             //to start playing if it is not playing.
-            final ImageButton start_button = findViewById(R.id.start_record_button);
-            start_button.setOnClickListener(v -> {
+            final ImageButton startButton = findViewById(R.id.start_record_button);
+            startButton.setOnClickListener(v -> {
                 if (!mPlaybackThread.playing()) {
                     mPlaybackThread.startPlayback();
                 }
             });
 
             //to stop playing if it is playing.
-            ImageButton stop_button = findViewById(R.id.stop_record_button);
-            stop_button.setOnClickListener(v -> {
+            ImageButton stopButton = findViewById(R.id.stop_record_button);
+            stopButton.setOnClickListener(v -> {
                 if(mPlaybackThread.playing()) {
                     onStop();
                     mPlaybackThread.stopPlayback();
                 }
             });
 
-            ImageButton next_button = findViewById(R.id.next_button_record2);
-            next_button.setOnClickListener(v -> next_button());
+            ImageButton nextButton = findViewById(R.id.next_button_record2);
+            nextButton.setOnClickListener(v -> nextButton());
         }
      }
 
@@ -92,7 +92,7 @@ public class RecordWave extends AppCompatActivity {
         return b;
     }*/
 
-    public void next_button() {
+    public void nextButton() {
         Intent intent_next = new Intent(this, FilesPage.class);
         startActivity(intent_next);
     }

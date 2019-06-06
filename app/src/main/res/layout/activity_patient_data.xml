@@ -18,7 +18,7 @@
         android:contentDescription="@string/patient_data"
         android:text="@string/patient_data"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/InputName"
+        app:layout_constraintBottom_toTopOf="@+id/input_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,13 +35,13 @@
         android:text="@string/name_data"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/last_name"
-        app:layout_constraintEnd_toStartOf="@+id/InputName"
+        app:layout_constraintEnd_toStartOf="@+id/input_name"
         app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose_patient_data" />
 
     <EditText
-        android:id="@+id/InputName"
+        android:id="@+id/input_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="71dp"
@@ -50,7 +50,7 @@
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/InputLastName"
+        app:layout_constraintBottom_toTopOf="@+id/input_last_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/name_data"
         app:layout_constraintTop_toBottomOf="@+id/spinner_patient"
@@ -66,14 +66,14 @@
         android:layout_marginBottom="16dp"
         android:text="@string/last_data"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/InputPatientNote"
-        app:layout_constraintEnd_toStartOf="@+id/InputLastName"
+        app:layout_constraintBottom_toTopOf="@+id/input_patient_note"
+        app:layout_constraintEnd_toStartOf="@+id/input_last_name"
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_data" />
 
     <EditText
-        android:id="@+id/InputLastName"
+        android:id="@+id/input_last_name"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="73dp"
@@ -82,10 +82,10 @@
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/InputPatientNote"
+        app:layout_constraintBottom_toTopOf="@+id/input_patient_note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/last_name"
-        app:layout_constraintTop_toBottomOf="@+id/InputName"
+        app:layout_constraintTop_toBottomOf="@+id/input_name"
         tools:ignore="Autofill" />
 
     <TextView
@@ -103,7 +103,7 @@
         app:layout_constraintEnd_toStartOf="@+id/date_data_input"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputPatientNote" />
+        app:layout_constraintTop_toBottomOf="@+id/input_patient_note" />
 
     <Button
         android:id="@+id/save_button"
@@ -134,7 +134,7 @@
         app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/date"
-        app:layout_constraintTop_toBottomOf="@+id/InputPatientNote" />
+        app:layout_constraintTop_toBottomOf="@+id/input_patient_note" />
 
     <TextView
         android:id="@+id/choose_patient_data"
@@ -161,7 +161,7 @@
         app:layout_constraintTop_toBottomOf="@+id/patient_data" />
 
     <EditText
-        android:id="@+id/InputPatientNote"
+        android:id="@+id/input_patient_note"
         android:layout_width="359dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -175,7 +175,7 @@
         app:layout_constraintBottom_toTopOf="@+id/date_data_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputLastName"
+        app:layout_constraintTop_toBottomOf="@+id/input_last_name"
         app:layout_constraintVertical_bias="0.145" />
 
 </android.support.constraint.ConstraintLayout>

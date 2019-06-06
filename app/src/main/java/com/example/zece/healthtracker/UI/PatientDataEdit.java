@@ -38,17 +38,17 @@ public class PatientDataEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_data_edit);
 
-        inputNameEdit = findViewById(R.id.InputNameEdit);
-        inputLastNameEdit = findViewById(R.id.InputLastNameEdit);
-        inputPatientNoteEdit = findViewById(R.id.InputPatientNoteEdit);
-        inputDateEdit = findViewById(R.id.InputDateEdit);
+        inputNameEdit = findViewById(R.id.input_name_edit);
+        inputLastNameEdit = findViewById(R.id.input_last_name_edit);
+        inputPatientNoteEdit = findViewById(R.id.input_patient_note_edit);
+        inputDateEdit = findViewById(R.id.input_date_edit);
 
         bundle = getIntent().getExtras();
 
         if(bundle != null) {
             patientId = bundle.getString("patient_id");
-            patientFirstName = bundle.getString("patient_firstName");
-            patientLastName = bundle.getString("patient_lastName");
+            patientFirstName = bundle.getString("patient_first_name");
+            patientLastName = bundle.getString("patient_last_name");
             recordDate = bundle.getString("record_date");
         }
 
@@ -64,7 +64,6 @@ public class PatientDataEdit extends AppCompatActivity {
             inputNameEdit.setText(patient.getFirst_name());
             inputLastNameEdit.setText(patient.getLast_name());
             inputPatientNoteEdit.setText(patient.getNote());
-
         });
         record.observe(this, record -> inputDateEdit.setText(record.getDate()));
     }
@@ -73,7 +72,7 @@ public class PatientDataEdit extends AppCompatActivity {
         String updatedFirstName = inputNameEdit.getText().toString();
         String updatedLastName = inputLastNameEdit.getText().toString();
         String updatedPatientNote = inputPatientNoteEdit.getText().toString();
-        String RecordDateEdit = inputDateEdit.getText().toString();
+        String recordDateEdit = inputDateEdit.getText().toString();
         Intent resultIntent = new Intent();
         resultIntent.putExtra(PATIENT_ID, patientId);
         resultIntent.putExtra(UPDATED_FIRSTNAME, updatedFirstName);
@@ -85,11 +84,11 @@ public class PatientDataEdit extends AppCompatActivity {
         File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/Health_tracker/"
                 +patientLastName + "_"
-                +patientFirstName+" "+RecordDateEdit+".wav" );
+                +patientFirstName+" "+recordDateEdit+".wav" );
         File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/Health_tracker/"
                 +updatedLastName +"_"
-                +updatedFirstName+" "+RecordDateEdit+".wav");
+                +updatedFirstName+" "+recordDateEdit+".wav");
         from.renameTo(to);
 
         finish();

@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.zece.healthtracker.Database.Patient;
@@ -26,7 +25,7 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
     public static final int UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE = 2;
     private static final int PATIENT_DATA_ACTIVITY_REQUEST_CODE = 1;
-    private String TAG = this.getClass().getSimpleName();
+    //private String TAG = this.getClass().getSimpleName();
     private PatientViewModel patientViewModel;
     private PatientListAdapter patientListAdapter;
 
@@ -47,14 +46,11 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
         fabVisibility();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 
-                Intent intent = new Intent(FilesPage.this, PatientData.class);
-                startActivityForResult(intent, PATIENT_DATA_ACTIVITY_REQUEST_CODE);
+            Intent intent = new Intent(FilesPage.this, PatientData.class);
+            startActivityForResult(intent, PATIENT_DATA_ACTIVITY_REQUEST_CODE);
 
-            }
         });
 
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
@@ -135,11 +131,4 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
         patientViewModel.delete(mPatient);
     }
-
-    /*@Override
-    public void OnDeleteClickListener2(Record mRecord) {
-
-        patientViewModel.delete(mRecord);
-    }*/
-
 }

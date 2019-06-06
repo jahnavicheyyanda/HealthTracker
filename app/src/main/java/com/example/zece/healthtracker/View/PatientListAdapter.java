@@ -95,8 +95,8 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
         PatientViewHolder(View itemView) {
             super(itemView);
             patientItemView = itemView.findViewById(R.id.file_name);
-            imgDelete = itemView.findViewById(R.id.ivRowDelete);
-            imgEdit = itemView.findViewById(R.id.ivRowEdit);
+            imgDelete = itemView.findViewById(R.id.iv_row_delete);
+            imgEdit = itemView.findViewById(R.id.iv_row_edit);
         }
 
         void setData(String patient, int position) {

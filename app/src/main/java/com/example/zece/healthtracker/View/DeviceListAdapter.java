@@ -38,8 +38,8 @@ public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
         BluetoothDevice device = mDevices.get(position);
 
         if (device != null) {
-            TextView deviceName = convertView.findViewById(R.id.tvDeviceName);
-            TextView deviceAddress = convertView.findViewById(R.id.tvDeviceAddress);
+            TextView deviceName = convertView.findViewById(R.id.tv_device_name);
+            TextView deviceAddress = convertView.findViewById(R.id.tv_device_address);
 
             if (deviceName != null) {
                 deviceName.setText(device.getName());
@@ -48,7 +48,6 @@ public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
                 deviceAddress.setText(device.getAddress());
             }
         }
-
         return convertView;
     }
 }

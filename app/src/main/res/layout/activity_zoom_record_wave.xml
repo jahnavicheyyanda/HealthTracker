@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ZoomRecordWave"
     android:orientation="vertical">
 
     <com.example.zece.healthtracker.Waveform.WaveformView
-        android:id="@+id/playbackWaveformView2"
+        android:id="@+id/playback_waveform_view_zoom"
         android:layout_width="390dp"
         android:layout_height="500dp"
         android:layout_above="@+id/buttonContainer"

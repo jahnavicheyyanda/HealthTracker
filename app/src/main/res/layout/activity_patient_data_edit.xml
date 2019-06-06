@@ -36,13 +36,13 @@
         android:text="@string/name_data"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/last_name"
-        app:layout_constraintEnd_toStartOf="@+id/InputNameEdit"
+        app:layout_constraintEnd_toStartOf="@+id/input_name_edit"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/InputNameEdit"
+        android:id="@+id/input_name_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="73dp"
@@ -51,7 +51,7 @@
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/InputLastNameEdit"
+        app:layout_constraintBottom_toTopOf="@+id/input_last_name_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/name_data"
         app:layout_constraintTop_toBottomOf="@+id/patient_data"
@@ -67,14 +67,14 @@
         android:layout_marginBottom="25dp"
         android:text="@string/last_data"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/InputDateEdit"
-        app:layout_constraintEnd_toStartOf="@+id/InputLastNameEdit"
+        app:layout_constraintBottom_toTopOf="@+id/input_date_edit"
+        app:layout_constraintEnd_toStartOf="@+id/input_last_name_edit"
         app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_data" />
 
     <EditText
-        android:id="@+id/InputLastNameEdit"
+        android:id="@+id/input_last_name_edit"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="73dp"
@@ -83,28 +83,28 @@
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/InputDateEdit"
+        app:layout_constraintBottom_toTopOf="@+id/input_date_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/last_name"
-        app:layout_constraintTop_toBottomOf="@+id/InputNameEdit"
+        app:layout_constraintTop_toBottomOf="@+id/input_name_edit"
         tools:ignore="Autofill" />
 
     <TextView
-        android:id="@+id/InputDateEdit"
+        android:id="@+id/input_date_edit"
         android:layout_width="0dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="52dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/InputPatientNoteEdit"
+        android:text="@string/input_date_edit"
+        app:layout_constraintBottom_toTopOf="@+id/input_patient_note_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputLastNameEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/input_last_name_edit" />
 
     <EditText
-        android:id="@+id/InputPatientNoteEdit"
+        android:id="@+id/input_patient_note_edit"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputDateEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/input_date_edit" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -131,7 +131,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputPatientNoteEdit">
+        app:layout_constraintTop_toBottomOf="@+id/input_patient_note_edit">
 
         <Button
             android:id="@+id/update"

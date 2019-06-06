@@ -3,16 +3,11 @@ package com.example.zece.healthtracker.UI;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
-import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,15 +23,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -44,8 +35,6 @@ import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.View.DeviceListAdapter;
 
 import static android.bluetooth.BluetoothAdapter.STATE_CONNECTED;
-import static android.bluetooth.BluetoothProfile.STATE_CONNECTING;
-
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -71,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
-                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, mBluetoothAdapter.ERROR);
+                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
 
                 switch (state) {
                     case BluetoothAdapter.STATE_OFF:
@@ -209,9 +198,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Button record_start = findViewById(R.id.record_start);
 
-        Button btnONOFF = findViewById(R.id.btnONOFF);
-        btnEnableDisable_Discoverable = findViewById(R.id.btnDiscoverable_on_off);
-        lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
+        Button btnONOFF = findViewById(R.id.btn_onn_off);
+        btnEnableDisable_Discoverable = findViewById(R.id.btn_discoverable_on_off);
+        lvNewDevices = (ListView) findViewById(R.id.lv_new_devices);
         mBTDevices = new ArrayList<>();
 
         //Broadcasts when bond state changes (ie: pairing)
@@ -444,11 +433,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }.start();
 
-        Button record_start = findViewById(R.id.record_start);
-        record_start.setVisibility(View.VISIBLE);
+        Button recordStart = findViewById(R.id.record_start);
+        recordStart.setVisibility(View.VISIBLE);
 
-        TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-        text_status.setText("Connected");
+        TextView textStatus = findViewById(R.id.text_bluetooth_connecton_status);
+        textStatus.setText("Connected");
 
     }
 

@@ -61,4 +61,7 @@
     <string name="Connect">Connect</string>
     <string name="button_okay">Ok</string>
     <string name="check">check</string>
+    <string name="iv_row_edit" />
+    <string name="iv_row_delete" />
+    <string name="input_date_edit" />
 </resources>

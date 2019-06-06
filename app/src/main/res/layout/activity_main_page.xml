@@ -9,7 +9,7 @@
     tools:context=".UI.MainPage">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/logo"
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:layout_marginStart="8dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/record_list_button"
         android:layout_width="75dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
@@ -38,13 +38,13 @@
         android:textAlignment="textEnd"
         android:tint="@color/default_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        app:layout_constraintEnd_toStartOf="@+id/next_page_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintVertical_bias="0.414" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/next_page_button"
         android:layout_width="75dp"
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
@@ -57,8 +57,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/record_list_button"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintVertical_bias="0.414" />
 
     <ImageButton
@@ -70,7 +70,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="78dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
