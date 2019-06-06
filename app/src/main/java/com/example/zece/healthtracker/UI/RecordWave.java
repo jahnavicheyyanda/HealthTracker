@@ -74,7 +74,7 @@ public class RecordWave extends AppCompatActivity {
                     mPlaybackView.setMarkerPosition(mPlaybackView.getAudioLength());
                 }
             });
-            mPlaybackView.setChannels(1);
+            mPlaybackView.setChannels(2);
             mPlaybackView.setSampleRate(SAMPLE_RATE);
             mPlaybackView.setSamples(samples);
 

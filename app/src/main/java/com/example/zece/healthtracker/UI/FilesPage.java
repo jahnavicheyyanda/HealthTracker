@@ -1,12 +1,10 @@
 package com.example.zece.healthtracker.UI;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +20,6 @@ import com.example.zece.healthtracker.View.PatientListAdapter;
 import com.example.zece.healthtracker.View.PatientViewModel;
 
 import java.io.File;
-import java.util.List;
 import java.util.UUID;
 
 public class FilesPage extends AppCompatActivity implements PatientListAdapter.OnDeleteClickListener {
@@ -62,48 +59,22 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
 
-        patientViewModel.getAllPatients().observe(this, new Observer<List<Patient>>(){
-            @Override
-            public void onChanged(@Nullable List<Patient> patients) {
+        patientViewModel.getAllPatients().observe(this, patients -> patientListAdapter.setPatients(patients));
 
-                patientListAdapter.setPatients(patients);
-
-            }
-        });
-
-        patientViewModel.getAllRecords().observe(this, new Observer<List<Record>>(){
-            @Override
-            public void onChanged(@Nullable List<Record> records) {
-
-                patientListAdapter.setRecords(records);
-
-            }
-        });
+        patientViewModel.getAllRecords().observe(this, records -> patientListAdapter.setRecords(records));
 
     }
 
-    public void fabInvisible(){
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.hide();
-    }
-
+    // In case of not having a new file to save, fab button will be invisible.
     public void fabVisibility() {
         FloatingActionButton fab = findViewById(R.id.fab);
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
         File file = new File(uri.toString());
 
-
         if (!file.exists()) {
-            //fab.show();
-            //fab.setVisibility(View.VISIBLE);
             fab.hide();
-            //fab.setEnabled(false);
-
-
         } else {
             fab.show();
-            //fab.hide();
-            //fab.setEnabled(true);
         }
     }
 
@@ -123,7 +94,9 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
             patientViewModel.insert(patient);
 
             final String rid = UUID.randomUUID().toString();
-            Record record = new Record (rid, patient_id, data.getStringExtra(PatientData.NEW_RECORDDATE));
+            Record record = new Record (rid,
+                                        patient_id,
+                                        data.getStringExtra(PatientData.NEW_RECORDDATE));
             patientViewModel.insert(record);
 
             fabVisibility();
@@ -142,17 +115,10 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
                     data.getStringExtra(PatientDataEdit.UPDATED_NOTE));
             PatientViewModel.update(patient);
 
-     //       PatientData patientData = new PatientData();
-     //       String inputName = patientData.onCreate();.patientFirstName;
-
-
-
             Toast.makeText(
                     getApplicationContext(),
                     R.string.updated  ,
                     Toast.LENGTH_LONG).show();
-
-
 
         } else{
             Toast.makeText(

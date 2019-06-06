@@ -39,13 +39,16 @@
         </activity>
         <activity android:name=".UI.RecordingWave" />
         <activity android:name=".UI.RecordedWave" />
-        <activity android:name=".UI.RecordWave" />
-        <activity android:name=".UI.PatientData" />
+        <activity android:name=".UI.RecordWave"
+            android:parentActivityName=".UI.MainActivity"/>
+        <activity android:name=".UI.PatientData"
+            android:parentActivityName=".UI.FilesPage"/>
         <activity
             android:name=".UI.FilesPage"
             android:label="@string/title_activity_files_page"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UI.PatientDataEdit" />
+        <activity android:name=".UI.PatientDataEdit"
+            android:parentActivityName=".UI.FilesPage"/>
     </application>
 
 </manifest>
