@@ -67,8 +67,6 @@ public class PatientData extends AppCompatActivity {
                     setResult(RESULT_OK, resultIntent);
 
 
-
-
                     File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                             + "/Health_tracker_transfer/Test.wav");
                     File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()

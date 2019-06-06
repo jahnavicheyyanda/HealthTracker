@@ -1,5 +1,6 @@
 package com.example.zece.healthtracker.Waveform;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -56,7 +57,6 @@ public class WaveformView extends View {
     public WaveformView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs, 0);
-
     }
 
     public WaveformView(Context context, AttributeSet attrs, int defStyle) {
@@ -73,9 +73,7 @@ public class WaveformView extends View {
 
         float strokeThickness = a.getFloat(R.styleable.WaveformView_waveformStrokeThickness, 1f);
         int mStrokeColor = a.getColor(R.styleable.WaveformView_waveformBlue,
-                //WaveformView_waveformColor
                 ContextCompat.getColor(context, R.color.colorGrey));
-                //default_waveform
         int mFillColor = a.getColor(R.styleable.WaveformView_waveformBlue,
                 ContextCompat.getColor(context, R.color.colorDarkGrey));
         int mMarkerColor = a.getColor(R.styleable.WaveformView_playbackIndicatorColor,
@@ -133,7 +131,6 @@ public class WaveformView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-
         LinkedList<float[]> temp = mHistoricalData;
         if (mMode == MODE_RECORDING && temp != null) {
             brightness = colorDelta;
@@ -163,7 +160,7 @@ public class WaveformView extends View {
         return fontSize;
     }
 
-    public int getMode() {
+    /*public int getMode() {
         return mMode;
     }
 
@@ -173,7 +170,7 @@ public class WaveformView extends View {
 
     public short[] getSamples() {
         return mSamples;
-    }
+    }*/
 
     public void setSamples(short[] samples) {
         mSamples = samples;
@@ -181,9 +178,9 @@ public class WaveformView extends View {
         onSamplesChanged();
     }
 
-    public int getMarkerPosition() {
+    /*public int getMarkerPosition() {
         return mMarkerPosition;
-    }
+    }*/
 
     public void setMarkerPosition(int markerPosition) {
         mMarkerPosition = markerPosition;
@@ -194,30 +191,22 @@ public class WaveformView extends View {
         return mAudioLength;
     }
 
-    public int getSampleRate() {
+    /*public int getSampleRate() {
         return mSampleRate;
-    }
+    }*/
 
     public void setSampleRate(int sampleRate) {
         mSampleRate = sampleRate;
         calculateAudioLength();
     }
 
-    public int getChannels() {
+    /*public int getChannels() {
         return mChannels;
-    }
+    }*/
 
     public void setChannels(int channels) {
         mChannels = channels;
         calculateAudioLength();
-    }
-
-    public boolean showTextAxis() {
-         return showTextAxis;
-    }
-
-    public void setShowTextAxis(boolean showTextAxis) {
-        this.showTextAxis = showTextAxis;
     }
 
     private void calculateAudioLength() {
@@ -271,7 +260,6 @@ public class WaveformView extends View {
                 waveformPoints[pointIndex++] = x;
                 waveformPoints[pointIndex++] = y;
             }
-
             lastX = x;
             lastY = y;
         }
@@ -302,7 +290,6 @@ public class WaveformView extends View {
         }
 
         waveformPath.close();
-
         return waveformPath;
     }
 
@@ -328,6 +315,7 @@ public class WaveformView extends View {
             mCachedWaveform.endRecording();
     }
 
+    @SuppressLint("DefaultLocale")
     private void drawAxis(Canvas canvas, int width) {
         if (!showTextAxis) return;
         int seconds = mAudioLength / 1000;

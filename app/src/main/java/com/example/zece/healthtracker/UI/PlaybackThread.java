@@ -21,51 +21,42 @@ import android.util.Log;
 
 import java.nio.ShortBuffer;
 
-public class PlaybackThread {
+class PlaybackThread {
     static final int SAMPLE_RATE = 16000;
     private static final String LOG_TAG = PlaybackThread.class.getSimpleName();
 
-    public PlaybackThread(short[] samples, PlaybackListener listener) {
+    PlaybackThread(short[] samples, PlaybackListener listener) {
         mSamples = ShortBuffer.wrap(samples);
         mNumSamples = samples.length;
         mListener = listener;
     }
 
-    public Thread mThread;
+    private Thread mThread;
     private boolean mShouldContinue;
     private ShortBuffer mSamples;
     private int mNumSamples;
     private PlaybackListener mListener;
 
-
-    public boolean playing() {
+    boolean playing() {
             return mThread != null;
     }
 
-
-
-    public void startPlayback() {
+    void startPlayback() {
         if (mThread != null)
             return;
 
         // Start streaming in a thread
         mShouldContinue = true;
-        mThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                play();
-            }
-        });
+        mThread = new Thread(this::play);
         mThread.start();
     }
 
-    public void stopPlayback() {
+    void stopPlayback() {
         if (mThread == null)
             return;
 
         mShouldContinue = false;
         mThread = null;
-
     }
 
     private void play() {
@@ -84,12 +75,14 @@ public class PlaybackThread {
                 AudioTrack.MODE_STREAM);
 
         audioTrack.setPlaybackPositionUpdateListener(new AudioTrack.OnPlaybackPositionUpdateListener() {
+
             @Override
             public void onPeriodicNotification(AudioTrack track) {
                 if (mListener != null && track.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) {
                     mListener.onProgress((track.getPlaybackHeadPosition() * 1000) / SAMPLE_RATE);
                 }
             }
+
             @Override
             public void onMarkerReached(AudioTrack track) {
                 Log.v(LOG_TAG, "Audio file end reached");
@@ -99,6 +92,7 @@ public class PlaybackThread {
                 }
             }
         });
+
         audioTrack.setPositionNotificationPeriod(SAMPLE_RATE / 30); // 30 times per second
         audioTrack.setNotificationMarkerPosition(mNumSamples);
 

@@ -5,7 +5,6 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.zece.healthtracker.R;
@@ -30,19 +29,9 @@ public class RecordedWave extends AppCompatActivity {
         Button next_button = findViewById(R.id.next_button);
         Button cancel_button = findViewById(R.id.cancel_button);
 
-        next_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                next_button();
-            }
-        });
+        next_button.setOnClickListener(v -> next_button());
 
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancel_button();
-            }
-        });
+        cancel_button.setOnClickListener(v -> cancel_button());
 
         if (!isRecording) {
             File file = new File(getExternalFilesDir(null), "new");

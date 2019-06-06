@@ -1,12 +1,10 @@
 package com.example.zece.healthtracker.UI;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -40,15 +38,12 @@ public class PatientDataEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_data_edit);
 
-
-
         inputNameEdit = findViewById(R.id.InputNameEdit);
         inputLastNameEdit = findViewById(R.id.InputLastNameEdit);
         inputPatientNoteEdit = findViewById(R.id.InputPatientNoteEdit);
         inputDateEdit = findViewById(R.id.InputDateEdit);
 
         bundle = getIntent().getExtras();
-
 
         if(bundle != null) {
             patientId = bundle.getString("patient_id");
@@ -65,21 +60,13 @@ public class PatientDataEdit extends AppCompatActivity {
         record = patientDataEditViewModel.getDate(patientId);
 
 
-        patient.observe(this, new Observer<Patient>() {
-            @Override
-            public void onChanged(@Nullable Patient patient) {
-                inputNameEdit.setText(patient.getFirst_name());
-                inputLastNameEdit.setText(patient.getLast_name());
-                inputPatientNoteEdit.setText(patient.getNote());
+        patient.observe(this, patient -> {
+            inputNameEdit.setText(patient.getFirst_name());
+            inputLastNameEdit.setText(patient.getLast_name());
+            inputPatientNoteEdit.setText(patient.getNote());
 
-            }
         });
-        record.observe(this, new Observer<Record>() {
-            @Override
-            public void onChanged(@Nullable Record record) {
-                inputDateEdit.setText(record.getDate());
-            }
-        });
+        record.observe(this, record -> inputDateEdit.setText(record.getDate()));
     }
 
     public void updateData(View view){
@@ -93,7 +80,6 @@ public class PatientDataEdit extends AppCompatActivity {
         resultIntent.putExtra(UPDATED_LASTNAME, updatedLastName);
         resultIntent.putExtra(UPDATED_NOTE, updatedPatientNote);
         setResult(RESULT_OK, resultIntent);
-
 
 
         File from = new File(Environment.getExternalStorageDirectory().getAbsolutePath()

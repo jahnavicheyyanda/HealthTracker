@@ -6,9 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.zece.healthtracker.R;
@@ -30,27 +27,16 @@ public class RecordWave extends AppCompatActivity {
 
     private PlaybackThread mPlaybackThread;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_wave);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         final ImageButton zoomImg = findViewById(R.id.zoom_img);
 
-        zoomImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                zoom_button();
-
-            }
-        });
-
+        //zoomImg.setOnClickListener(v -> zoom_button());
 
         final WaveformView mPlaybackView = findViewById(R.id.playbackWaveformView);
-
         //Bitmap bitmap = loadBitmapFromView(findViewById(R.id.playbackWaveformView),350,450);
 
         short[] samples = null;
@@ -61,8 +47,6 @@ public class RecordWave extends AppCompatActivity {
         }
 
         if (samples != null) {
-
-
 
             mPlaybackThread = new PlaybackThread(samples, new PlaybackListener() {
                 @Override
@@ -78,45 +62,26 @@ public class RecordWave extends AppCompatActivity {
             mPlaybackView.setSampleRate(SAMPLE_RATE);
             mPlaybackView.setSamples(samples);
 
-
+            //to start playing if it is not playing.
             final ImageButton start_button = findViewById(R.id.start_record_button);
-
-            start_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!mPlaybackThread.playing()) {
-                        mPlaybackThread.startPlayback();
-
-                    }
-
+            start_button.setOnClickListener(v -> {
+                if (!mPlaybackThread.playing()) {
+                    mPlaybackThread.startPlayback();
                 }
             });
 
+            //to stop playing if it is playing.
             ImageButton stop_button = findViewById(R.id.stop_record_button);
-
-            stop_button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    if(mPlaybackThread.playing()) {
-
-                        onStop();
-                        mPlaybackThread.stopPlayback();
-
-                    }
+            stop_button.setOnClickListener(v -> {
+                if(mPlaybackThread.playing()) {
+                    onStop();
+                    mPlaybackThread.stopPlayback();
                 }
             });
 
             ImageButton next_button = findViewById(R.id.next_button_record2);
-
-            next_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    next_button();
-                }
-            });
+            next_button.setOnClickListener(v -> next_button());
         }
-
-
      }
 
     /*public static Bitmap loadBitmapFromView(View v, int width, int height) {
@@ -132,10 +97,10 @@ public class RecordWave extends AppCompatActivity {
         startActivity(intent_next);
     }
 
-    public void zoom_button(){
+    /*public void zoom_button(){
         Intent intent_zoom = new Intent(this, ZoomRecordWave.class);
         startActivity(intent_zoom);
-    }
+    }*/
 
     @Override
     protected void onStop() {
@@ -144,18 +109,12 @@ public class RecordWave extends AppCompatActivity {
         mPlaybackThread.stopPlayback();
     }
 
+    //Audio file will be get from Health_tracker_transfer folder in SD card.
     private short[] getAudioSample() throws IOException {
-        //InputStream is = getResources().openRawResource(R.raw.test2);
 
-        //Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
-       // File fileBluetooth = new File(uriBluetooth.toString());
-
-
-        //THIS SHOULD CHANGE TO DOWNLOADS OR SMTH AFTER TESTING: RIGHT NOW WE RE NOT ABLE TO SEND IT TO HEALTH_TRACKER_TRANSFER
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
         File file = new File(uri.toString());
         FileInputStream is = new FileInputStream(file);
-
 
             byte[] data;
             try {
@@ -171,32 +130,6 @@ public class RecordWave extends AppCompatActivity {
             sb.get(samples);
             return samples;
         }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
 }
 
 

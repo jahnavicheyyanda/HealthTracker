@@ -131,15 +131,15 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
     //For delete operation
 
     @Override
-    public void OnDeleteClickListener(Patient mPatient) {
+    public void onDeleteClickListener(Patient mPatient) {
 
         patientViewModel.delete(mPatient);
     }
 
-    @Override
+    /*@Override
     public void OnDeleteClickListener2(Record mRecord) {
 
         patientViewModel.delete(mRecord);
-    }
+    }*/
 
 }
