@@ -443,7 +443,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     //creates insecure outgoing connection with BT device using UUID
-    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+    /*private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         try {
             final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
 
@@ -452,15 +452,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Log.e(TAG, "Could not create Insecure RFComm Connection", e);
         }
         return device.createRfcommSocketToServiceRecord(uuid);
-    }
+    } */
 
 
     //creates secure outgoing connection with BT device using UUID
-   /* private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         mmSocket = device.createRfcommSocketToServiceRecord(uuid);
         return mmSocket;
 
-    }*/
+    }
 
     private interface MessageConstants {
         public static final int MESSAGE_READ = 0;
