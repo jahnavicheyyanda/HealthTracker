@@ -23,9 +23,8 @@ public class Patient {
     private  String note;
 
     @NonNull
-    public String getPatient_id() {
-        return patient_id;
-    }
+    public String getPatient_id() { return patient_id; }
+
     @NonNull
     public void setPatient_id(String patient_id) {
         this.patient_id = patient_id;
@@ -38,10 +37,12 @@ public class Patient {
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
+
     @NonNull
     public String getLast_name() {
         return this.last_name;
     }
+
     @NonNull
     public void setLast_name(String last_name) {
         this.last_name = last_name;
@@ -50,8 +51,6 @@ public class Patient {
     public String getNote() { return this.note; }
 
     public void setNote(String note) { this.note = note; }
-
-
 
     public Patient(String patient_id, String last_name, String first_name, String note) {
         this.patient_id=patient_id;

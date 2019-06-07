@@ -32,8 +32,6 @@ public interface DAO {
     @Query("SELECT * FROM patients WHERE patient_id=:patientId")
     LiveData<Patient> getPatient_note(String patientId);
 
-    @Query("SELECT * FROM patients WHERE patient_id=:patientId")
-    LiveData<Patient> getRecord_date(String patientId);
 
     @Insert
     void insert(Record... record);
@@ -47,7 +45,11 @@ public interface DAO {
     @Query("SELECT * FROM records")
     LiveData<List<Record>> getAllRecords();
 
-    @Query("SELECT * FROM records WHERE rid=:rid")
-    LiveData<Record> getDate(String rid);
+    @Query("SELECT * FROM records WHERE pid=:pid")
+    LiveData<Record> getDate(String pid);
+
+    //@Query("SELECT * FROM records WHERE rid=:rid")
+    //LiveData<Record> getDate(String rid);
+
 
 }

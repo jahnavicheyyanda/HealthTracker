@@ -3,8 +3,8 @@ package com.example.zece.healthtracker.View;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,16 +17,15 @@ import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
-import com.example.zece.healthtracker.UI.MainActivity;
 import com.example.zece.healthtracker.UI.PatientDataEdit;
 
+import java.io.File;
 import java.util.List;
 
 public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.PatientViewHolder> {
 
     public interface OnDeleteClickListener{
-        void OnDeleteClickListener(Patient mPatient);
-        void OnDeleteClickListener2(Record mRecord);
+        void onDeleteClickListener(Patient mPatient);
     }
 
     private final LayoutInflater layoutInflater;
@@ -37,13 +36,9 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
     public PatientListAdapter(Context context, OnDeleteClickListener listener , OnDeleteClickListener listener2) {
         layoutInflater = LayoutInflater.from(context);
-        this.list = list;
-        this.recordList = recordList;
         mContext = context;
         this.onDeleteClickListener = listener;
     }
-
-    //Create new views
 
     @NonNull
     @Override
@@ -59,23 +54,18 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
         if (list != null) {
 
-            Record record = recordList.get(position);
-            holder.setDataRec(record.getRid(), position);
-            holder.setDataRec(record.getPid(), position);
-            holder.setDataRec(String.valueOf(record.getDate()), position);
+            // In the record list, last names are added as titles
 
-            Patient patient = list.get(position);
-            holder.setData(patient.getLast_name(), position);
-            holder.setData(patient.getFirst_name(), position);
-            holder.setData(patient.getNote(), position);
-
+            Patient patientLastName = list.get(position);
+            holder.setData(patientLastName.getLast_name(), position);
+            /*holder.setData(patient.getNote(), position);
+            holder.setData(patient.getLast_name(), position);*/
 
             holder.setListeners();
 
         } else {
             holder.patientItemView.setText(R.string.no_patient);
         }
-
     }
 
     @Override
@@ -102,72 +92,53 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
         private int mPosition;
         private ImageView imgDelete, imgEdit;
 
-        public PatientViewHolder(View itemView) {
+        PatientViewHolder(View itemView) {
             super(itemView);
             patientItemView = itemView.findViewById(R.id.file_name);
-            imgDelete = itemView.findViewById(R.id.ivRowDelete);
-            imgEdit = itemView.findViewById(R.id.ivRowEdit);
+            imgDelete = itemView.findViewById(R.id.iv_row_delete);
+            imgEdit = itemView.findViewById(R.id.iv_row_edit);
         }
 
-        public void setData(String patient, int position) {
+        void setData(String patient, int position) {
             patientItemView.setText(patient);
             mPosition=position;
         }
 
-        public void setDataRec(String record, int position) {
-            patientItemView.setText(record);
-            mPosition=position;
-        }
+        void setListeners() {
 
-        public void setListeners() {
+            imgEdit.setOnClickListener(v -> {
 
-            imgEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                Intent intent = new Intent(mContext, PatientDataEdit.class);
+                intent.putExtra("patient_id", list.get(mPosition).getPatient_id());
+                intent.putExtra("patient_firstName", list.get(mPosition).getFirst_name());
+                intent.putExtra("patient_lastName", list.get(mPosition).getLast_name());
 
-                    Intent intent = new Intent(mContext, PatientDataEdit.class);
-                    intent.putExtra("patient_id", list.get(mPosition).getPatient_id());
-                    intent.putExtra("patient_firstName", list.get(mPosition).getFirst_name());
-                    intent.putExtra("patient_lastName", list.get(mPosition).getLast_name());
-                    //intent.putExtra("record_date", list.get(mPosition).getRecord_date());
+                ((Activity)mContext).startActivityForResult(intent,
+                        FilesPage.UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE);
 
-                    ((Activity)mContext).startActivityForResult(intent,
-                            FilesPage.UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE);
-
-
-
-                }
             });
 
-            imgDelete.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder altDial = new AlertDialog.Builder(mContext);
-                    altDial.setMessage("Do you want to delete the data?").setCancelable(false)
-                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+            imgDelete.setOnClickListener(v -> {
+                AlertDialog.Builder altDial = new AlertDialog.Builder(mContext);
+                altDial.setMessage("Do you want to delete the data?").setCancelable(false)
+                        .setPositiveButton("Delete", (dialog, which) -> {
 
-                                    if (onDeleteClickListener != null){
-                                        onDeleteClickListener.OnDeleteClickListener(list.get(mPosition));
-                                    }
+                            if (onDeleteClickListener != null){
+                                onDeleteClickListener.onDeleteClickListener(list.get(mPosition));
 
-                                }
-                            })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
+                                File file = new File(Environment.getExternalStorageDirectory() + "/Health_tracker/"
+                                        + list.get(mPosition).getLast_name() + "_"
+                                        + list.get(mPosition).getFirst_name() + " " +recordList.get(mPosition).getDate()+ ".wav");
 
-                    AlertDialog alert = altDial.create();
-                    alert.setTitle("Delete");
-                    alert.show();
+                                    boolean deleted = file.delete();
+                            }
+                        })
+                        .setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
+                AlertDialog alert = altDial.create();
+                alert.setTitle("Delete");
+                alert.show();
 
-
-                }
             });
         }
     }

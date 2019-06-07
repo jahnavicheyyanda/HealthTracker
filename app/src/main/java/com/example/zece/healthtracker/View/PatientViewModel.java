@@ -1,5 +1,6 @@
 package com.example.zece.healthtracker.View;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
@@ -19,7 +20,7 @@ public class PatientViewModel extends AndroidViewModel {
 
     private String TAG = this.getClass().getSimpleName();
     private static DAO patientDao;
-    public MyAppDatabase patientDB;
+    private MyAppDatabase patientDB;
 
     //private LiveData member variable to cache the list of words.
     private LiveData<List<Patient>> mAllPatients;
@@ -69,8 +70,8 @@ public class PatientViewModel extends AndroidViewModel {
         Log.d(TAG, "ViewModel Destroyed");
     }
 
-        //With AsyncTask, operations will be done in background thread
-
+    //With AsyncTask, operations will be done in background thread
+    @SuppressLint("StaticFieldLeak")
     private class OperationsAsyncTask extends AsyncTask<Patient, Void, Void> {
 
         DAO mAsyncTaskDao;
@@ -85,9 +86,10 @@ public class PatientViewModel extends AndroidViewModel {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class InsertAsyncTask extends OperationsAsyncTask {
 
-        public InsertAsyncTask(DAO mPatientDao) { super(mPatientDao);   }
+        InsertAsyncTask(DAO mPatientDao) { super(mPatientDao);   }
 
 
         @Override
@@ -112,9 +114,10 @@ public class PatientViewModel extends AndroidViewModel {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DeleteAsyncTask extends OperationsAsyncTask {
 
-        public DeleteAsyncTask(DAO patientDao) { super(patientDao);        }
+        DeleteAsyncTask(DAO patientDao) { super(patientDao);        }
 
         @Override
         protected Void doInBackground(Patient... patients) {
@@ -124,6 +127,7 @@ public class PatientViewModel extends AndroidViewModel {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private class OperationsAsyncTask2 extends AsyncTask<Record, Void, Void> {
 
         DAO mAsyncTaskDao;
@@ -138,17 +142,16 @@ public class PatientViewModel extends AndroidViewModel {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class InsertAsyncTask2 extends OperationsAsyncTask2 {
 
-        public InsertAsyncTask2(DAO mPatientDao) { super(mPatientDao);   }
-
+        InsertAsyncTask2(DAO mPatientDao) { super(mPatientDao);   }
 
         @Override
         protected Void doInBackground(Record... records) {
             mAsyncTaskDao.insert(records[0]);
             return null;
         }
-
     }
 
     private static class UpdateAsyncTask2 extends AsyncTask<Record, Void, Void> {
@@ -165,9 +168,10 @@ public class PatientViewModel extends AndroidViewModel {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DeleteAsyncTask2 extends OperationsAsyncTask2 {
 
-        public DeleteAsyncTask2(DAO patientDao) { super(patientDao);        }
+        DeleteAsyncTask2(DAO patientDao) { super(patientDao);        }
 
         @Override
         protected Void doInBackground(Record... records) {

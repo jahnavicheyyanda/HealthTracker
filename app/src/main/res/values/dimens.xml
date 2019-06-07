@@ -8,4 +8,6 @@
     <dimen name="std">16sp</dimen>
     <dimen name="waveheight">50dp</dimen>
     <dimen name="wave">150dp</dimen>
+    <dimen name="app_name_width">5dp</dimen>
+    <dimen name="app_name_width_new">1dp</dimen>
 </resources>

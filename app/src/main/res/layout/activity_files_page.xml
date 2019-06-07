@@ -23,7 +23,8 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/content_files_page" />
+        layout="@layout/content_files_page"
+        android:background="@color/white" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -31,6 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:visibility="invisible" />
+
 
 </android.support.design.widget.CoordinatorLayout>
