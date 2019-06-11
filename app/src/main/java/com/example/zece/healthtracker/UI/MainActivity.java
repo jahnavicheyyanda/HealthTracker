@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Handler handler;
     private ConnectedThread mConnectedThread;
     private BluetoothSocket mmSocket ;
+    //UUID should be same as the one saved in the pi
     UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
     // Create a BroadcastReceiver for ACTION_FOUND.
@@ -216,6 +217,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         nextButton.setOnClickListener(v -> {
 
+            //If the android phone does not have obexftp service file is saved in /bluetooth or /Download
+
             Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
             File fileBluetooth = new File(uriBluetooth.toString());
 
@@ -255,6 +258,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             if(file.exists()){
                 file.delete();
             }
+
+            //Sending control signal to send recorded file
             if (mmSocket.isConnected()) {
                 byte[] num = "1".getBytes();
                 mConnectedThread.write(num);
