@@ -25,7 +25,6 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
 
     public static final int UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE = 2;
     private static final int PATIENT_DATA_ACTIVITY_REQUEST_CODE = 1;
-    //private String TAG = this.getClass().getSimpleName();
     private PatientViewModel patientViewModel;
     private PatientListAdapter patientListAdapter;
 
