@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -42,18 +41,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static final String TAG = "Main Activity";
 
     BluetoothAdapter mBluetoothAdapter;
-    Button btnEnableDisable_Discoverable;
+    Button btnEnableDisableDiscoverable;
     ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     DeviceListAdapter mDeviceListAdapter;
     ListView lvNewDevices;
     public BluetoothDevice device;
     private Handler handler;
-    //private ConnectThread mConnectThread;
-    //private AcceptThread mAcceptThread;
     private ConnectedThread mConnectedThread;
     private BluetoothSocket mmSocket ;
+    //UUID should be same as the one saved in the pi
     UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
-
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -160,11 +157,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             File appDirectoryTransfer = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker_transfer/");
-
             File appDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Health_tracker/");
 
             Log.d("appDirectroyTransExist", appDirectoryTransfer.exists() + "");
             Log.d("appDirectroyExist", appDirectory.exists() + "");
+
             if (!appDirectoryTransfer.exists())
                 Log.d("appDirTr created: ", appDirectoryTransfer.mkdir() + "");
 
@@ -172,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
     }
-
 
     @Override
     protected void onDestroy() {
@@ -193,14 +189,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         OperateFolderActions();
 
-        TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-        text_status.setText("Please turn the bluetooth on.");
+        TextView textStatus = findViewById(R.id.text_bluetooth_connecton_status);
+        textStatus.setText("Please turn the bluetooth on.");
 
-        Button record_start = findViewById(R.id.record_start);
+        Button recordStart = findViewById(R.id.record_start);
 
-        Button btnONOFF = findViewById(R.id.btn_onn_off);
-        btnEnableDisable_Discoverable = findViewById(R.id.btn_discoverable_on_off);
-        lvNewDevices = (ListView) findViewById(R.id.lv_new_devices);
+        Button btnOnOff = findViewById(R.id.btn_onn_off);
+        btnEnableDisableDiscoverable = findViewById(R.id.btn_discoverable_on_off);
+        lvNewDevices = findViewById(R.id.lv_new_devices);
         mBTDevices = new ArrayList<>();
 
         //Broadcasts when bond state changes (ie: pairing)
@@ -211,90 +207,73 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         lvNewDevices.setOnItemClickListener(MainActivity.this);
 
-        btnONOFF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "enabling / disabling bluetooth.");
-                enableDisableBT();
-                TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-                text_status.setText("Please discover devices to connect.");
+        btnOnOff.setOnClickListener(v -> {
+            Log.d(TAG, "enabling / disabling bluetooth.");
+            enableDisableBT();
+            textStatus.setText("Please discover devices to connect.");
+        });
+
+        Button nextButton = findViewById(R.id.next_button_home);
+
+        nextButton.setOnClickListener(v -> {
+
+            //If the android phone does not have obexftp service file is saved in /bluetooth or /Download
+
+            Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
+            File fileBluetooth = new File(uriBluetooth.toString());
+
+            Uri uriDownload = Uri.parse(Environment.getExternalStorageDirectory() + "/Download/Test.wav");
+            File fileDownload = new File(uriDownload.toString());
+
+            if(fileBluetooth.exists()){
+                File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                        + "/Health_tracker_transfer/Test.wav");
+                fileBluetooth.renameTo(to);
+            } else if (fileDownload.exists()) {
+                File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                        + "/Health_tracker_transfer/Test.wav");
+                fileDownload.renameTo(to);
+            }
+
+            Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+            File file = new File(uri.toString());
+            if (file.exists()) {
+                recordingWave();
+            } else {
+
+                Toast.makeText(getApplicationContext(), "There is no file to stream", Toast.LENGTH_LONG).show();
             }
 
         });
 
-        Button next_button = findViewById(R.id.next_button_home);
+        recordStart.setOnClickListener(v -> {
+            Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
+            File fileBluetooth = new File(uriBluetooth.toString());
+            if(fileBluetooth.exists()){
+                fileBluetooth.delete();
+            }
 
-        next_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
+            File file = new File(uri.toString());
+            if(file.exists()){
+                file.delete();
+            }
 
-                Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
-                File fileBluetooth = new File(uriBluetooth.toString());
-
-                Uri uriDownload = Uri.parse(Environment.getExternalStorageDirectory() + "/Download/Test.wav");
-                File fileDownload = new File(uriDownload.toString());
-
-                if(fileBluetooth.exists()){
-                    File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                            + "/Health_tracker_transfer/Test.wav");
-                    fileBluetooth.renameTo(to);
-                } else if (fileDownload.exists()) {
-                    File to = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                            + "/Health_tracker_transfer/Test.wav");
-                    fileDownload.renameTo(to);
-                }
-
-                Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
-                File file = new File(uri.toString());
-                if (file.exists()) {
-                    recording_wave();
-                } else {
-
-                    Toast.makeText(getApplicationContext(), "There is no file to stream", Toast.LENGTH_LONG).show();
-                }
-
+            //Sending control signal to send recorded file
+            if (mmSocket.isConnected()) {
+                byte[] num = "1".getBytes();
+                mConnectedThread.write(num);
+            }
+            else {
+                textStatus.setText("Please select the correct bluetooth device");
+            }
+            try {
+                mmSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
-
-
-
-        record_start.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Uri uriBluetooth = Uri.parse(Environment.getExternalStorageDirectory() + "/bluetooth/Test.wav");
-                File fileBluetooth = new File(uriBluetooth.toString());
-                if(fileBluetooth.exists()){
-                    fileBluetooth.delete();
-                }
-
-                Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/Health_tracker_transfer/Test.wav");
-                File file = new File(uri.toString());
-                if(file.exists()){
-                    file.delete();
-                }
-                TextView text_status = findViewById(R.id.text_bluetooth_connecton_status);
-                if (mmSocket.isConnected()) {
-                    byte[] num = "1".getBytes();
-                    mConnectedThread.write(num);
-                }
-                else {
-                    text_status.setText("Please select the correct bluetooth device");
-                }
-                try {
-                    mmSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //mConnectedThread.run();
-
-
-            }
-        });
-
     }
-
 
     public void enableDisableBT() {
 
@@ -321,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     public void btnEnableDisable_Discoverable(View view) {
-        Log.d(TAG, "btnEnableDisable_Discoverable: Making device discoverable for 3000 secs");
+        Log.d(TAG, "btnEnableDisableDiscoverable: Making device discoverable for 3000 secs");
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3000);
         startActivity(discoverableIntent);
@@ -361,7 +340,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void checkBTPermissions() {
 
         //if it is greater that LOLLIPOP version, it will check the manifest for bluetooth permissions
-        //do not care about errors below. the reason is they can be used only after API 23. with if clauses we give it so no problem.
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             int permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
             permissionCheck += this.checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION");
@@ -373,7 +351,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
         }
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -441,26 +418,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-
-    //creates insecure outgoing connection with BT device using UUID
-    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
-        try {
-            final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
-
-            return (BluetoothSocket) m.invoke(device, uuid);
-        } catch (Exception e) {
-            Log.e(TAG, "Could not create Insecure RFComm Connection", e);
-        }
-        return device.createRfcommSocketToServiceRecord(uuid);
-    }
-
-
     //creates secure outgoing connection with BT device using UUID
-   /* private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         mmSocket = device.createRfcommSocketToServiceRecord(uuid);
         return mmSocket;
 
-    }*/
+    }
 
     private interface MessageConstants {
         public static final int MESSAGE_READ = 0;
@@ -510,25 +473,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 handler.sendMessage(writeErrorMsg);
             }
         }
-
-
-
-
-        // Call this method from the main activity to shut down the connection.
-    /*    public void cancel() {
-            try {
-                mmSocket.close();
-            } catch (IOException e) {
-                Log.e(TAG, "Could not close the connect socket", e);
-            }
-        }*/
-
-
     }
 
 
 
-    public void recording_wave() {
+    public void recordingWave() {
         Intent intent = new Intent(this, RecordWave.class);
         startActivity(intent);
     }

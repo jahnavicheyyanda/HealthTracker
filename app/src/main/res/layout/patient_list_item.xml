@@ -79,9 +79,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/ivRowPlay"
-                android:visibility="gone"
-                card_view:srcCompat="@android:drawable/ic_media_play"
-                tools:visibility="gone" />
+                android:visibility="visible"
+                card_view:srcCompat="@android:drawable/ic_media_play" />
         </LinearLayout>
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-/*package com.example.zece.healthtracker.UI;
+package com.example.zece.healthtracker.UI;
 
 import android.app.Activity;
 import android.graphics.Matrix;
@@ -59,7 +59,7 @@ public class ZoomRecordWave extends Activity implements OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoom_record_wave);
 
-        final WaveformView mPlaybackView = findViewById(R.id.playbackWaveformView2);
+        final WaveformView mPlaybackView = findViewById(R.id.playback_waveform_view_zoom);
 
         //ImageView imageView = new ImageView();
         //mPlaybackView.buildDrawingCache();
@@ -163,7 +163,7 @@ public class ZoomRecordWave extends Activity implements OnTouchListener {
         view.setImageMatrix(matrix); // display the transformation on screen
 
         return true; // indicate event was handled
-    }*/
+    }
 
     /*
      * --------------------------------------------------------------------------
@@ -171,13 +171,13 @@ public class ZoomRecordWave extends Activity implements OnTouchListener {
      * checks the spacing between the two fingers on touch
      * ----------------------------------------------------
      */
-/*
+
     private float spacing(MotionEvent event)
     {
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
         return (float) Math.sqrt(x * x + y * y);
-    }*/
+    }
 
     /*
      * --------------------------------------------------------------------------
@@ -186,15 +186,15 @@ public class ZoomRecordWave extends Activity implements OnTouchListener {
      * ------------------------------------------------------------
      */
 
-   /* private void midPoint(PointF point, MotionEvent event)
+    private void midPoint(PointF point, MotionEvent event)
     {
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
-    }*/
+    }
 
     /** Show an event in the LogCat view, for debugging */
-    /*private void dumpEvent(MotionEvent event)
+    private void dumpEvent(MotionEvent event)
     {
         String names[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE","POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?" };
         StringBuilder sb = new StringBuilder();
@@ -279,4 +279,4 @@ public class ZoomRecordWave extends Activity implements OnTouchListener {
 
 
 
-}*/
+}
