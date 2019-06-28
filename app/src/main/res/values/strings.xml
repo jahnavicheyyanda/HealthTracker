@@ -47,7 +47,6 @@
     <string name="action_settings">action_settings</string>
     <string name="start_record_button">START</string>
     <string name="stop_record_button">STOP</string>
-    <string name="Record">record</string>
     <string name="record_button">selected button</string>
     <string name="main_page_logo">Health Tracker</string>
     <string name="main_page_file_view">View Files</string>
@@ -64,4 +63,7 @@
     <string name="iv_row_edit" />
     <string name="iv_row_delete" />
     <string name="input_date_edit" />
+    <string name="Record">record</string>
+    <string name="record_start">Start/Stop</string>
+    <string name="send_file">Transfer</string>
 </resources>

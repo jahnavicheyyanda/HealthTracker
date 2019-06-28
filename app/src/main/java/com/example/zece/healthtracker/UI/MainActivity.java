@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //unregisterReceiver(mBroadcastReceiver2);
         //unregisterReceiver(mBroadcastReceiver3);
         //unregisterReceiver(mBroadcastReceiver4);
-        //mBluetoothAdapter.cancelDiscovery();
+        mBluetoothAdapter.cancelDiscovery();
     }
 
 
