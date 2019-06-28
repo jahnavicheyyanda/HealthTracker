@@ -32,6 +32,9 @@ ID of record and ID of patients are created in here and the data which are enter
 ### WaveformView: 
 Class for arrangement in the visualization of signal with help of AudioUtils, SamplingUtils and TextUtils.
 
+### PlaybackThread: 
+Class for reading and playing the received audio file. 
 
- 
+### RecordWave: 
+Class for signal visualization with the help of PlaybackThread and WaveformView. 
  
