@@ -1,35 +1,35 @@
 Health tracker app is developed in order to control the prototype of auscultation device in a convenient way. Transmission and communication of the data and control
 commands between device and smartphone is implemented wireless via Bluetooth. The app allows visualization of audio signals and saving them along with patient data. 
 
-### On Raspberrypi side:
+## On Raspberrypi side:
 To accept the connections coming from android phone we are creating a bluetooth server application on the raspberrypi. The python code can be found here  
 
 https://github.com/zecergin/HealthTracker/blob/master/raspibtsrv.py  
 
  PyBluez library currently supports two types of BluetoothSocket objects: RFCOMM and L2CAP. We create a Bluetooth socket using the RFCOM protocol.  The RFCOMM socket  is created by passing RFCOMM as an argument to the BluetoothSocket constructor. An UUID is advertised so any client knowing the UUID may connect. When the socket receives a command from the client, the audio file is transferred using Obexftp Service.  
  
-### The Android Application:
+## The Android Application:
  
-## MainPage: 
+### MainPage: 
 Class to manage the first screen of application. It has the connection with AppInfo for pop-up information, MainActivity to manage Bluetooth and FilesPage for listview of records. 
 
-## AppInfo: 
+### AppInfo: 
 Class for pop-up info 
 
-## MainActivity: 
+### MainActivity: 
 Turning the bluetooth on/off, opening the mobile device to discover by other devices, discovering the devices with Bluetooth, pairing and connecting to chosen devices are managed in this class. 
 
-## PatientData: 
+### PatientData: 
 Class to keep the patient data which is entered by user. 
 
-## PatientDataEdit: 
+### PatientDataEdit: 
 Class to keep the changed data by the user. Changes will be reflected to the audio files title in SD card. 
 
-## FilesPage: 
+### FilesPage: 
 Class for the listView of records with the help of viewModel and adapter. For the list, recyclerView is used for the changing in data. 
 ID of record and ID of patients are created in here and the data which are entered in PatientData and PatientDataEdit is kept, inserted, updated and deleted in this class. 
 
-## WaveformView: 
+### WaveformView: 
 Class for arrangement in the visualization of signal with help of AudioUtils, SamplingUtils and TextUtils.
 
 
