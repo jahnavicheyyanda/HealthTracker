@@ -2,7 +2,6 @@ package com.example.zece.healthtracker.UI;
 
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zece.healthtracker.Database.Patient;
 import com.example.zece.healthtracker.Database.Record;
@@ -138,32 +136,6 @@ public class RecordedWave extends AppCompatActivity {
             patientLastName = bundle.getString("patient_lastName");
             recordDate = bundle.getString("record_date");
         }
-
-        patientDataEditViewModel = ViewModelProviders.of(this).get(PatientDataEditViewModel.class);
-        patient = patientDataEditViewModel.getFirst_name(patientId);
-        patient = patientDataEditViewModel.getLast_name(patientId);
-        record = patientDataEditViewModel.getDate(patientId);
-
-
-        patient.observe(this, patient -> {
-            patientFirstNameShow.setText(patient.getFirst_name());
-            patientLastNameShow.setText(patient.getLast_name());
-
-            //String updatedFirstName = patientFirstNameShow.getText().toString();
-            //String updatedLastName = patientLastNameShow.getText().toString();
-
-        });
-        record.observe(this, record -> {
-            recordDateShow.setText(record.getDate());
-
-            //String recordDateEdit = recordDateShow.getText().toString();
-        });
-
-
-        String updatedFirstName = patientFirstNameShow.getText().toString();
-        String updatedLastName = patientLastNameShow.getText().toString();
-        String recordDateEdit = recordDateShow.getText().toString();
-
         finish();
     }
 
@@ -182,10 +154,6 @@ public class RecordedWave extends AppCompatActivity {
             patientLastName = bundle.getString("patient_lastName");
             recordDate = bundle.getString("record_date");
         }
-
-        System.out.println("test:" + patientFirstName);
-        Toast.makeText(getApplicationContext(), "/Health_tracker/" +patientLastName + "_"
-                +patientFirstName+" "+recordDate+ ".wav", Toast.LENGTH_SHORT).show();
 
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()
                 +"/Health_tracker/"
