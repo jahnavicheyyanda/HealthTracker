@@ -18,6 +18,7 @@ import com.example.zece.healthtracker.Database.Record;
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.UI.FilesPage;
 import com.example.zece.healthtracker.UI.PatientDataEdit;
+import com.example.zece.healthtracker.UI.RecordedWave;
 
 import java.io.File;
 import java.util.List;
@@ -90,14 +91,16 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
         private TextView patientItemView;
         private int mPosition;
-        private ImageView imgDelete, imgEdit;
+        private ImageView imgDelete, imgEdit, imgPlay;
 
         PatientViewHolder(View itemView) {
             super(itemView);
             patientItemView = itemView.findViewById(R.id.file_name);
             imgDelete = itemView.findViewById(R.id.iv_row_delete);
             imgEdit = itemView.findViewById(R.id.iv_row_edit);
+            imgPlay = itemView.findViewById(R.id.iv_row_play);
         }
+
 
         void setData(String patient, int position) {
             patientItemView.setText(patient);
@@ -128,7 +131,8 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
 
                                 File file = new File(Environment.getExternalStorageDirectory() + "/Health_tracker/"
                                         + list.get(mPosition).getLast_name() + "_"
-                                        + list.get(mPosition).getFirst_name() + " " +recordList.get(mPosition).getDate()+ ".wav");
+                                        + list.get(mPosition).getFirst_name() + " "
+                                        + recordList.get(mPosition).getDate()+ ".wav");
 
                                     boolean deleted = file.delete();
                             }
@@ -140,6 +144,21 @@ public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.
                 alert.show();
 
             });
+
+            imgPlay.setOnClickListener(v -> {
+
+                Intent intentPlay = new Intent(mContext, RecordedWave.class);
+                intentPlay.putExtra("patient_id", list.get(mPosition).getPatient_id());
+                intentPlay.putExtra("patient_firstName", list.get(mPosition).getFirst_name());
+                intentPlay.putExtra("patient_lastName", list.get(mPosition).getLast_name());
+                intentPlay.putExtra("record_date", recordList.get(mPosition).getDate());
+
+                ((Activity)mContext).startActivityForResult(intentPlay,
+                        FilesPage.UPDATE_PATIENT_DATA_ACTIVITY_REQUEST_CODE);
+
+
+            });
+
         }
     }
 }

@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".UI.RecordWave"
             android:parentActivityName=".UI.MainActivity"/>
+        <activity android:name=".UI.RecordedWave"
+            android:parentActivityName=".UI.MainActivity"/>
         <activity android:name=".UI.PatientData"
             android:parentActivityName=".UI.FilesPage"/>
         <activity
