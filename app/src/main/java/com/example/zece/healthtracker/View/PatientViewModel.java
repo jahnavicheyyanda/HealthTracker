@@ -35,7 +35,6 @@ public class PatientViewModel extends AndroidViewModel {
         mAllRecords = patientDao.getAllRecords();
     }
 
-    //ViewModel is used to hide the implementation from the UI.
     public LiveData<List<Patient>> getAllPatients(){
         return mAllPatients;
     }

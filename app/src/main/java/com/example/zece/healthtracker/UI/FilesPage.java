@@ -115,12 +115,12 @@ public class FilesPage extends AppCompatActivity implements PatientListAdapter.O
                     R.string.updated  ,
                     Toast.LENGTH_LONG).show();
 
-        } else{
-            Toast.makeText(
-                    getApplicationContext(),
-                    R.string.not_saved,
-                    Toast.LENGTH_LONG).show();
-        }
+        } //else{
+          //  Toast.makeText(
+          //          getApplicationContext(),
+          //          R.string.not_saved,
+          //          Toast.LENGTH_LONG).show();
+        //}
     }
 
     //For delete operation
