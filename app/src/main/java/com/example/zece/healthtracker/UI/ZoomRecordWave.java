@@ -280,3 +280,4 @@ public class ZoomRecordWave extends Activity implements OnTouchListener {
 
 
 }
+

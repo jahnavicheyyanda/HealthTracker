@@ -389,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 // Establish the Bluetooth socket connection.
                 try {
                     mmSocket.connect();
-
+                    System.out.println("Connected");
                 } catch (IOException e) {
                     // Unable to connect; close the socket and return.
                     try {
@@ -481,8 +481,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent(this, RecordWave.class);
         startActivity(intent);
     }
-
-
 
 
 

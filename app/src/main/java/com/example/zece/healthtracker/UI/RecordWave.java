@@ -6,7 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import com.example.zece.healthtracker.R;
 import com.example.zece.healthtracker.Waveform.WaveformView;
@@ -35,6 +38,7 @@ public class RecordWave extends AppCompatActivity {
         //final ImageButton zoomImg = findViewById(R.id.zoom_img);
 
         //zoomImg.setOnClickListener(v -> zoom_button());
+
 
         final WaveformView mPlaybackView = findViewById(R.id.playback_waveform_view);
         //Bitmap bitmap = loadBitmapFromView(findViewById(R.id.playbackWaveformView),350,450);
@@ -82,7 +86,59 @@ public class RecordWave extends AppCompatActivity {
             ImageButton nextButton = findViewById(R.id.next_button_record2);
             nextButton.setOnClickListener(v -> nextButton());
         }
+
+        final ZoomControls simpleZoomControl = findViewById(R.id.simple_zoom_control);
+
+
+        // perform  setOnZoomInClickListener event on ZoomControls
+        simpleZoomControl.setOnZoomInClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                simpleZoomControl.setIsZoomOutEnabled(true);
+                // add zoom in code here
+                // calculate current scale x and y value of WaveformView
+                float x = mPlaybackView.getScaleX();
+                float y = mPlaybackView.getScaleY();
+                final float MAX_ZOOM = 5f;
+                // set increased value of scale x and y to perform zoom in functionality
+                mPlaybackView.setScaleX((float) (x + 1));
+                mPlaybackView.setScaleY((float) (y + 1));
+                // display a toast to show Zoom In Message on Screen
+                //Toast.makeText(getApplicationContext(),"Zoom In",Toast.LENGTH_SHORT).show();
+                // hide the ZoomControls from the screen
+                if(mPlaybackView.getScaleX() < MAX_ZOOM){
+                    simpleZoomControl.setIsZoomInEnabled(true);
+                }
+                else if (mPlaybackView.getScaleX() >= (MAX_ZOOM) ){
+                        simpleZoomControl.setIsZoomInEnabled(false);
+
+            }
+            }
+        });
+
+        // perform  setOnZoomOutClickListener event on ZoomControls
+        simpleZoomControl.setOnZoomOutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                simpleZoomControl.setIsZoomInEnabled(true);
+                // add zoom out code here
+                // calculate current scale x and y value of WaveformView
+                float x = mPlaybackView.getScaleX();
+                float y = mPlaybackView.getScaleY();
+                final float MIN_ZOOM = 1f;
+                // set decreased value of scale x and y to perform zoom out functionality
+                mPlaybackView.setScaleX((float) (x - 1));
+                mPlaybackView.setScaleY((float) (y - 1));
+                // display a toast to show Zoom Out Message on Screen
+                //Toast.makeText(getApplicationContext(),"Zoom Out",Toast.LENGTH_SHORT).show();
+                if(mPlaybackView.getScaleX() <= (MIN_ZOOM)){
+                    simpleZoomControl.setIsZoomOutEnabled(false);
+                }
+            }
+        });
+
      }
+
 
     /*public static Bitmap loadBitmapFromView(View v, int width, int height) {
         Bitmap b = Bitmap.createBitmap(width , height, Bitmap.Config.ARGB_8888);
@@ -97,15 +153,10 @@ public class RecordWave extends AppCompatActivity {
         startActivity(intent_next);
     }
 
-    /*public void zoom_button(){
-        Intent intent_zoom = new Intent(this, ZoomRecordWave.class);
-        startActivity(intent_zoom);
-    }*/
 
     @Override
     protected void onStop() {
         super.onStop();
-
         mPlaybackThread.stopPlayback();
     }
 
@@ -130,6 +181,7 @@ public class RecordWave extends AppCompatActivity {
             sb.get(samples);
             return samples;
         }
+
 }
 
 
