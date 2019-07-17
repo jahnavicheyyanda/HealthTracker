@@ -52,7 +52,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="69dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="14dp"
         android:layout_marginBottom="20dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
@@ -60,7 +60,7 @@
         android:src="@drawable/icons_music_stop"
         android:tint="@color/default_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/zoom_recorded_img"
+        app:layout_constraintEnd_toStartOf="@+id/simple_zoom_control"
         app:layout_constraintStart_toEndOf="@+id/start_recorded_button"
         app:layout_constraintTop_toBottomOf="@+id/playback_waveform_view" />
 
@@ -79,30 +79,22 @@
         android:tint="@color/default_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/zoom_recorded_img"
+        app:layout_constraintStart_toEndOf="@+id/simple_zoom_control"
         app:layout_constraintTop_toBottomOf="@+id/playback_waveform_view" />
 
-    <ImageButton
-        android:id="@+id/zoom_recorded_img"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
-        android:contentDescription="@string/zoom_recorded_img"
-        android:foregroundTint="#00090101"
-        android:tint="@color/default_background"
-        android:visibility="visible"
+    <ZoomControls
+        android:id="@+id/simple_zoom_control"
+        android:layout_width="163dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next_button_recorded"
-        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toEndOf="@+id/stop_recorded_button"
         app:layout_constraintTop_toBottomOf="@+id/playback_waveform_view"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_zoom" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/patient_first_name_show"
@@ -139,9 +131,9 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginBottom="110dp"
         android:text="@string/record_date"
-        app:layout_constraintBottom_toTopOf="@+id/zoom_recorded_img"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/patient_last_name_show"
         app:layout_constraintTop_toBottomOf="@+id/playback_waveform_view" />
