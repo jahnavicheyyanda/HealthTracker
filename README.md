@@ -13,9 +13,6 @@ https://github.com/zecergin/HealthTracker/blob/master/raspibtsrv.py
 ### MainPage: 
 Class to manage the first screen of application. It has the connection with AppInfo for pop-up information, MainActivity to manage Bluetooth and FilesPage for listview of records. 
 
-### AppInfo: 
-Class for pop-up info 
-
 ### MainActivity: 
 Turning the bluetooth on/off, opening the mobile device to discover by other devices, discovering the devices with Bluetooth, pairing and connecting to chosen devices are managed in this class. 
 
@@ -24,13 +21,6 @@ Class to keep the patient data which is entered by user.
 
 ### PatientDataEdit: 
 Class to keep the changed data by the user. Changes will be reflected to the audio files title in SD card. 
-
-### FilesPage: 
-Class for the listView of records with the help of viewModel and adapter. For the list, recyclerView is used for the changing in data. 
-ID of record and ID of patients are created in here and the data which are entered in PatientData and PatientDataEdit is kept, inserted, updated and deleted in this class. 
-
-### WaveformView: 
-Class for arrangement in the visualization of signal with help of AudioUtils, SamplingUtils and TextUtils.
 
 ### PlaybackThread: 
 Class for reading and playing the received audio file. 
