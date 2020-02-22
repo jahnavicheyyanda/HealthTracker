@@ -27,4 +27,7 @@ Class for reading and playing the received audio file.
 
 ### RecordWave: 
 Class for signal visualization with the help of PlaybackThread and WaveformView. 
+
+##Complete Documentation:
+https://github.com/jahnavicheyyanda/HealthTracker/blob/master/Documentation_DE_Project.pdf
  
